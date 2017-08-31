@@ -78,6 +78,64 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" title="python 发送邮件出现Connection reset by peer解决" itemprop="url">python 发送邮件出现Connection reset by peer解决</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  <p class="article-time">
+    <time datetime="2017-08-31T13:17:37.000Z" itemprop="datePublished"> Published 2017-08-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <pre><code>利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。
+
+       网上查找发现对于此问题的解释多是因为socket，web连接问题。后经排查后发现stmp协议使用的端口号是25：这里贴一段关于SMTP协议的介绍STMP协议介绍
+</code></pre><p>下面连接邮件服务器一定要写上邮件端口号25<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">smtp.connect(smtpserver,<span class="string">"25"</span>)</div></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/python/">python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2017/08/30/hello-world/" title="Hello World" itemprop="url">Hello World</a>
   </h1>
   <p class="article-author">By
@@ -150,6 +208,17 @@
   
 
   
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
 
   <div class="linkslist">
   <p class="asidetitle">Links</p>
