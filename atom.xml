@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-08-31T13:44:18.000Z</updated>
+  <updated>2017-09-01T02:47:22.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>opentack节点扩容后热迁移异常</title>
+    <link href="http://yoursite.com/2017/09/01/opentack%E8%8A%82%E7%82%B9%E6%89%A9%E5%AE%B9%E5%90%8E%E7%83%AD%E8%BF%81%E7%A7%BB%E5%BC%82%E5%B8%B8/"/>
+    <id>http://yoursite.com/2017/09/01/opentack节点扩容后热迁移异常/</id>
+    <published>2017-09-01T02:27:37.000Z</published>
+    <updated>2017-09-01T02:47:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上</p>
+<p>故障原因为：新旧节点的qemu版本存在差异。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kvm</div></pre></td></tr></table></figure>
+<p>qemu-kvm-2.5.1-1.1.el7.x86_64</p>
+<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
+<p>qemu-kvm-common-2.5.1-1.1.el7.x86_64</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kvm</div></pre></td></tr></table></figure>
+<p>qemu-kvm-2.5.1-1.el7.es.x86_64</p>
+<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
+<p>qemu-kvm-common-2.5.1-1.el7.es.x86_64</p>
+<p>openstack虚机热迁移节点要求（摘录三条）:</p>
+<ol>
+<li><p>源和目标节点的 CPU 类型要一致。</p>
+</li>
+<li><p>源和目标节点的 Libvirt 版本要一致。</p>
+</li>
+<li><p>源和目标节点能相互识别对方的主机名称，比如可以在 /etc/hosts 中加入对方的条目。</p>
+<p>迁移失败原因是第2条不满足。</p>
+<p>升级qumu版本后解决，blog留作记录。</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上&lt;/p&gt;
+&lt;p&gt;故障原因为：新旧节点的qemu版本存在差异。&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div cl
+    
+    </summary>
+    
+    
+      <category term="cloud" scheme="http://yoursite.com/tags/cloud/"/>
+    
+  </entry>
   
   <entry>
     <title>python 发送邮件出现Connection reset by peer解决</title>

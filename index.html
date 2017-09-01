@@ -79,6 +79,81 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2017/09/01/opentack节点扩容后热迁移异常/" title="opentack节点扩容后热迁移异常" itemprop="url">opentack节点扩容后热迁移异常</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  <p class="article-time">
+    <time datetime="2017-09-01T02:27:37.000Z" itemprop="datePublished"> 发表于 2017-09-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上</p>
+<p>故障原因为：新旧节点的qemu版本存在差异。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kvm</div></pre></td></tr></table></figure>
+<p>qemu-kvm-2.5.1-1.1.el7.x86_64</p>
+<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
+<p>qemu-kvm-common-2.5.1-1.1.el7.x86_64</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kvm</div></pre></td></tr></table></figure>
+<p>qemu-kvm-2.5.1-1.el7.es.x86_64</p>
+<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
+<p>qemu-kvm-common-2.5.1-1.el7.es.x86_64</p>
+<p>openstack虚机热迁移节点要求（摘录三条）:</p>
+<ol>
+<li><p>源和目标节点的 CPU 类型要一致。</p>
+</li>
+<li><p>源和目标节点的 Libvirt 版本要一致。</p>
+</li>
+<li><p>源和目标节点能相互识别对方的主机名称，比如可以在 /etc/hosts 中加入对方的条目。</p>
+<p>迁移失败原因是第2条不满足。</p>
+<p>升级qumu版本后解决，blog留作记录。</p>
+</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/cloud/">cloud</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" title="python 发送邮件出现Connection reset by peer解决" itemprop="url">python 发送邮件出现Connection reset by peer解决</a>
   </h1>
   <p class="article-author">By
@@ -214,6 +289,10 @@
 		
 			
 				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/cloud/" title="cloud">cloud<sup>1</sup></a></li>
 			
 		
 		</ul>
