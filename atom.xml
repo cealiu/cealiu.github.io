@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-01T02:47:22.000Z</updated>
+  <updated>2017-09-01T16:12:02.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Logistic回归和Sigmoid函数的理解</title>
+    <link href="http://yoursite.com/2017/09/01/Logistic%E5%9B%9E%E5%BD%92%E5%92%8CSigmoid%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>http://yoursite.com/2017/09/01/Logistic回归和Sigmoid函数的理解/</id>
+    <published>2017-09-01T06:02:21.000Z</published>
+    <updated>2017-09-01T16:12:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。<br>$$<br>\sigma(z) = \cfrac{1}{1  +e^{-z}}<br>$$</p>
+<p>Sigmoid函数的输入记为z，下面公式用于确定z：<br>$$<br>z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}<br>$$</p>
+<p>&emsp;&emsp;书上用的梯度上升算法确定系数w的数值。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。&lt;br&gt;$$&lt;br&gt;\sigma(z) = \cfrac{1}{1  +e^{-z}}&lt;br&gt;$$&lt;/p&gt;
+&lt;p&gt;Sigmoi
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>opentack节点扩容后热迁移异常</title>
@@ -87,25 +111,33 @@
     <link href="http://yoursite.com/2017/08/30/hello-world/"/>
     <id>http://yoursite.com/2017/08/30/hello-world/</id>
     <published>2017-08-30T12:19:34.000Z</published>
-    <updated>2017-08-30T12:19:34.000Z</updated>
+    <updated>2017-09-01T16:12:37.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <content type="html"><![CDATA[<p>用hexo和github搭建了一个静态博客，程序员惯用helloworld例程那就拿之前在知乎写简单写的一个回答放在这里吧，当作熟悉hexo博客和markdown语法了；后续会将开源中国上的和笔记软件记录的内容放上来。</p>
+<h2 id="韩国灾难电影推荐"><a href="#韩国灾难电影推荐" class="headerlink" title="韩国灾难电影推荐"></a>韩国灾难电影推荐</h2><p>最近在腾讯视频上看了部韩国电影《铁线虫入侵》仔细回想发现之前看过不少类似韩国灾难电影这里一并推荐出来吧。</p>
+<h3 id="《铁线虫入侵》"><a href="#《铁线虫入侵》" class="headerlink" title="《铁线虫入侵》"></a>《铁线虫入侵》</h3><p>关于人体寄生虫的故事</p>
+<p><img src="/images/tiexianchongruqin.jpg" alt=""></p>
+<h3 id="《流感》"><a href="#《流感》" class="headerlink" title="《流感》"></a>《流感》</h3><p>讲传染病的故事，让人想起之前的非典不过电影比较夸张</p>
+<p><img src="/images/liugan.jpg" alt=""></p>
+<h3 id="《釜山行》"><a href="#《釜山行》" class="headerlink" title="《釜山行》"></a>《釜山行》</h3><p>号称亚洲首部丧尸片</p>
+<p><img src="/images/fushanxing.jpg" alt=""></p>
+<h3 id="《隧道》"><a href="#《隧道》" class="headerlink" title="《隧道》"></a>《隧道》</h3><p>类似井下求生的故事</p>
+<p><img src="/images/suidao.jpg" alt=""></p>
+<h3 id="《汉江怪物》"><a href="#《汉江怪物》" class="headerlink" title="《汉江怪物》"></a>《汉江怪物》</h3><p>大家一起打怪兽</p>
+<p><img src="/images/hanjiangguaiwu.jpg" alt=""></p>
+<h3 id="《潘多拉》"><a href="#《潘多拉》" class="headerlink" title="《潘多拉》"></a>《潘多拉》</h3><p>讲述核电站核泄漏的故事</p>
+<p><img src="/images/panduola.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;p&gt;用hexo和github搭建了一个静态博客，程序员惯用helloworld例程那就拿之前在知乎写简单写的一个回答放在这里吧，当作熟悉hexo博客和markdown语法了；后续会将开源中国上的和笔记软件记录的内容放上来。&lt;/p&gt;
+&lt;h2 id=&quot;韩国灾难电影推荐&quot;&gt;&lt;a hr
     
     </summary>
     
+    
+      <category term="影视" scheme="http://yoursite.com/tags/%E5%BD%B1%E8%A7%86/"/>
     
   </entry>
   

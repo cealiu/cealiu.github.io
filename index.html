@@ -2,7 +2,7 @@
  <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
     <title>LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -29,11 +29,11 @@
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
   <body>
-    <header>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
       
 <div>
 		
@@ -73,190 +73,87 @@
     <div id="container">
       <div id="main">
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/09/01/opentack节点扩容后热迁移异常/" title="opentack节点扩容后热迁移异常" itemprop="url">opentack节点扩容后热迁移异常</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
-		
-  <p class="article-time">
-    <time datetime="2017-09-01T02:27:37.000Z" itemprop="datePublished"> 发表于 2017-09-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上</p>
-<p>故障原因为：新旧节点的qemu版本存在差异。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kvm</div></pre></td></tr></table></figure>
-<p>qemu-kvm-2.5.1-1.1.el7.x86_64</p>
-<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
-<p>qemu-kvm-common-2.5.1-1.1.el7.x86_64</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kvm</div></pre></td></tr></table></figure>
-<p>qemu-kvm-2.5.1-1.el7.es.x86_64</p>
-<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
-<p>qemu-kvm-common-2.5.1-1.el7.es.x86_64</p>
-<p>openstack虚机热迁移节点要求（摘录三条）:</p>
-<ol>
-<li><p>源和目标节点的 CPU 类型要一致。</p>
-</li>
-<li><p>源和目标节点的 Libvirt 版本要一致。</p>
-</li>
-<li><p>源和目标节点能相互识别对方的主机名称，比如可以在 /etc/hosts 中加入对方的条目。</p>
-<p>迁移失败原因是第2条不满足。</p>
-<p>升级qumu版本后解决，blog留作记录。</p>
-</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/tags/cloud/">cloud</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" title="python 发送邮件出现Connection reset by peer解决" itemprop="url">python 发送邮件出现Connection reset by peer解决</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
-		
-  <p class="article-time">
-    <time datetime="2017-08-31T13:17:37.000Z" itemprop="datePublished"> 发表于 2017-08-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>​       利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。</p>
-<p>​       网上查找发现对于此问题的解释多是因为socket，web连接问题。后经排查后发现stmp协议使用的端口号是25：这里贴一段关于SMTP协议的介绍STMP协议介绍</p>
-<p>​      下面连接邮件服务器一定要写上邮件端口号25<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">smtp.connect(smtpserver,<span class="string">"25"</span>)</div></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/python/">python</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <a href="/2017/09/01/Logistic回归和Sigmoid函数的理解/" title="Logistic回归和Sigmoid函数的理解" itemprop="url">
+  
+    <h1 itemprop="name">Logistic回归和Sigmoid函数的理解</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$
+Sigmoid函数的输入记为z，下面公式用于确定z：$$</p>
+        
     
-      <a href="/2017/08/30/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
-		
-  <p class="article-time">
-    <time datetime="2017-08-30T12:19:34.000Z" itemprop="datePublished"> 发表于 2017-08-30</time>
+    <time datetime="2017-09-01T06:02:21.000Z" itemprop="datePublished">2017-09-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/09/01/opentack节点扩容后热迁移异常/" title="opentack节点扩容后热迁移异常" itemprop="url">
+  
+    <h1 itemprop="name">opentack节点扩容后热迁移异常</h1>
     
-  </p>
-</header>
-    <div class="article-content">
+     
+           <p itemprop="description" >扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上
+故障原因为：新旧节点的qemu版本存在差异。
+1rpm -qa | grep kvm
+qemu-kvm-2.5.1-1.1.el7.x86_64
+libvirt-daemon-kvm-1.3.1-1.el7.centos.</p>
         
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    
+    <time datetime="2017-09-01T02:27:37.000Z" itemprop="datePublished">2017-09-01</time>
+  </a>
+</section>
 
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" title="python 发送邮件出现Connection reset by peer解决" itemprop="url">
+  
+    <h1 itemprop="name">python 发送邮件出现Connection reset by peer解决</h1>
+    
+     
+           <p itemprop="description" >​       利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。
+​       网上查找发现对于此问题的解释多是因为socket，web</p>
         
+    
+    <time datetime="2017-08-31T13:17:37.000Z" itemprop="datePublished">2017-08-31</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/08/30/hello-world/" title="Hello World" itemprop="url">
+  
+    <h1 itemprop="name">Hello World</h1>
+    
+     
+           <p itemprop="description" >用hexo和github搭建了一个静态博客，程序员惯用helloworld例程那就拿之前在知乎写简单写的一个回答放在这里吧，当作熟悉hexo博客和markdown语法了；后续会将开源中国上的和笔记软件记录的内容放上来。
+韩国灾难电影推荐最近在腾讯视频上看了部韩国电影《铁线虫入侵》</p>
         
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
+    
+    <time datetime="2017-08-30T12:19:34.000Z" itemprop="datePublished">2017-08-30</time>
+  </a>
+</section>
 
 
 
@@ -288,11 +185,19 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/cloud/" title="cloud">cloud<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/影视/" title="影视">影视<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -491,12 +396,41 @@ var _hmt = _hmt || [];
 <!-- MathJax Begin -->
 <!-- mathjax config similar to math.stackexchange -->
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 
 <!-- MathJax End -->
 
 <!-- Tiny_search Begin -->
 
-<!-- Tiny_search End -->
+<!-- Tiny_search End --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
   </body>
  </html>

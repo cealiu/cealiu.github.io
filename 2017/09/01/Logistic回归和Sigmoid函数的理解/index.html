@@ -1,28 +1,28 @@
 
-  
-    <!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>LiuCe&#39;s Blog</title>
+    <title>Logistic回归和Sigmoid函数的理解 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="###test">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LiuCe&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+    <meta name="description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ &amp;">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logistic回归和Sigmoid函数的理解">
+<meta property="og:url" content="http://yoursite.com/2017/09/01/Logistic回归和Sigmoid函数的理解/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="###test">
+<meta property="og:description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ &amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-30T13:44:02.000Z">
+<meta property="og:updated_time" content="2017-09-01T16:12:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LiuCe&#39;s Blog">
-<meta name="twitter:description" content="###test">
+<meta name="twitter:title" content="Logistic回归和Sigmoid函数的理解">
+<meta name="twitter:description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ &amp;">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -37,9 +37,9 @@
     <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
-      <body>
-        <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
-          
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
+      
 <div>
 		
 			<div id="imglogo">
@@ -74,33 +74,47 @@
 				</ul>
 			</nav>			
 </div>
-        </header>
-        <div id="container">
-          <div id="main" class="page" itemscope itemprop="blogPost">
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/about/index.html" title="" itemprop="url"></a>
+      <a href="/2017/09/01/Logistic回归和Sigmoid函数的理解/" title="Logistic回归和Sigmoid函数的理解" itemprop="url">Logistic回归和Sigmoid函数的理解</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-08-31T13:43:29.000Z" itemprop="datePublished"> 发表于 2017-08-31</time>
+    <time datetime="2017-09-01T06:02:21.000Z" itemprop="datePublished"> 发表于 2017-09-01</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>###test</p>
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。<br>$$<br>\sigma(z) = \cfrac{1}{1  +e^{-z}}<br>$$</p>
+<p>Sigmoid函数的输入记为z，下面公式用于确定z：<br>$$<br>z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}<br>$$</p>
+<p>&emsp;&emsp;书上用的梯度上升算法确定系数w的数值。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/机器学习/">机器学习</a>
+  </div>
 
 </div>
 
@@ -108,7 +122,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/about/index.html" data-title="LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/09/01/Logistic回归和Sigmoid函数的理解/" data-title="Logistic回归和Sigmoid函数的理解 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -119,12 +133,108 @@
    	       
 	</article>
 	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/09/01/opentack节点扩容后热迁移异常/"  title="opentack节点扩容后热迁移异常">
+ <strong>下一篇：</strong><br/> 
+ <span>opentack节点扩容后热迁移异常
+</span>
+</a>
+</div>
+
+</nav>
+
 	
 
 
 </div>  
-        </div>
-        <footer><div id="footer" >
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="cealiu" data-theme="medium"></div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/cloud/" title="cloud">cloud<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/影视/" title="影视">影视<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
 	
 	<div class="line">
 		<span></span>
@@ -169,7 +279,7 @@
 		</p>
 </div>
 </footer>
-        <script src="/js/jquery-2.0.3.min.js"></script>
+    <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 <script src="/js/jquery.qrcode-0.12.0.min.js"></script>
@@ -213,8 +323,36 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
   });
 });
 </script>
@@ -366,6 +504,5 @@ var _hmt = _hmt || [];
 
 <!-- Tiny_search End --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-      </body>
-     </html>
-     
+  </body>
+</html>
