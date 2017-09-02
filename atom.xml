@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-02T11:08:12.000Z</updated>
+  <updated>2017-09-02T12:42:15.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,13 +20,13 @@
     <link href="http://yoursite.com/2017/09/01/Logistic%E5%9B%9E%E5%BD%92%E5%92%8CSigmoid%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3/"/>
     <id>http://yoursite.com/2017/09/01/Logistic回归和Sigmoid函数的理解/</id>
     <published>2017-09-01T06:02:21.000Z</published>
-    <updated>2017-09-02T11:08:12.000Z</updated>
+    <updated>2017-09-02T12:42:15.000Z</updated>
     
     <content type="html"><![CDATA[<p>看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。<br>$$<br>\sigma(z) = \cfrac{1}{1  +e^{-z}}<br>$$</p>
 <p>Sigmoid函数的输入记为z，下面公式用于确定z：<br>$$<br>z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}<br>$$</p>
 <p>书上用的梯度上升算法确定系数w的数值。</p>
 <p>该函数二维上就是在一些散点中画一条线来划分出不同的特征点，我们要找W就是这条线的系数。</p>
-<p>书上给的给出的代码历程不能很好的运行，我做了简单的修改最后结果如下图：</p>
+<p>书上给的给出的代码例程不能很好的运行，我做了简单的修改最后结果如下图：</p>
 <p>修改过的源码上传到我的GitHub了<a href="https://github.com/cealiu/machinelearn/tree/master/Ch05" target="_blank" rel="external">地址</a></p>
 <p><img src="/images/Logistic_1.png" alt=""></p>
 ]]></content>
