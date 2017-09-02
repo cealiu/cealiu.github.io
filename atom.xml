@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://cealiu.me/"/>
   <updated>2017-09-02T12:42:15.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://cealiu.me/</id>
   
   <author>
     <name>LiuCe</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Logistic回归和Sigmoid函数的理解</title>
-    <link href="http://yoursite.com/2017/09/01/Logistic%E5%9B%9E%E5%BD%92%E5%92%8CSigmoid%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3/"/>
-    <id>http://yoursite.com/2017/09/01/Logistic回归和Sigmoid函数的理解/</id>
+    <link href="http://cealiu.me/2017/09/01/Logistic%E5%9B%9E%E5%BD%92%E5%92%8CSigmoid%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/</id>
     <published>2017-09-01T06:02:21.000Z</published>
     <updated>2017-09-02T12:42:15.000Z</updated>
     
@@ -39,14 +39,14 @@
     </summary>
     
     
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://cealiu.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>opentack节点扩容后热迁移异常</title>
-    <link href="http://yoursite.com/2017/09/01/opentack%E8%8A%82%E7%82%B9%E6%89%A9%E5%AE%B9%E5%90%8E%E7%83%AD%E8%BF%81%E7%A7%BB%E5%BC%82%E5%B8%B8/"/>
-    <id>http://yoursite.com/2017/09/01/opentack节点扩容后热迁移异常/</id>
+    <link href="http://cealiu.me/2017/09/01/opentack%E8%8A%82%E7%82%B9%E6%89%A9%E5%AE%B9%E5%90%8E%E7%83%AD%E8%BF%81%E7%A7%BB%E5%BC%82%E5%B8%B8/"/>
+    <id>http://cealiu.me/2017/09/01/opentack节点扩容后热迁移异常/</id>
     <published>2017-09-01T02:27:37.000Z</published>
     <updated>2017-09-01T02:47:22.000Z</updated>
     
@@ -82,14 +82,14 @@
     </summary>
     
     
-      <category term="cloud" scheme="http://yoursite.com/tags/cloud/"/>
+      <category term="cloud" scheme="http://cealiu.me/tags/cloud/"/>
     
   </entry>
   
   <entry>
     <title>python 发送邮件出现Connection reset by peer解决</title>
-    <link href="http://yoursite.com/2017/08/31/python-%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%87%BA%E7%8E%B0Connection-reset-by-peer%E8%A7%A3%E5%86%B3/"/>
-    <id>http://yoursite.com/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/</id>
+    <link href="http://cealiu.me/2017/08/31/python-%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%87%BA%E7%8E%B0Connection-reset-by-peer%E8%A7%A3%E5%86%B3/"/>
+    <id>http://cealiu.me/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/</id>
     <published>2017-08-31T13:17:37.000Z</published>
     <updated>2017-08-31T13:44:18.000Z</updated>
     
@@ -106,14 +106,14 @@
     </summary>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="python" scheme="http://cealiu.me/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2017/08/30/hello-world/"/>
-    <id>http://yoursite.com/2017/08/30/hello-world/</id>
+    <link href="http://cealiu.me/2017/08/30/hello-world/"/>
+    <id>http://cealiu.me/2017/08/30/hello-world/</id>
     <published>2017-08-30T12:19:34.000Z</published>
     <updated>2017-09-01T16:12:37.000Z</updated>
     
@@ -141,7 +141,7 @@
     </summary>
     
     
-      <category term="影视" scheme="http://yoursite.com/tags/%E5%BD%B1%E8%A7%86/"/>
+      <category term="影视" scheme="http://cealiu.me/tags/%E5%BD%B1%E8%A7%86/"/>
     
   </entry>
   
