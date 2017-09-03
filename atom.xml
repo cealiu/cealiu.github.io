@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cealiu.me/"/>
-  <updated>2017-09-03T14:13:35.000Z</updated>
+  <updated>2017-09-03T14:22:38.000Z</updated>
   <id>http://cealiu.me/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>存储知识记录</title>
+    <link href="http://cealiu.me/2017/09/03/%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    <id>http://cealiu.me/2017/09/03/存储知识记录/</id>
+    <published>2017-09-03T14:19:22.000Z</published>
+    <updated>2017-09-03T14:22:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>平时工作是做云计算相关的，最近在学习hadoop的知识看到hadoop的文件存储方式结合用过的ceph，elasticsearch做下存储相关知识的记录。</p>
+<h2 id="块存储、文件存储、对象存储"><a href="#块存储、文件存储、对象存储" class="headerlink" title="块存储、文件存储、对象存储"></a>块存储、文件存储、对象存储</h2><h3 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h3><p>块存储：是以扇区为基础的，一个或连续的扇区组成一个块，概念来自于物理存储。</p>
+<p>文件储存：是多个物理块组成逻辑块后形成文件存储，根据不同的概念及驱动形成入nfs，ext4等文件系统。</p>
+<p>对象存储：结合上面两个优点，增加了元数据(metadata)服务器。</p>
+<p>这里有个知乎上不错的回答：<a href="http://www.zhihu.com/question/21536660" target="_blank" rel="external">http://www.zhihu.com/question/21536660</a></p>
+<h3 id="优缺点："><a href="#优缺点：" class="headerlink" title="优缺点："></a>优缺点：</h3><p>推荐生产环境ceph使用块存储、对象存储</p>
+<p>文件级备份：</p>
+<p>文件级备份是指在指定某些文件进行备份时，首先会查找每个文件逻辑块，其次物理块，由于逻辑块是分散在物理块上，而物理块也是分散在不同扇区上。需要一层一 层往下查找，最后才完成整个文件复制。文件级备份时比较费时间，效率不高，实时性不强，备份时间长，且增量备份时，单文件某一小部份修改，不会只备份修改 部份，而整个文件都备份。</p>
+<p>块级备份：</p>
+<p>块级备份是指物理块复制，效率高，实时性强，备份时间短，且增量备份时，只备份修改过的物理块。</p>
+<h2 id="ceph、hadoop、elasticsearch"><a href="#ceph、hadoop、elasticsearch" class="headerlink" title="ceph、hadoop、elasticsearch"></a>ceph、hadoop、elasticsearch</h2><p>hadoop：分布式存储主要适用于一次写入多次读取的场合（后续可能会增加其他数据处理方式），有数据块的概念(64M为一块，可配置)，将大文件分割为多个块进行存储；namenode内存中存放datanode数据索引，存储大小瓶颈来自namenode内存大小。</p>
+<p>ceph：支持块存储、文件存储、对象存储；与hadoop相似的是块存储，不过更接近于物理块的概念；ceph的块驱动基于RBD（介绍<a href="http://www.sebastien-han.fr/blog/2016/03/28/ceph-jewel-preview-ceph-rbd-mirroring" target="_blank" rel="external">http://www.sebastien-han.fr/blog/2016/03/28/ceph-jewel-preview-ceph-rbd-mirroring</a>）</p>
+<p>hadoop的存储也可以换成ceph的块存储不过性能可能会下降。</p>
+<p>elasticsearch：更接近于nosql的数据库，不过分布式存储也是切片保存数据（介绍<a href="https://kibana.logstash.es/content/elasticsearch/principle/" target="_blank" rel="external">https://kibana.logstash.es/content/elasticsearch/principle/</a>）；查询的时候还有hadoop-elasticsearch插件感觉上是将logstash替换为了hadoop（理解的不知道对不对）。</p>
+<h3 id="最后："><a href="#最后：" class="headerlink" title="最后："></a>最后：</h3><p>以上是工作中接触过的一些分布式存储的系统，要是想更深层次的理解一些知识还是要看一些理论行的东西如CAP，数据一致性存储等。</p>
+<p>以上有什么说的不对的请指正，大家共同学习。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;平时工作是做云计算相关的，最近在学习hadoop的知识看到hadoop的文件存储方式结合用过的ceph，elasticsearch做下存储相关知识的记录。&lt;/p&gt;
+&lt;h2 id=&quot;块存储、文件存储、对象存储&quot;&gt;&lt;a href=&quot;#块存储、文件存储、对象存储&quot; class=&quot;
+    
+    </summary>
+    
+    
+      <category term="cloud" scheme="http://cealiu.me/tags/cloud/"/>
+    
+  </entry>
   
   <entry>
     <title>Logistic回归和Sigmoid函数的理解</title>
