@@ -1,5 +1,5 @@
+http://cealiu.me/2017/09/04/hadoop-demo程序/
+http://cealiu.me/2017/09/04/hadoop单机搭建/
 http://cealiu.me/2017/09/03/存储知识记录/
 http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/
 http://cealiu.me/2017/09/01/opentack节点扩容后热迁移异常/
-http://cealiu.me/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/
-http://cealiu.me/2017/08/30/hello-world/
