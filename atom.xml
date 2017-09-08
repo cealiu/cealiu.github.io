@@ -295,6 +295,33 @@
   </entry>
   
   <entry>
+    <title>ELK排障记录</title>
+    <link href="http://cealiu.me/2017/04/08/ELK%E6%8E%92%E9%9A%9C%E8%AE%B0%E5%BD%95/"/>
+    <id>http://cealiu.me/2017/04/08/ELK排障记录/</id>
+    <published>2017-04-08T08:33:52.000Z</published>
+    <updated>2017-09-08T09:10:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景介绍："><a href="#背景介绍：" class="headerlink" title="背景介绍："></a>背景介绍：</h2><p>之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。</p>
+<p>公司用的审计接入日志的ELK架构图如下：</p>
+<p><img src="/images/ELK_structure.png" alt=""></p>
+<p>架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后用告警平台发送相应信息到责任人。</p>
+<h2 id="处理："><a href="#处理：" class="headerlink" title="处理："></a>处理：</h2><p>因为是在kibana展示上发现部分日志未展示，所以我们先检查了所有logstash shipper节点的日志情况发现日志时间戳连续没问题，es集群里缺少相应时间的部分日志，之后ossec上查看发现有部分日志缺失判定是logstash吐日志出现问题。</p>
+<p>排查shipper各个节点时发现一台机器的logstash进程down了，重启后问题解决。</p>
+<p>建议后期监控logstash进程或者修改配置。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景介绍：&quot;&gt;&lt;a href=&quot;#背景介绍：&quot; class=&quot;headerlink&quot; title=&quot;背景介绍：&quot;&gt;&lt;/a&gt;背景介绍：&lt;/h2&gt;&lt;p&gt;之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告
+    
+    </summary>
+    
+    
+      <category term="日志" scheme="http://cealiu.me/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>集中式日志监控系统</title>
     <link href="http://cealiu.me/2017/03/13/ELK%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA/"/>
     <id>http://cealiu.me/2017/03/13/ELK日志系统搭建/</id>

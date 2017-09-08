@@ -4,25 +4,27 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>opentack节点扩容后热迁移异常 | LiuCe&#39;s Blog</title>
+    <title>ELK排障记录 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上 故障原因为：新旧节点的qemu版本存在差异。 1rpm -qa | grep kvm qemu-kvm-2.5.1-1.1.el7.x86_64 libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64 qemu-kvm-common-2.5.1-1.1.el7.x86_64 1rpm -qa | gr">
-<meta name="keywords" content="cloud">
+    <meta name="description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
+<meta name="keywords" content="日志">
 <meta property="og:type" content="article">
-<meta property="og:title" content="opentack节点扩容后热迁移异常">
-<meta property="og:url" content="http://cealiu.me/2017/09/01/opentack节点扩容后热迁移异常/index.html">
+<meta property="og:title" content="ELK排障记录">
+<meta property="og:url" content="http://cealiu.me/2017/04/08/ELK排障记录/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上 故障原因为：新旧节点的qemu版本存在差异。 1rpm -qa | grep kvm qemu-kvm-2.5.1-1.1.el7.x86_64 libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64 qemu-kvm-common-2.5.1-1.1.el7.x86_64 1rpm -qa | gr">
+<meta property="og:description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-01T02:47:22.000Z">
+<meta property="og:image" content="http://cealiu.me/images/ELK_structure.png">
+<meta property="og:updated_time" content="2017-09-08T09:10:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="opentack节点扩容后热迁移异常">
-<meta name="twitter:description" content="扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上 故障原因为：新旧节点的qemu版本存在差异。 1rpm -qa | grep kvm qemu-kvm-2.5.1-1.1.el7.x86_64 libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64 qemu-kvm-common-2.5.1-1.1.el7.x86_64 1rpm -qa | gr">
+<meta name="twitter:title" content="ELK排障记录">
+<meta name="twitter:description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
+<meta name="twitter:image" content="http://cealiu.me/images/ELK_structure.png">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -82,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/09/01/opentack节点扩容后热迁移异常/" title="opentack节点扩容后热迁移异常" itemprop="url">opentack节点扩容后热迁移异常</a>
+      <a href="/2017/04/08/ELK排障记录/" title="ELK排障记录" itemprop="url">ELK排障记录</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-09-01T02:27:37.000Z" itemprop="datePublished"> 发表于 2017-09-01</time>
+    <time datetime="2017-04-08T08:33:52.000Z" itemprop="datePublished"> 发表于 2017-04-08</time>
     
   </p>
 </header>
@@ -98,31 +100,17 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍："><span class="toc-number">1.</span> <span class="toc-text">背景介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#处理："><span class="toc-number">2.</span> <span class="toc-text">处理：</span></a></li></ol>
 		
 		</div>
 		
-		<p>扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上</p>
-<p>故障原因为：新旧节点的qemu版本存在差异。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kvm</div></pre></td></tr></table></figure>
-<p>qemu-kvm-2.5.1-1.1.el7.x86_64</p>
-<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
-<p>qemu-kvm-common-2.5.1-1.1.el7.x86_64</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kvm</div></pre></td></tr></table></figure>
-<p>qemu-kvm-2.5.1-1.el7.es.x86_64</p>
-<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
-<p>qemu-kvm-common-2.5.1-1.el7.es.x86_64</p>
-<p>openstack虚机热迁移节点要求（摘录三条）:</p>
-<ol>
-<li><p>源和目标节点的 CPU 类型要一致。</p>
-</li>
-<li><p>源和目标节点的 Libvirt 版本要一致。</p>
-</li>
-<li><p>源和目标节点能相互识别对方的主机名称，比如可以在 /etc/hosts 中加入对方的条目。</p>
-<p>迁移失败原因是第2条不满足。</p>
-<p>升级qumu版本后解决，blog留作记录。</p>
-</li>
-</ol>
+		<h2 id="背景介绍："><a href="#背景介绍：" class="headerlink" title="背景介绍："></a>背景介绍：</h2><p>之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。</p>
+<p>公司用的审计接入日志的ELK架构图如下：</p>
+<p><img src="/images/ELK_structure.png" alt=""></p>
+<p>架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后用告警平台发送相应信息到责任人。</p>
+<h2 id="处理："><a href="#处理：" class="headerlink" title="处理："></a>处理：</h2><p>因为是在kibana展示上发现部分日志未展示，所以我们先检查了所有logstash shipper节点的日志情况发现日志时间戳连续没问题，es集群里缺少相应时间的部分日志，之后ossec上查看发现有部分日志缺失判定是logstash吐日志出现问题。</p>
+<p>排查shipper各个节点时发现一台机器的logstash进程down了，重启后问题解决。</p>
+<p>建议后期监控logstash进程或者修改配置。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -131,7 +119,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/cloud/">cloud</a>
+  <span></span> <a href="/tags/日志/">日志</a>
   </div>
 
 </div>
@@ -140,7 +128,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/09/01/opentack节点扩容后热迁移异常/" data-title="opentack节点扩容后热迁移异常 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2017/04/08/ELK排障记录/" data-title="ELK排障记录 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -154,18 +142,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/09/01/Logistic回归和Sigmoid函数的理解/" title="Logistic回归和Sigmoid函数的理解">
+ <a href="/2017/08/30/hello-world/" title="Hello World">
   <strong>上一篇：</strong><br/>
   <span>
-  Logistic回归和Sigmoid函数的理解</span>
+  Hello World</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/"  title="python 发送邮件出现Connection reset by peer解决">
+<a href="/2017/03/13/ELK日志系统搭建/"  title="集中式日志监控系统">
  <strong>下一篇：</strong><br/> 
- <span>python 发送邮件出现Connection reset by peer解决
+ <span>集中式日志监控系统
 </span>
 </a>
 </div>
@@ -174,7 +162,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/09/01/opentack节点扩容后热迁移异常/" data-title="opentack节点扩容后热迁移异常" data-url="http://cealiu.me/2017/09/01/opentack节点扩容后热迁移异常/"></div>
+	<div class="ds-thread" data-thread-key="2017/04/08/ELK排障记录/" data-title="ELK排障记录" data-url="http://cealiu.me/2017/04/08/ELK排障记录/"></div>
 </section>
 
 
@@ -191,7 +179,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍："><span class="toc-number">1.</span> <span class="toc-text">背景介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#处理："><span class="toc-number">2.</span> <span class="toc-text">处理：</span></a></li></ol>
  
   </div>
 
