@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cealiu.me/"/>
-  <updated>2017-09-04T03:15:21.000Z</updated>
+  <updated>2017-09-17T06:55:30.000Z</updated>
   <id>http://cealiu.me/</id>
   
   <author>
@@ -14,6 +14,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>安装linux系统</title>
+    <link href="http://cealiu.me/2017/09/17/%E5%AE%89%E8%A3%85linux%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://cealiu.me/2017/09/17/安装linux系统/</id>
+    <published>2017-09-17T06:46:27.000Z</published>
+    <updated>2017-09-17T06:55:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：</p>
+<ul>
+<li><p>用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。</p>
+</li>
+<li><p>进入系统后安装kvm manger后使用图形界面结果显示“Spice doesn’t work from Virtual Machine Manager”linux mint18.2是基于Ubuntu的16.04安装后会出现这个bug，解决办法是执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install gir1.2-spice-client-gtk-3.0</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="http://cealiu.me/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://cealiu.me/2017/09/09/openstack%20%E6%A6%82%E5%BF%B5%E6%95%B4%E7%90%86/"/>
+    <id>http://cealiu.me/2017/09/09/openstack 概念整理/</id>
+    <published>2017-09-09T07:45:26.000Z</published>
+    <updated>2017-09-11T14:26:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="openstack-概念整理"><a href="#openstack-概念整理" class="headerlink" title="openstack 概念整理"></a>openstack 概念整理</h2><h3 id="keystone"><a href="#keystone" class="headerlink" title="keystone"></a>keystone</h3><p>V2：</p>
+<p>Tenant、User、Role</p>
+<p>V3</p>
+<p>Domain、Project、Group、User、Role</p>
+<p>例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用</p>
+<p>Tenant -&gt; 部门，User-&gt;用户，Role-&gt;权限</p>
+<p>现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出domain类似公司</p>
+<p>Domain-&gt;公司，Project-&gt;部门，User-&gt;用户，Role-&gt;权限，Group-&gt;组（包含给多个user赋权限）</p>
+<h3 id="区域概念"><a href="#区域概念" class="headerlink" title="区域概念"></a>区域概念</h3><ul>
+<li>region：更像是一个地理上的概念，每个region有自己独立的endpoint，regions之间完全隔离，但是多个regions之间共享同一个keystone和dashboard。（注：目前openstack的dashboard还不支持多region）所以除了提供隔离的功能，region的设计更多侧重地理位置的概念，用户可以选择离自己更近的region来部署自己的服务。</li>
+<li>cell：cell是openstack一个非常重要的概念，主要用来解决openstack的扩展性和规模瓶颈。众所周知，openstack是由很多的组件通过松耦合构成，那么当达到一定的规模后，某些模块必然成为整个系统的瓶颈。比较典型的组件就是database和AMQP了，所以，每个cell有自己独立的DB和AMQP。<ul>
+<li>cell之间的通信(通过rpc完成)</li>
+</ul>
+</li>
+<li>Availability Zone：AZ可以简单理解为一组节点的集合，这组节点具有独立的电力供应设备，比如一个个独立供电的机房，一个个独立供电的机架都可以被划分成AZ。所以，AZ主要是通过冗余来解决可用性问题。AZ是用户可见的一个概念，用户在创建instance的时候可以选择创建到哪些AZ中，以保证instance的可用性。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;openstack-概念整理&quot;&gt;&lt;a href=&quot;#openstack-概念整理&quot; class=&quot;headerlink&quot; title=&quot;openstack 概念整理&quot;&gt;&lt;/a&gt;openstack 概念整理&lt;/h2&gt;&lt;h3 id=&quot;keystone&quot;&gt;&lt;a href
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>hadoop demo程序</title>

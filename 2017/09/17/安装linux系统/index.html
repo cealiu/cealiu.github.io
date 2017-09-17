@@ -4,27 +4,25 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>ELK排障记录 | LiuCe&#39;s Blog</title>
+    <title>安装linux系统 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
-<meta name="keywords" content="日志">
+    <meta name="description" content="很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：  用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。  进入系统后安装kvm ma">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ELK排障记录">
-<meta property="og:url" content="http://cealiu.me/2017/04/08/ELK排障记录/index.html">
+<meta property="og:title" content="安装linux系统">
+<meta property="og:url" content="http://cealiu.me/2017/09/17/安装linux系统/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
+<meta property="og:description" content="很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：  用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。  进入系统后安装kvm ma">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://cealiu.me/images/ELK_structure.png">
-<meta property="og:updated_time" content="2017-09-08T09:10:06.000Z">
+<meta property="og:updated_time" content="2017-09-17T06:55:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ELK排障记录">
-<meta name="twitter:description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
-<meta name="twitter:image" content="http://cealiu.me/images/ELK_structure.png">
+<meta name="twitter:title" content="安装linux系统">
+<meta name="twitter:description" content="很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：  用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。  进入系统后安装kvm ma">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -84,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/08/ELK排障记录/" title="ELK排障记录" itemprop="url">ELK排障记录</a>
+      <a href="/2017/09/17/安装linux系统/" title="安装linux系统" itemprop="url">安装linux系统</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-08T08:33:52.000Z" itemprop="datePublished"> 发表于 2017-04-08</time>
+    <time datetime="2017-09-17T06:46:27.000Z" itemprop="datePublished"> 发表于 2017-09-17</time>
     
   </p>
 </header>
@@ -100,17 +98,19 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍："><span class="toc-number">1.</span> <span class="toc-text">背景介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#处理："><span class="toc-number">2.</span> <span class="toc-text">处理：</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="背景介绍："><a href="#背景介绍：" class="headerlink" title="背景介绍："></a>背景介绍：</h2><p>之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。</p>
-<p>公司用的审计接入日志的ELK架构图如下：</p>
-<p><img src="/images/ELK_structure.png" alt=""></p>
-<p>架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后用告警平台发送相应信息到责任人。</p>
-<h2 id="处理："><a href="#处理：" class="headerlink" title="处理："></a>处理：</h2><p>因为是在kibana展示上发现部分日志未展示，所以我们先检查了所有logstash shipper节点的日志情况发现日志时间戳连续没问题，es集群里缺少相应时间的部分日志，之后ossec上查看发现有部分日志缺失判定是logstash吐日志出现问题。</p>
-<p>排查shipper各个节点时发现一台机器的logstash进程down了，重启后问题解决。</p>
-<p>建议后期监控logstash进程或者修改配置。</p>
+		<p>很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：</p>
+<ul>
+<li><p>用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。</p>
+</li>
+<li><p>进入系统后安装kvm manger后使用图形界面结果显示“Spice doesn’t work from Virtual Machine Manager”linux mint18.2是基于Ubuntu的16.04安装后会出现这个bug，解决办法是执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install gir1.2-spice-client-gtk-3.0</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -119,7 +119,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/日志/">日志</a>
+  <span></span> <a href="/tags/linux/">linux</a>
   </div>
 
 </div>
@@ -128,7 +128,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/04/08/ELK排障记录/" data-title="ELK排障记录 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2017/09/17/安装linux系统/" data-title="安装linux系统 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -141,19 +141,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/08/30/hello-world/" title="Hello World">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Hello World</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/13/ELK日志系统搭建/"  title="集中式日志监控系统">
+<a href="/2017/09/09/openstack 概念整理/"  title="">
  <strong>下一篇：</strong><br/> 
- <span>集中式日志监控系统
+ <span>(no title)
 </span>
 </a>
 </div>
@@ -162,7 +154,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/04/08/ELK排障记录/" data-title="ELK排障记录" data-url="http://cealiu.me/2017/04/08/ELK排障记录/"></div>
+	<div class="ds-thread" data-thread-key="2017/09/17/安装linux系统/" data-title="安装linux系统" data-url="http://cealiu.me/2017/09/17/安装linux系统/"></div>
 </section>
 
 
@@ -179,7 +171,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍："><span class="toc-number">1.</span> <span class="toc-text">背景介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#处理："><span class="toc-number">2.</span> <span class="toc-text">处理：</span></a></li></ol>
+ 
  
   </div>
 

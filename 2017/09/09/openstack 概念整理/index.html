@@ -4,27 +4,24 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>ELK排障记录 | LiuCe&#39;s Blog</title>
+    <title>LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
-<meta name="keywords" content="日志">
+    <meta name="description" content="openstack 概念整理keystoneV2： Tenant、User、Role V3 Domain、Project、Group、User、Role 例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用 Tenant -&amp;gt; 部门，User-&amp;gt;用户，Role-&amp;gt;权限 现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出doma">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ELK排障记录">
-<meta property="og:url" content="http://cealiu.me/2017/04/08/ELK排障记录/index.html">
+<meta property="og:title" content="LiuCe&#39;s Blog">
+<meta property="og:url" content="http://cealiu.me/2017/09/09/openstack 概念整理/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
+<meta property="og:description" content="openstack 概念整理keystoneV2： Tenant、User、Role V3 Domain、Project、Group、User、Role 例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用 Tenant -&amp;gt; 部门，User-&amp;gt;用户，Role-&amp;gt;权限 现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出doma">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://cealiu.me/images/ELK_structure.png">
-<meta property="og:updated_time" content="2017-09-08T09:10:06.000Z">
+<meta property="og:updated_time" content="2017-09-11T14:26:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ELK排障记录">
-<meta name="twitter:description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
-<meta name="twitter:image" content="http://cealiu.me/images/ELK_structure.png">
+<meta name="twitter:title" content="LiuCe&#39;s Blog">
+<meta name="twitter:description" content="openstack 概念整理keystoneV2： Tenant、User、Role V3 Domain、Project、Group、User、Role 例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用 Tenant -&amp;gt; 部门，User-&amp;gt;用户，Role-&amp;gt;权限 现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出doma">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -84,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/08/ELK排障记录/" title="ELK排障记录" itemprop="url">ELK排障记录</a>
+      <a href="/2017/09/09/openstack 概念整理/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-08T08:33:52.000Z" itemprop="datePublished"> 发表于 2017-04-08</time>
+    <time datetime="2017-09-09T07:45:26.000Z" itemprop="datePublished"> 发表于 2017-09-09</time>
     
   </p>
 </header>
@@ -100,27 +97,31 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍："><span class="toc-number">1.</span> <span class="toc-text">背景介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#处理："><span class="toc-number">2.</span> <span class="toc-text">处理：</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#openstack-概念整理"><span class="toc-number">1.</span> <span class="toc-text">openstack 概念整理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#keystone"><span class="toc-number">1.1.</span> <span class="toc-text">keystone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区域概念"><span class="toc-number">1.2.</span> <span class="toc-text">区域概念</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h2 id="背景介绍："><a href="#背景介绍：" class="headerlink" title="背景介绍："></a>背景介绍：</h2><p>之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。</p>
-<p>公司用的审计接入日志的ELK架构图如下：</p>
-<p><img src="/images/ELK_structure.png" alt=""></p>
-<p>架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后用告警平台发送相应信息到责任人。</p>
-<h2 id="处理："><a href="#处理：" class="headerlink" title="处理："></a>处理：</h2><p>因为是在kibana展示上发现部分日志未展示，所以我们先检查了所有logstash shipper节点的日志情况发现日志时间戳连续没问题，es集群里缺少相应时间的部分日志，之后ossec上查看发现有部分日志缺失判定是logstash吐日志出现问题。</p>
-<p>排查shipper各个节点时发现一台机器的logstash进程down了，重启后问题解决。</p>
-<p>建议后期监控logstash进程或者修改配置。</p>
+		<h2 id="openstack-概念整理"><a href="#openstack-概念整理" class="headerlink" title="openstack 概念整理"></a>openstack 概念整理</h2><h3 id="keystone"><a href="#keystone" class="headerlink" title="keystone"></a>keystone</h3><p>V2：</p>
+<p>Tenant、User、Role</p>
+<p>V3</p>
+<p>Domain、Project、Group、User、Role</p>
+<p>例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用</p>
+<p>Tenant -&gt; 部门，User-&gt;用户，Role-&gt;权限</p>
+<p>现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出domain类似公司</p>
+<p>Domain-&gt;公司，Project-&gt;部门，User-&gt;用户，Role-&gt;权限，Group-&gt;组（包含给多个user赋权限）</p>
+<h3 id="区域概念"><a href="#区域概念" class="headerlink" title="区域概念"></a>区域概念</h3><ul>
+<li>region：更像是一个地理上的概念，每个region有自己独立的endpoint，regions之间完全隔离，但是多个regions之间共享同一个keystone和dashboard。（注：目前openstack的dashboard还不支持多region）所以除了提供隔离的功能，region的设计更多侧重地理位置的概念，用户可以选择离自己更近的region来部署自己的服务。</li>
+<li>cell：cell是openstack一个非常重要的概念，主要用来解决openstack的扩展性和规模瓶颈。众所周知，openstack是由很多的组件通过松耦合构成，那么当达到一定的规模后，某些模块必然成为整个系统的瓶颈。比较典型的组件就是database和AMQP了，所以，每个cell有自己独立的DB和AMQP。<ul>
+<li>cell之间的通信(通过rpc完成)</li>
+</ul>
+</li>
+<li>Availability Zone：AZ可以简单理解为一组节点的集合，这组节点具有独立的电力供应设备，比如一个个独立供电的机房，一个个独立供电的机架都可以被划分成AZ。所以，AZ主要是通过冗余来解决可用性问题。AZ是用户可见的一个概念，用户在创建instance的时候可以选择创建到哪些AZ中，以保证instance的可用性。</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/日志/">日志</a>
-  </div>
 
 </div>
 
@@ -128,7 +129,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/04/08/ELK排障记录/" data-title="ELK排障记录 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2017/09/09/openstack 概念整理/" data-title="LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -142,18 +143,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/08/30/hello-world/" title="Hello World">
+ <a href="/2017/09/17/安装linux系统/" title="安装linux系统">
   <strong>上一篇：</strong><br/>
   <span>
-  Hello World</span>
+  安装linux系统</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/03/13/ELK日志系统搭建/"  title="集中式日志监控系统">
+<a href="/2017/09/04/hadoop-demo程序/"  title="hadoop demo程序">
  <strong>下一篇：</strong><br/> 
- <span>集中式日志监控系统
+ <span>hadoop demo程序
 </span>
 </a>
 </div>
@@ -162,7 +163,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/04/08/ELK排障记录/" data-title="ELK排障记录" data-url="http://cealiu.me/2017/04/08/ELK排障记录/"></div>
+	<div class="ds-thread" data-thread-key="2017/09/09/openstack 概念整理/" data-title="" data-url="http://cealiu.me/2017/09/09/openstack 概念整理/"></div>
 </section>
 
 
@@ -179,7 +180,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍："><span class="toc-number">1.</span> <span class="toc-text">背景介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#处理："><span class="toc-number">2.</span> <span class="toc-text">处理：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#openstack-概念整理"><span class="toc-number">1.</span> <span class="toc-text">openstack 概念整理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#keystone"><span class="toc-number">1.1.</span> <span class="toc-text">keystone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区域概念"><span class="toc-number">1.2.</span> <span class="toc-text">区域概念</span></a></li></ol></li></ol>
  
   </div>
 
