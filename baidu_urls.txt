@@ -1,5 +1,5 @@
+http://cealiu.me/2017/11/01/集群搭建hadoop问题总结/
 http://cealiu.me/2017/09/17/安装linux系统/
 http://cealiu.me/2017/09/09/openstack 概念整理/
 http://cealiu.me/2017/09/04/hadoop-demo程序/
 http://cealiu.me/2017/09/04/hadoop单机搭建/
-http://cealiu.me/2017/09/03/存储知识记录/

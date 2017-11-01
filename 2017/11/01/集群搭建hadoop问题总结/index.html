@@ -4,32 +4,25 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>Hello World | LiuCe&#39;s Blog</title>
+    <title>集群搭建hadoop问题总结 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="用hexo和github搭建了一个静态博客，程序员惯用helloworld例程那就拿之前在知乎写简单写的一个回答放在这里吧，当作熟悉hexo博客和markdown语法了；后续会将开源中国上的和笔记软件记录的内容放上来。 韩国灾难电影推荐最近在腾讯视频上看了部韩国电影《铁线虫入侵》仔细回想发现之前看过不少类似韩国灾难电影这里一并推荐出来吧。 《铁线虫入侵》关于人体寄生虫的故事  《流感》讲传染病的故">
-<meta name="keywords" content="影视">
+    <meta name="description" content="在公司的openstack上搭建hadoop的集群环境的过程中遇到一些问题，整理记录下： 搭建的过程参考官方文档和一些blog，版本2.7.4  申请资源的hadoop的master节点申请public ip，datanode节点可以不用申请public ip。  master节点跟datanode节点设置免密码登录。  搭建完成后运行 1hadoop namenode -format   运行不">
+<meta name="keywords" content="bigdata">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://cealiu.me/2017/08/30/hello-world/index.html">
+<meta property="og:title" content="集群搭建hadoop问题总结">
+<meta property="og:url" content="http://cealiu.me/2017/11/01/集群搭建hadoop问题总结/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="用hexo和github搭建了一个静态博客，程序员惯用helloworld例程那就拿之前在知乎写简单写的一个回答放在这里吧，当作熟悉hexo博客和markdown语法了；后续会将开源中国上的和笔记软件记录的内容放上来。 韩国灾难电影推荐最近在腾讯视频上看了部韩国电影《铁线虫入侵》仔细回想发现之前看过不少类似韩国灾难电影这里一并推荐出来吧。 《铁线虫入侵》关于人体寄生虫的故事  《流感》讲传染病的故">
+<meta property="og:description" content="在公司的openstack上搭建hadoop的集群环境的过程中遇到一些问题，整理记录下： 搭建的过程参考官方文档和一些blog，版本2.7.4  申请资源的hadoop的master节点申请public ip，datanode节点可以不用申请public ip。  master节点跟datanode节点设置免密码登录。  搭建完成后运行 1hadoop namenode -format   运行不">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://cealiu.me/images/tiexianchongruqin.jpg">
-<meta property="og:image" content="http://cealiu.me/images/liugan.jpg">
-<meta property="og:image" content="http://cealiu.me/images/fushanxing.jpg">
-<meta property="og:image" content="http://cealiu.me/images/suidao.jpg">
-<meta property="og:image" content="http://cealiu.me/images/hanjiangguaiwu.jpg">
-<meta property="og:image" content="http://cealiu.me/images/panduola.jpg">
-<meta property="og:updated_time" content="2017-09-01T16:12:37.000Z">
+<meta property="og:updated_time" content="2017-11-01T13:42:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="用hexo和github搭建了一个静态博客，程序员惯用helloworld例程那就拿之前在知乎写简单写的一个回答放在这里吧，当作熟悉hexo博客和markdown语法了；后续会将开源中国上的和笔记软件记录的内容放上来。 韩国灾难电影推荐最近在腾讯视频上看了部韩国电影《铁线虫入侵》仔细回想发现之前看过不少类似韩国灾难电影这里一并推荐出来吧。 《铁线虫入侵》关于人体寄生虫的故事  《流感》讲传染病的故">
-<meta name="twitter:image" content="http://cealiu.me/images/tiexianchongruqin.jpg">
+<meta name="twitter:title" content="集群搭建hadoop问题总结">
+<meta name="twitter:description" content="在公司的openstack上搭建hadoop的集群环境的过程中遇到一些问题，整理记录下： 搭建的过程参考官方文档和一些blog，版本2.7.4  申请资源的hadoop的master节点申请public ip，datanode节点可以不用申请public ip。  master节点跟datanode节点设置免密码登录。  搭建完成后运行 1hadoop namenode -format   运行不">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -89,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/08/30/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2017/11/01/集群搭建hadoop问题总结/" title="集群搭建hadoop问题总结" itemprop="url">集群搭建hadoop问题总结</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-08-30T12:19:34.000Z" itemprop="datePublished"> 发表于 2017-08-30</time>
+    <time datetime="2017-11-01T13:06:12.000Z" itemprop="datePublished"> 发表于 2017-11-01</time>
     
   </p>
 </header>
@@ -105,24 +98,35 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#韩国灾难电影推荐"><span class="toc-number">1.</span> <span class="toc-text">韩国灾难电影推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#《铁线虫入侵》"><span class="toc-number">1.1.</span> <span class="toc-text">《铁线虫入侵》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《流感》"><span class="toc-number">1.2.</span> <span class="toc-text">《流感》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《釜山行》"><span class="toc-number">1.3.</span> <span class="toc-text">《釜山行》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《隧道》"><span class="toc-number">1.4.</span> <span class="toc-text">《隧道》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《汉江怪物》"><span class="toc-number">1.5.</span> <span class="toc-text">《汉江怪物》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《潘多拉》"><span class="toc-number">1.6.</span> <span class="toc-text">《潘多拉》</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#hadoop-java-net-UnknowHostException"><span class="toc-number">1.</span> <span class="toc-text">hadoop java.net.UnknowHostException</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component"><span class="toc-number">2.</span> <span class="toc-text">FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component</span></a></li></ol>
 		
 		</div>
 		
-		<p>用hexo和github搭建了一个静态博客，程序员惯用helloworld例程那就拿之前在知乎写简单写的一个回答放在这里吧，当作熟悉hexo博客和markdown语法了；后续会将开源中国上的和笔记软件记录的内容放上来。</p>
-<h2 id="韩国灾难电影推荐"><a href="#韩国灾难电影推荐" class="headerlink" title="韩国灾难电影推荐"></a>韩国灾难电影推荐</h2><p>最近在腾讯视频上看了部韩国电影《铁线虫入侵》仔细回想发现之前看过不少类似韩国灾难电影这里一并推荐出来吧。</p>
-<h3 id="《铁线虫入侵》"><a href="#《铁线虫入侵》" class="headerlink" title="《铁线虫入侵》"></a>《铁线虫入侵》</h3><p>关于人体寄生虫的故事</p>
-<p><img src="/images/tiexianchongruqin.jpg" alt=""></p>
-<h3 id="《流感》"><a href="#《流感》" class="headerlink" title="《流感》"></a>《流感》</h3><p>讲传染病的故事，让人想起之前的非典不过电影比较夸张</p>
-<p><img src="/images/liugan.jpg" alt=""></p>
-<h3 id="《釜山行》"><a href="#《釜山行》" class="headerlink" title="《釜山行》"></a>《釜山行》</h3><p>号称亚洲首部丧尸片</p>
-<p><img src="/images/fushanxing.jpg" alt=""></p>
-<h3 id="《隧道》"><a href="#《隧道》" class="headerlink" title="《隧道》"></a>《隧道》</h3><p>类似井下求生的故事</p>
-<p><img src="/images/suidao.jpg" alt=""></p>
-<h3 id="《汉江怪物》"><a href="#《汉江怪物》" class="headerlink" title="《汉江怪物》"></a>《汉江怪物》</h3><p>大家一起打怪兽</p>
-<p><img src="/images/hanjiangguaiwu.jpg" alt=""></p>
-<h3 id="《潘多拉》"><a href="#《潘多拉》" class="headerlink" title="《潘多拉》"></a>《潘多拉》</h3><p>讲述核电站核泄漏的故事</p>
-<p><img src="/images/panduola.jpg" alt=""></p>
+		<p>在公司的openstack上搭建hadoop的集群环境的过程中遇到一些问题，整理记录下：</p>
+<p>搭建的过程参考官方文档和一些blog，版本2.7.4</p>
+<ol>
+<li><p>申请资源的hadoop的master节点申请public ip，datanode节点可以不用申请public ip。</p>
+</li>
+<li><p>master节点跟datanode节点设置免密码登录。</p>
+</li>
+<li><p>搭建完成后运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop namenode -format</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>运行不成功，开始报错。</p>
+<h4 id="hadoop-java-net-UnknowHostException"><a href="#hadoop-java-net-UnknowHostException" class="headerlink" title="hadoop java.net.UnknowHostException"></a>hadoop java.net.UnknowHostException</h4><p>上面这个错误是不能识别集群的hostname，依次做如下修改：</p>
+<ol>
+<li>编辑集群中每个/etc/hosts文件，依次将集群的ip hostname记录下来。</li>
+<li>编辑/etc/hostname文件，将主机名记录此文件。</li>
+<li>编辑 Hadoop/etc/hadoop/slave文件，将datanode的主机名或者datanode的记录下来。</li>
+</ol>
+<h4 id="FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component"><a href="#FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component" class="headerlink" title="FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component"></a>FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component</h4><p>出现这个问题有说是配置文件重载权限问题，但是我将hdfs-site.xml的文件权限设置成777也没有生效，后将此文件中的xml配置写成固定值成功，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>tmp目录是自己指定的。</p>
+<p><strong>完成上述配置后格式化启动成功，发现启动节点数不对或者其他不确定错误，将上面的tmp目录内容清空再试一次即可</strong></p>
+<p>放个hadoop配置文件<a href="http://blog.csdn.net/team77/article/details/50205917" target="_blank" rel="external">参数介绍</a></p>
+<p>之后就可以在上层跑hive，hsql，spark，storm的组件了，map/reduce的开发跟之前单机版一样。</p>
+<p>hadoop，es，spark/storm基本思想差不多都是<strong>大化小，小块处理，结果整合</strong>，之前记录过。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -131,7 +135,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/影视/">影视</a>
+  <span></span> <a href="/tags/bigdata/">bigdata</a>
   </div>
 
 </div>
@@ -140,7 +144,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/08/30/hello-world/" data-title="Hello World | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2017/11/01/集群搭建hadoop问题总结/" data-title="集群搭建hadoop问题总结 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -153,19 +157,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" title="python 发送邮件出现Connection reset by peer解决">
-  <strong>上一篇：</strong><br/>
-  <span>
-  python 发送邮件出现Connection reset by peer解决</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/04/08/ELK排障记录/"  title="ELK排障记录">
+<a href="/2017/09/17/安装linux系统/"  title="安装linux系统">
  <strong>下一篇：</strong><br/> 
- <span>ELK排障记录
+ <span>安装linux系统
 </span>
 </a>
 </div>
@@ -174,7 +170,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/08/30/hello-world/" data-title="Hello World" data-url="http://cealiu.me/2017/08/30/hello-world/"></div>
+	<div class="ds-thread" data-thread-key="2017/11/01/集群搭建hadoop问题总结/" data-title="集群搭建hadoop问题总结" data-url="http://cealiu.me/2017/11/01/集群搭建hadoop问题总结/"></div>
 </section>
 
 
@@ -191,7 +187,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#韩国灾难电影推荐"><span class="toc-number">1.</span> <span class="toc-text">韩国灾难电影推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#《铁线虫入侵》"><span class="toc-number">1.1.</span> <span class="toc-text">《铁线虫入侵》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《流感》"><span class="toc-number">1.2.</span> <span class="toc-text">《流感》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《釜山行》"><span class="toc-number">1.3.</span> <span class="toc-text">《釜山行》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《隧道》"><span class="toc-number">1.4.</span> <span class="toc-text">《隧道》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《汉江怪物》"><span class="toc-number">1.5.</span> <span class="toc-text">《汉江怪物》</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《潘多拉》"><span class="toc-number">1.6.</span> <span class="toc-text">《潘多拉》</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#hadoop-java-net-UnknowHostException"><span class="toc-number">1.</span> <span class="toc-text">hadoop java.net.UnknowHostException</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component"><span class="toc-number">2.</span> <span class="toc-text">FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component</span></a></li></ol>
  
   </div>
 

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cealiu.me/"/>
-  <updated>2017-09-17T06:55:30.000Z</updated>
+  <updated>2017-11-01T13:42:40.000Z</updated>
   <id>http://cealiu.me/</id>
   
   <author>
@@ -14,6 +14,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>集群搭建hadoop问题总结</title>
+    <link href="http://cealiu.me/2017/11/01/%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BAhadoop%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://cealiu.me/2017/11/01/集群搭建hadoop问题总结/</id>
+    <published>2017-11-01T13:06:12.000Z</published>
+    <updated>2017-11-01T13:42:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在公司的openstack上搭建hadoop的集群环境的过程中遇到一些问题，整理记录下：</p>
+<p>搭建的过程参考官方文档和一些blog，版本2.7.4</p>
+<ol>
+<li><p>申请资源的hadoop的master节点申请public ip，datanode节点可以不用申请public ip。</p>
+</li>
+<li><p>master节点跟datanode节点设置免密码登录。</p>
+</li>
+<li><p>搭建完成后运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop namenode -format</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>运行不成功，开始报错。</p>
+<h4 id="hadoop-java-net-UnknowHostException"><a href="#hadoop-java-net-UnknowHostException" class="headerlink" title="hadoop java.net.UnknowHostException"></a>hadoop java.net.UnknowHostException</h4><p>上面这个错误是不能识别集群的hostname，依次做如下修改：</p>
+<ol>
+<li>编辑集群中每个/etc/hosts文件，依次将集群的ip hostname记录下来。</li>
+<li>编辑/etc/hostname文件，将主机名记录此文件。</li>
+<li>编辑 Hadoop/etc/hadoop/slave文件，将datanode的主机名或者datanode的记录下来。</li>
+</ol>
+<h4 id="FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component"><a href="#FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component" class="headerlink" title="FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component"></a>FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component</h4><p>出现这个问题有说是配置文件重载权限问题，但是我将hdfs-site.xml的文件权限设置成777也没有生效，后将此文件中的xml配置写成固定值成功，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>tmp目录是自己指定的。</p>
+<p><strong>完成上述配置后格式化启动成功，发现启动节点数不对或者其他不确定错误，将上面的tmp目录内容清空再试一次即可</strong></p>
+<p>放个hadoop配置文件<a href="http://blog.csdn.net/team77/article/details/50205917" target="_blank" rel="external">参数介绍</a></p>
+<p>之后就可以在上层跑hive，hsql，spark，storm的组件了，map/reduce的开发跟之前单机版一样。</p>
+<p>hadoop，es，spark/storm基本思想差不多都是<strong>大化小，小块处理，结果整合</strong>，之前记录过。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在公司的openstack上搭建hadoop的集群环境的过程中遇到一些问题，整理记录下：&lt;/p&gt;
+&lt;p&gt;搭建的过程参考官方文档和一些blog，版本2.7.4&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;申请资源的hadoop的master节点申请public ip，datanode节点
+    
+    </summary>
+    
+    
+      <category term="bigdata" scheme="http://cealiu.me/tags/bigdata/"/>
+    
+  </entry>
   
   <entry>
     <title>安装linux系统</title>
