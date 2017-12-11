@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cealiu.me/"/>
-  <updated>2017-12-11T13:47:20.000Z</updated>
+  <updated>2017-12-11T13:50:44.000Z</updated>
   <id>http://cealiu.me/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://cealiu.me/2017/11/16/%E7%9B%91%E6%8E%A7%E6%80%BB%E7%BB%93/"/>
     <id>http://cealiu.me/2017/11/16/监控总结/</id>
     <published>2017-11-16T00:49:38.000Z</published>
-    <updated>2017-12-11T13:47:20.000Z</updated>
+    <updated>2017-12-11T13:50:44.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>年初入职新公司做云计算奈何线上系统都还有没有做监控，所以接手做监控事宜；</p>
+    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜；</p>
 <h4 id="zabbix邮件短信服务"><a href="#zabbix邮件短信服务" class="headerlink" title="zabbix邮件短信服务"></a>zabbix邮件短信服务</h4><p>监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。</p>
 <p>配置如下：</p>
 <p><img src="/images/sms.png" alt=""></p>
@@ -36,13 +36,14 @@
 <h4 id="日志监控"><a href="#日志监控" class="headerlink" title="日志监控"></a>日志监控</h4><p>本来想用ELK做日志收集监控（城商行不允许这么做），所以选择了zabbix告警日志error信息还好错误信息产生速率不高；</p>
 <h4 id="对账文件监控"><a href="#对账文件监控" class="headerlink" title="对账文件监控"></a>对账文件监控</h4><p>平台每天在不同时间段会产生几个对账文件，需要每天检测一次对账文件是否生成；zabbix 3.0支持固定时间点生成告警（粒度一分钟）</p>
 <p><img src="/images/zabbix_time.png" alt=""></p>
-<h5 id="to-be-contiune"><a href="#to-be-contiune" class="headerlink" title="to be contiune"></a>to be contiune</h5><p>部署选用的ansible，后面补充一些调优配置</p>
+<p>###to be contiune</p>
+<p>部署选用的ansible，后面补充一些调优配置</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;年初入职新公司做云计算奈何线上系统都还有没有做监控，所以接手做监控事宜；&lt;/p&gt;
-&lt;h4 id=&quot;zabbix邮件短信服务&quot;&gt;&lt;a href
+      &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜；&lt;/p&gt;
+&lt;h4 id=&quot;zabbix邮件短信服务&quot;&gt;&lt;a 
     
     </summary>
     
