@@ -11,20 +11,20 @@
     
 
     
-    <meta name="description" content="背景年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜； zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。 配置如下：  在图中，Name自行定义；Type选择 Script；Script name填写脚本名称">
+    <meta name="description" content="背景年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜； zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警通过socket对接的是总行的短信服务。 配置如下：  在图中，Name自行定义；Type选择 Script；Script name填写脚本名称">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="监控总结">
 <meta property="og:url" content="http://cealiu.me/2017/11/16/监控总结/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="背景年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜； zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。 配置如下：  在图中，Name自行定义；Type选择 Script；Script name填写脚本名称">
+<meta property="og:description" content="背景年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜； zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警通过socket对接的是总行的短信服务。 配置如下：  在图中，Name自行定义；Type选择 Script；Script name填写脚本名称">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://cealiu.me/images/sms.png">
 <meta property="og:image" content="http://cealiu.me/images/zabbix_time.png">
-<meta property="og:updated_time" content="2017-12-11T13:52:30.000Z">
+<meta property="og:updated_time" content="2017-12-11T13:54:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控总结">
-<meta name="twitter:description" content="背景年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜； zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。 配置如下：  在图中，Name自行定义；Type选择 Script；Script name填写脚本名称">
+<meta name="twitter:description" content="背景年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜； zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警通过socket对接的是总行的短信服务。 配置如下：  在图中，Name自行定义；Type选择 Script；Script name填写脚本名称">
 <meta name="twitter:image" content="http://cealiu.me/images/sms.png">
 
     
@@ -106,7 +106,7 @@
 		</div>
 		
 		<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜；</p>
-<h4 id="zabbix邮件短信服务"><a href="#zabbix邮件短信服务" class="headerlink" title="zabbix邮件短信服务"></a>zabbix邮件短信服务</h4><p>监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。</p>
+<h4 id="zabbix邮件短信服务"><a href="#zabbix邮件短信服务" class="headerlink" title="zabbix邮件短信服务"></a>zabbix邮件短信服务</h4><p>监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警通过socket对接的是总行的短信服务。</p>
 <p>配置如下：</p>
 <p><img src="/images/sms.png" alt=""></p>
 <p>在图中，Name自行定义；Type选择 Script；Script name填写脚本名称socket_alarm_script.py；Script parameters包含3个参数：{ALERT.SENDTO}、{ALERT.SUBJECT}、{ALERT.MESSAGE}，这3个参数是zabbix启用脚本时自动传给脚本的参数。此3个参数的具体内容将在zabbix文档有具体说明。</p>
