@@ -4,25 +4,28 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>python 发送邮件出现Connection reset by peer解决 | LiuCe&#39;s Blog</title>
+    <title>监控总结 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="​       利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。 ​       网上查找发现对于此问题的解释多是因为socket，web连接问题。后经排查后发现stmp协议使用的端口号是25：这里贴一段关于SMTP协议的介绍STMP协议介绍 ​">
-<meta name="keywords" content="python">
+    <meta name="description" content="背景年初入职新公司做云计算奈何线上系统都还有没有做监控，所以接手做监控事宜； zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。 配置如下：  在图中，Name自行定义；Type选择 Script；Script name填写脚本名称sock">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python 发送邮件出现Connection reset by peer解决">
-<meta property="og:url" content="http://cealiu.me/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/index.html">
+<meta property="og:title" content="监控总结">
+<meta property="og:url" content="http://cealiu.me/2017/11/16/监控总结/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="​       利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。 ​       网上查找发现对于此问题的解释多是因为socket，web连接问题。后经排查后发现stmp协议使用的端口号是25：这里贴一段关于SMTP协议的介绍STMP协议介绍 ​">
+<meta property="og:description" content="背景年初入职新公司做云计算奈何线上系统都还有没有做监控，所以接手做监控事宜； zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。 配置如下：  在图中，Name自行定义；Type选择 Script；Script name填写脚本名称sock">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-31T13:44:18.000Z">
+<meta property="og:image" content="http://cealiu.me/images/sms.png">
+<meta property="og:image" content="http://cealiu.me/images/zabbix_time.png">
+<meta property="og:updated_time" content="2017-12-11T13:47:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python 发送邮件出现Connection reset by peer解决">
-<meta name="twitter:description" content="​       利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。 ​       网上查找发现对于此问题的解释多是因为socket，web连接问题。后经排查后发现stmp协议使用的端口号是25：这里贴一段关于SMTP协议的介绍STMP协议介绍 ​">
+<meta name="twitter:title" content="监控总结">
+<meta name="twitter:description" content="背景年初入职新公司做云计算奈何线上系统都还有没有做监控，所以接手做监控事宜； zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。 配置如下：  在图中，Name自行定义；Type选择 Script；Script name填写脚本名称sock">
+<meta name="twitter:image" content="http://cealiu.me/images/sms.png">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -82,14 +85,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" title="python 发送邮件出现Connection reset by peer解决" itemprop="url">python 发送邮件出现Connection reset by peer解决</a>
+      <a href="/2017/11/16/监控总结/" title="监控总结" itemprop="url">监控总结</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-08-31T13:17:37.000Z" itemprop="datePublished"> 发表于 2017-08-31</time>
+    <time datetime="2017-11-16T00:49:38.000Z" itemprop="datePublished"> 发表于 2017-11-16</time>
     
   </p>
 </header>
@@ -98,13 +101,25 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#zabbix邮件短信服务"><span class="toc-number">1.1.</span> <span class="toc-text">zabbix邮件短信服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要监控项目"><span class="toc-number">2.</span> <span class="toc-text">主要监控项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tomcat、nginx、redis、oracle、zookeeper"><span class="toc-number">2.1.</span> <span class="toc-text">tomcat、nginx、redis、oracle、zookeeper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志监控"><span class="toc-number">2.2.</span> <span class="toc-text">日志监控</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对账文件监控"><span class="toc-number">2.3.</span> <span class="toc-text">对账文件监控</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#to-be-contiune"><span class="toc-number">2.3.1.</span> <span class="toc-text">to be contiune</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<p>​       利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。</p>
-<p>​       网上查找发现对于此问题的解释多是因为socket，web连接问题。后经排查后发现stmp协议使用的端口号是25：这里贴一段关于SMTP协议的介绍STMP协议介绍</p>
-<p>​      下面连接邮件服务器一定要写上邮件端口号25<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">smtp.connect(smtpserver,<span class="string">"25"</span>)</div></pre></td></tr></table></figure></p>
+		<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>年初入职新公司做云计算奈何线上系统都还有没有做监控，所以接手做监控事宜；</p>
+<h4 id="zabbix邮件短信服务"><a href="#zabbix邮件短信服务" class="headerlink" title="zabbix邮件短信服务"></a>zabbix邮件短信服务</h4><p>监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。</p>
+<p>配置如下：</p>
+<p><img src="/images/sms.png" alt=""></p>
+<p>在图中，Name自行定义；Type选择 Script；Script name填写脚本名称socket_alarm_script.py；Script parameters包含3个参数：{ALERT.SENDTO}、{ALERT.SUBJECT}、{ALERT.MESSAGE}，这3个参数是zabbix启用脚本时自动传给脚本的参数。此3个参数的具体内容将在zabbix文档有具体说明。</p>
+<h3 id="主要监控项目"><a href="#主要监控项目" class="headerlink" title="主要监控项目"></a>主要监控项目</h3><p>帮助某家城商行做互金项目监控，主要有tomcat、nginx、redis、oracle、日记</p>
+<h4 id="tomcat、nginx、redis、oracle、zookeeper"><a href="#tomcat、nginx、redis、oracle、zookeeper" class="headerlink" title="tomcat、nginx、redis、oracle、zookeeper"></a>tomcat、nginx、redis、oracle、zookeeper</h4><p>tomcat、zookeper监控通过jmx接口来获取jvm监控信息，zabbix页面也支持jmx获取。</p>
+<p>nginx通过添加 –with-http_stub_status_module参数编译和在配置文件中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 127.0.0.1:80;</div><div class="line">    server_name 127.0.0.1;</div><div class="line">    access_log off;</div><div class="line">    allow 127.0.0.1;</div><div class="line">    deny all;</div><div class="line">    location /nginxstatus &#123;</div><div class="line">           stub_status on;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Oracle可以通过orabbix获取，不过我通过pyOrale连接oracle获取的信息</p>
+<p>redis通过缓存redis系统信息获取（主要是info里的信息）</p>
+<h4 id="日志监控"><a href="#日志监控" class="headerlink" title="日志监控"></a>日志监控</h4><p>本来想用ELK做日志收集监控（城商行不允许这么做），所以选择了zabbix告警日志error信息还好错误信息产生速率不高；</p>
+<h4 id="对账文件监控"><a href="#对账文件监控" class="headerlink" title="对账文件监控"></a>对账文件监控</h4><p>平台每天在不同时间段会产生几个对账文件，需要每天检测一次对账文件是否生成；zabbix 3.0支持固定时间点生成告警（粒度一分钟）</p>
+<p><img src="/images/zabbix_time.png" alt=""></p>
+<h5 id="to-be-contiune"><a href="#to-be-contiune" class="headerlink" title="to be contiune"></a>to be contiune</h5><p>部署选用的ansible，后面补充一些调优配置</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -113,7 +128,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/python/">python</a>
+  <span></span> <a href="/tags/linux/">linux</a>
   </div>
 
 </div>
@@ -122,7 +137,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" data-title="python 发送邮件出现Connection reset by peer解决 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2017/11/16/监控总结/" data-title="监控总结 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -135,19 +150,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/09/01/opentack节点扩容后热迁移异常/" title="opentack节点扩容后热迁移异常">
-  <strong>上一篇：</strong><br/>
-  <span>
-  opentack节点扩容后热迁移异常</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/08/30/hello-world/"  title="Hello World">
+<a href="/2017/11/01/集群搭建hadoop问题总结/"  title="集群搭建hadoop问题总结">
  <strong>下一篇：</strong><br/> 
- <span>Hello World
+ <span>集群搭建hadoop问题总结
 </span>
 </a>
 </div>
@@ -156,7 +163,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" data-title="python 发送邮件出现Connection reset by peer解决" data-url="http://cealiu.me/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/"></div>
+	<div class="ds-thread" data-thread-key="2017/11/16/监控总结/" data-title="监控总结" data-url="http://cealiu.me/2017/11/16/监控总结/"></div>
 </section>
 
 
@@ -173,7 +180,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#zabbix邮件短信服务"><span class="toc-number">1.1.</span> <span class="toc-text">zabbix邮件短信服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要监控项目"><span class="toc-number">2.</span> <span class="toc-text">主要监控项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tomcat、nginx、redis、oracle、zookeeper"><span class="toc-number">2.1.</span> <span class="toc-text">tomcat、nginx、redis、oracle、zookeeper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志监控"><span class="toc-number">2.2.</span> <span class="toc-text">日志监控</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对账文件监控"><span class="toc-number">2.3.</span> <span class="toc-text">对账文件监控</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#to-be-contiune"><span class="toc-number">2.3.1.</span> <span class="toc-text">to be contiune</span></a></li></ol></li></ol></li></ol>
  
   </div>
 

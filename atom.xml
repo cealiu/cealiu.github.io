@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cealiu.me/"/>
-  <updated>2017-11-01T13:42:40.000Z</updated>
+  <updated>2017-12-11T13:47:20.000Z</updated>
   <id>http://cealiu.me/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>监控总结</title>
+    <link href="http://cealiu.me/2017/11/16/%E7%9B%91%E6%8E%A7%E6%80%BB%E7%BB%93/"/>
+    <id>http://cealiu.me/2017/11/16/监控总结/</id>
+    <published>2017-11-16T00:49:38.000Z</published>
+    <updated>2017-12-11T13:47:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>年初入职新公司做云计算奈何线上系统都还有没有做监控，所以接手做监控事宜；</p>
+<h4 id="zabbix邮件短信服务"><a href="#zabbix邮件短信服务" class="headerlink" title="zabbix邮件短信服务"></a>zabbix邮件短信服务</h4><p>监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警功过socket对接的是总行的短信服务。</p>
+<p>配置如下：</p>
+<p><img src="/images/sms.png" alt=""></p>
+<p>在图中，Name自行定义；Type选择 Script；Script name填写脚本名称socket_alarm_script.py；Script parameters包含3个参数：{ALERT.SENDTO}、{ALERT.SUBJECT}、{ALERT.MESSAGE}，这3个参数是zabbix启用脚本时自动传给脚本的参数。此3个参数的具体内容将在zabbix文档有具体说明。</p>
+<h3 id="主要监控项目"><a href="#主要监控项目" class="headerlink" title="主要监控项目"></a>主要监控项目</h3><p>帮助某家城商行做互金项目监控，主要有tomcat、nginx、redis、oracle、日记</p>
+<h4 id="tomcat、nginx、redis、oracle、zookeeper"><a href="#tomcat、nginx、redis、oracle、zookeeper" class="headerlink" title="tomcat、nginx、redis、oracle、zookeeper"></a>tomcat、nginx、redis、oracle、zookeeper</h4><p>tomcat、zookeper监控通过jmx接口来获取jvm监控信息，zabbix页面也支持jmx获取。</p>
+<p>nginx通过添加 –with-http_stub_status_module参数编译和在配置文件中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 127.0.0.1:80;</div><div class="line">    server_name 127.0.0.1;</div><div class="line">    access_log off;</div><div class="line">    allow 127.0.0.1;</div><div class="line">    deny all;</div><div class="line">    location /nginxstatus &#123;</div><div class="line">           stub_status on;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Oracle可以通过orabbix获取，不过我通过pyOrale连接oracle获取的信息</p>
+<p>redis通过缓存redis系统信息获取（主要是info里的信息）</p>
+<h4 id="日志监控"><a href="#日志监控" class="headerlink" title="日志监控"></a>日志监控</h4><p>本来想用ELK做日志收集监控（城商行不允许这么做），所以选择了zabbix告警日志error信息还好错误信息产生速率不高；</p>
+<h4 id="对账文件监控"><a href="#对账文件监控" class="headerlink" title="对账文件监控"></a>对账文件监控</h4><p>平台每天在不同时间段会产生几个对账文件，需要每天检测一次对账文件是否生成；zabbix 3.0支持固定时间点生成告警（粒度一分钟）</p>
+<p><img src="/images/zabbix_time.png" alt=""></p>
+<h5 id="to-be-contiune"><a href="#to-be-contiune" class="headerlink" title="to be contiune"></a>to be contiune</h5><p>部署选用的ansible，后面补充一些调优配置</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;年初入职新公司做云计算奈何线上系统都还有没有做监控，所以接手做监控事宜；&lt;/p&gt;
+&lt;h4 id=&quot;zabbix邮件短信服务&quot;&gt;&lt;a href
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="http://cealiu.me/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>集群搭建hadoop问题总结</title>
