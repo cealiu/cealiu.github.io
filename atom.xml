@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cealiu.me/"/>
-  <updated>2017-12-11T13:54:28.000Z</updated>
+  <updated>2018-01-23T13:33:33.000Z</updated>
   <id>http://cealiu.me/</id>
   
   <author>
@@ -14,6 +14,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>openstack源码分析一</title>
+    <link href="http://cealiu.me/2018/01/23/openstack%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%80/"/>
+    <id>http://cealiu.me/2018/01/23/openstack源码分析一/</id>
+    <published>2018-01-23T13:09:10.000Z</published>
+    <updated>2018-01-23T13:33:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的参数，比如虚拟机的规格、可用域之类的信息。</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>我们在启动nova-api会使用service openstack-nova-api start命令，查看该服务启动的是/usr/bin/nova-api</p>
+<ol>
+<li><p>nova/cmd/api.py    def main():  #启动进程</p>
+<p>功能：载入配置文件、启动进程数（默认cpu核数）、根据配置文件中的enabled_apis启动不同WSGIService</p>
+<p>nova.conf</p>
+<p>enabled_apis=ec2,osapi_compute,metadata</p>
+<p>ec2 亚马逊云主机</p>
+<p>osapi_compute openstack云主机</p>
+<p>metadata 元数据</p>
+<p>我们主要看osapi_compute</p>
+</li>
+<li><p>nova/service.py class WSGIService(service.Service):</p>
+<p>功能加载/etc/nova/api-paste.ini（这里用到了deploy模块解释：<a href="https://www.cnblogs.com/Security-Darren/p/4087587.html" target="_blank" rel="external">https://www.cnblogs.com/Security-Darren/p/4087587.html</a>）</p>
+</li>
+<li><p>etc/nova/api-paste.ini</p>
+<p>[composite:osapi_compute]</p>
+<p>use = call:nova.api.openstack.urlmap:urlmap_factory</p>
+<p>解析url调用 urlmap_factory</p>
+</li>
+<li><p>nova/api/openstack/urlmap.py</p>
+<p>def urlmap_factory(loader, global_conf, **local_conf):</p>
+<p>#loader是上面加在的app的loader，这里是osapi_compute</p>
+<p>#global_conf = {‘<strong>file</strong>‘: ‘/etc/nova/api-paste.ini’, ‘here’: ‘/etc/nova’}</p>
+<p>#local_conf = {‘/v2’: ‘openstack_compute_api_v21_legacy_v2_compatible’, ‘/‘: ‘oscomputeversions’, ‘/v2.1’: ‘openstack_compute_api_v21’}</p>
+<p>该方法将osapi_compute 转换为 openstack_compute_api_v21_legacy_v2_compatible</p>
+<p>[composite:openstack_compute_api_v21_legacy_v2_compatible]</p>
+<p>use = call:nova.api.auth:pipeline_factory_v21</p>
+<p>noauth2 = cors http_proxy_to_wsgi compute_req_id faultwrap request_log sizelimit osprofiler noauth2 legacy_v2_compatible osapi_compute_app_v21</p>
+<p>keystone = cors http_proxy_to_wsgi compute_req_id faultwrap request_log sizelimit osprofiler authtoken keystonecontext legacy_v2_compatible osapi_compute_app_v21</p>
+</li>
+<li><p>nova/api/auth.py</p>
+<p>def pipeline_factory_v21(loader, global_conf, **local_conf): </p>
+<p>#使用keystone验证 类似Django midware看keystone最后一项osapi_compute_app_v21</p>
+</li>
+<li><p>[app:osapi_compute_app_v21]</p>
+<p>paste.app_factory = nova.api.openstack.compute:APIRouterV21.factory</p>
+<p>Nova/api/openstack/compute/routes.py</p>
+<p>class APIRouterV21(base_wsgi.Router): #最终url解析（flavor、show…）</p>
+<p>贴一个调用流程图，新版加入了nova-cell这里是个简易版</p>
+<p><img src="/images/nova.png" alt=""></p>
+</li>
+</ol>
+<p>#####先介绍这里，剩下就是nova-conductor、nova-scheduler、nova-coumpute的rpc调用</p>
+<p>#####to be continued</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的
+    
+    </summary>
+    
+    
+      <category term="cloud" scheme="http://cealiu.me/tags/cloud/"/>
+    
+  </entry>
   
   <entry>
     <title>监控总结</title>

@@ -4,24 +4,27 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>LiuCe&#39;s Blog</title>
+    <title>openstack源码分析一 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="openstack 概念整理keystoneV2： Tenant、User、Role V3 Domain、Project、Group、User、Role 例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用 Tenant -&amp;gt; 部门，User-&amp;gt;用户，Role-&amp;gt;权限 现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出doma">
+    <meta name="description" content="从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的参数，比如虚拟机的规格、可用域之类的信息。 启动我们在启动nova-api会使用service openstack-nova-">
+<meta name="keywords" content="cloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LiuCe&#39;s Blog">
-<meta property="og:url" content="http://cealiu.me/2017/09/09/openstack 概念整理/index.html">
+<meta property="og:title" content="openstack源码分析一">
+<meta property="og:url" content="http://cealiu.me/2018/01/23/openstack源码分析一/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="openstack 概念整理keystoneV2： Tenant、User、Role V3 Domain、Project、Group、User、Role 例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用 Tenant -&amp;gt; 部门，User-&amp;gt;用户，Role-&amp;gt;权限 现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出doma">
+<meta property="og:description" content="从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的参数，比如虚拟机的规格、可用域之类的信息。 启动我们在启动nova-api会使用service openstack-nova-">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-11T14:26:59.000Z">
+<meta property="og:image" content="http://cealiu.me/images/nova.png">
+<meta property="og:updated_time" content="2018-01-23T13:33:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LiuCe&#39;s Blog">
-<meta name="twitter:description" content="openstack 概念整理keystoneV2： Tenant、User、Role V3 Domain、Project、Group、User、Role 例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用 Tenant -&amp;gt; 部门，User-&amp;gt;用户，Role-&amp;gt;权限 现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出doma">
+<meta name="twitter:title" content="openstack源码分析一">
+<meta name="twitter:description" content="从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的参数，比如虚拟机的规格、可用域之类的信息。 启动我们在启动nova-api会使用service openstack-nova-">
+<meta name="twitter:image" content="http://cealiu.me/images/nova.png">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -81,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/09/09/openstack 概念整理/" title="" itemprop="url"></a>
+      <a href="/2018/01/23/openstack源码分析一/" title="openstack源码分析一" itemprop="url">openstack源码分析一</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-09-09T07:45:26.000Z" itemprop="datePublished"> 发表于 2017-09-09</time>
+    <time datetime="2018-01-23T13:09:10.000Z" itemprop="datePublished"> 发表于 2018-01-23</time>
     
   </p>
 </header>
@@ -97,31 +100,65 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#openstack-概念整理"><span class="toc-number">1.</span> <span class="toc-text">openstack 概念整理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#keystone"><span class="toc-number">1.1.</span> <span class="toc-text">keystone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区域概念"><span class="toc-number">1.2.</span> <span class="toc-text">区域概念</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-number">1.</span> <span class="toc-text">启动</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="openstack-概念整理"><a href="#openstack-概念整理" class="headerlink" title="openstack 概念整理"></a>openstack 概念整理</h2><h3 id="keystone"><a href="#keystone" class="headerlink" title="keystone"></a>keystone</h3><p>V2：</p>
-<p>Tenant、User、Role</p>
-<p>V3</p>
-<p>Domain、Project、Group、User、Role</p>
-<p>例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用</p>
-<p>Tenant -&gt; 部门，User-&gt;用户，Role-&gt;权限</p>
-<p>现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出domain类似公司</p>
-<p>Domain-&gt;公司，Project-&gt;部门，User-&gt;用户，Role-&gt;权限，Group-&gt;组（包含给多个user赋权限）</p>
-<h3 id="区域概念"><a href="#区域概念" class="headerlink" title="区域概念"></a>区域概念</h3><ul>
-<li>region：更像是一个地理上的概念，每个region有自己独立的endpoint，regions之间完全隔离，但是多个regions之间共享同一个keystone和dashboard。（注：目前openstack的dashboard还不支持多region）所以除了提供隔离的功能，region的设计更多侧重地理位置的概念，用户可以选择离自己更近的region来部署自己的服务。</li>
-<li>cell：cell是openstack一个非常重要的概念，主要用来解决openstack的扩展性和规模瓶颈。众所周知，openstack是由很多的组件通过松耦合构成，那么当达到一定的规模后，某些模块必然成为整个系统的瓶颈。比较典型的组件就是database和AMQP了，所以，每个cell有自己独立的DB和AMQP。<ul>
-<li>cell之间的通信(通过rpc完成)</li>
-</ul>
+		<p>从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的参数，比如虚拟机的规格、可用域之类的信息。</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>我们在启动nova-api会使用service openstack-nova-api start命令，查看该服务启动的是/usr/bin/nova-api</p>
+<ol>
+<li><p>nova/cmd/api.py    def main():  #启动进程</p>
+<p>功能：载入配置文件、启动进程数（默认cpu核数）、根据配置文件中的enabled_apis启动不同WSGIService</p>
+<p>nova.conf</p>
+<p>enabled_apis=ec2,osapi_compute,metadata</p>
+<p>ec2 亚马逊云主机</p>
+<p>osapi_compute openstack云主机</p>
+<p>metadata 元数据</p>
+<p>我们主要看osapi_compute</p>
 </li>
-<li>Availability Zone：AZ可以简单理解为一组节点的集合，这组节点具有独立的电力供应设备，比如一个个独立供电的机房，一个个独立供电的机架都可以被划分成AZ。所以，AZ主要是通过冗余来解决可用性问题。AZ是用户可见的一个概念，用户在创建instance的时候可以选择创建到哪些AZ中，以保证instance的可用性。</li>
-</ul>
+<li><p>nova/service.py class WSGIService(service.Service):</p>
+<p>功能加载/etc/nova/api-paste.ini（这里用到了deploy模块解释：<a href="https://www.cnblogs.com/Security-Darren/p/4087587.html" target="_blank" rel="external">https://www.cnblogs.com/Security-Darren/p/4087587.html</a>）</p>
+</li>
+<li><p>etc/nova/api-paste.ini</p>
+<p>[composite:osapi_compute]</p>
+<p>use = call:nova.api.openstack.urlmap:urlmap_factory</p>
+<p>解析url调用 urlmap_factory</p>
+</li>
+<li><p>nova/api/openstack/urlmap.py</p>
+<p>def urlmap_factory(loader, global_conf, **local_conf):</p>
+<p>#loader是上面加在的app的loader，这里是osapi_compute</p>
+<p>#global_conf = {‘<strong>file</strong>‘: ‘/etc/nova/api-paste.ini’, ‘here’: ‘/etc/nova’}</p>
+<p>#local_conf = {‘/v2’: ‘openstack_compute_api_v21_legacy_v2_compatible’, ‘/‘: ‘oscomputeversions’, ‘/v2.1’: ‘openstack_compute_api_v21’}</p>
+<p>该方法将osapi_compute 转换为 openstack_compute_api_v21_legacy_v2_compatible</p>
+<p>[composite:openstack_compute_api_v21_legacy_v2_compatible]</p>
+<p>use = call:nova.api.auth:pipeline_factory_v21</p>
+<p>noauth2 = cors http_proxy_to_wsgi compute_req_id faultwrap request_log sizelimit osprofiler noauth2 legacy_v2_compatible osapi_compute_app_v21</p>
+<p>keystone = cors http_proxy_to_wsgi compute_req_id faultwrap request_log sizelimit osprofiler authtoken keystonecontext legacy_v2_compatible osapi_compute_app_v21</p>
+</li>
+<li><p>nova/api/auth.py</p>
+<p>def pipeline_factory_v21(loader, global_conf, **local_conf): </p>
+<p>#使用keystone验证 类似Django midware看keystone最后一项osapi_compute_app_v21</p>
+</li>
+<li><p>[app:osapi_compute_app_v21]</p>
+<p>paste.app_factory = nova.api.openstack.compute:APIRouterV21.factory</p>
+<p>Nova/api/openstack/compute/routes.py</p>
+<p>class APIRouterV21(base_wsgi.Router): #最终url解析（flavor、show…）</p>
+<p>贴一个调用流程图，新版加入了nova-cell这里是个简易版</p>
+<p><img src="/images/nova.png" alt=""></p>
+</li>
+</ol>
+<p>#####先介绍这里，剩下就是nova-conductor、nova-scheduler、nova-coumpute的rpc调用</p>
+<p>#####to be continued</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/cloud/">cloud</a>
+  </div>
 
 </div>
 
@@ -129,7 +166,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/09/09/openstack 概念整理/" data-title="LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2018/01/23/openstack源码分析一/" data-title="openstack源码分析一 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -142,19 +179,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/09/17/安装linux系统/" title="安装linux系统">
-  <strong>上一篇：</strong><br/>
-  <span>
-  安装linux系统</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/09/04/hadoop-demo程序/"  title="hadoop demo程序">
+<a href="/2017/11/16/监控总结/"  title="监控总结">
  <strong>下一篇：</strong><br/> 
- <span>hadoop demo程序
+ <span>监控总结
 </span>
 </a>
 </div>
@@ -163,7 +192,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/09/09/openstack 概念整理/" data-title="" data-url="http://cealiu.me/2017/09/09/openstack 概念整理/"></div>
+	<div class="ds-thread" data-thread-key="2018/01/23/openstack源码分析一/" data-title="openstack源码分析一" data-url="http://cealiu.me/2018/01/23/openstack源码分析一/"></div>
 </section>
 
 
@@ -180,7 +209,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#openstack-概念整理"><span class="toc-number">1.</span> <span class="toc-text">openstack 概念整理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#keystone"><span class="toc-number">1.1.</span> <span class="toc-text">keystone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区域概念"><span class="toc-number">1.2.</span> <span class="toc-text">区域概念</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-number">1.</span> <span class="toc-text">启动</span></a></li></ol>
  
   </div>
 
