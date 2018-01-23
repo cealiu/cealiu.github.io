@@ -20,7 +20,7 @@
 <meta property="og:description" content="从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的参数，比如虚拟机的规格、可用域之类的信息。 启动我们在启动nova-api会使用service openstack-nova-">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://cealiu.me/images/nova.png">
-<meta property="og:updated_time" content="2018-01-23T13:33:33.000Z">
+<meta property="og:updated_time" content="2018-01-23T13:43:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openstack源码分析一">
 <meta name="twitter:description" content="从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的参数，比如虚拟机的规格、可用域之类的信息。 启动我们在启动nova-api会使用service openstack-nova-">
@@ -100,7 +100,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-number">1.</span> <span class="toc-text">启动</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-number">1.</span> <span class="toc-text">启动</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#to-be-continued"><span class="toc-number">1.0.1.</span> <span class="toc-text">to be continued</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
@@ -145,11 +145,11 @@
 <p>class APIRouterV21(base_wsgi.Router): #最终url解析（flavor、show…）</p>
 <p>贴一个调用流程图，新版加入了nova-cell这里是个简易版</p>
 <p><img src="/images/nova.png" alt=""></p>
+<p>​</p>
+<p>先介绍这里，剩下就是nova-conductor、nova-scheduler、nova-coumpute的rpc调用</p>
 </li>
 </ol>
-<p>#####先介绍这里，剩下就是nova-conductor、nova-scheduler、nova-coumpute的rpc调用</p>
-<p>#####to be continued</p>
-  
+<h5 id="to-be-continued"><a href="#to-be-continued" class="headerlink" title="to be continued"></a>to be continued</h5>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -209,7 +209,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-number">1.</span> <span class="toc-text">启动</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-number">1.</span> <span class="toc-text">启动</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#to-be-continued"><span class="toc-number">1.0.1.</span> <span class="toc-text">to be continued</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
