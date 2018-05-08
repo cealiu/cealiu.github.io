@@ -4,25 +4,25 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>安装linux系统 | LiuCe&#39;s Blog</title>
+    <title>车牌识别 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：  用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。  进入系统后安装kvm ma">
-<meta name="keywords" content="linux">
+    <meta name="description" content="车牌识别最近帮朋友调一个车牌识别的源码[开源地址][https://github.com/zeusees/HyperLPR]有些地方要改动才能跑起来，该项目是基于opencv、深度学习DNN算法做的车牌识别，该blog主要是记录下踩坑过程。 环境搭建opencv环境搭建项目是基于python开发的，但是底层还是依赖opencv的c++库，所以环境搭建最主要的还是opencv的配置；我是基于mac系">
+<meta name="keywords" content="bigdata">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安装linux系统">
-<meta property="og:url" content="http://cealiu.me/2017/09/17/安装linux系统/index.html">
+<meta property="og:title" content="车牌识别">
+<meta property="og:url" content="http://cealiu.me/2018/05/08/车牌识别/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：  用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。  进入系统后安装kvm ma">
+<meta property="og:description" content="车牌识别最近帮朋友调一个车牌识别的源码[开源地址][https://github.com/zeusees/HyperLPR]有些地方要改动才能跑起来，该项目是基于opencv、深度学习DNN算法做的车牌识别，该blog主要是记录下踩坑过程。 环境搭建opencv环境搭建项目是基于python开发的，但是底层还是依赖opencv的c++库，所以环境搭建最主要的还是opencv的配置；我是基于mac系">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-17T06:55:30.000Z">
+<meta property="og:updated_time" content="2018-05-08T14:10:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安装linux系统">
-<meta name="twitter:description" content="很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：  用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。  进入系统后安装kvm ma">
+<meta name="twitter:title" content="车牌识别">
+<meta name="twitter:description" content="车牌识别最近帮朋友调一个车牌识别的源码[开源地址][https://github.com/zeusees/HyperLPR]有些地方要改动才能跑起来，该项目是基于opencv、深度学习DNN算法做的车牌识别，该blog主要是记录下踩坑过程。 环境搭建opencv环境搭建项目是基于python开发的，但是底层还是依赖opencv的c++库，所以环境搭建最主要的还是opencv的配置；我是基于mac系">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -82,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/09/17/安装linux系统/" title="安装linux系统" itemprop="url">安装linux系统</a>
+      <a href="/2018/05/08/车牌识别/" title="车牌识别" itemprop="url">车牌识别</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-09-17T06:46:27.000Z" itemprop="datePublished"> 发表于 2017-09-17</time>
+    <time datetime="2018-05-08T13:48:23.000Z" itemprop="datePublished"> 发表于 2018-05-08</time>
     
   </p>
 </header>
@@ -98,19 +98,17 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#车牌识别"><span class="toc-number">1.</span> <span class="toc-text">车牌识别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境搭建"><span class="toc-number">2.</span> <span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#opencv环境搭建"><span class="toc-number">2.1.</span> <span class="toc-text">opencv环境搭建</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<p>很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：</p>
-<ul>
-<li><p>用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。</p>
+		<h3 id="车牌识别"><a href="#车牌识别" class="headerlink" title="车牌识别"></a>车牌识别</h3><p>最近帮朋友调一个车牌识别的源码[开源地址][<a href="https://github.com/zeusees/HyperLPR]有些地方要改动才能跑起来，该项目是基于opencv、深度学习DNN算法做的车牌识别，该blog主要是记录下踩坑过程。" target="_blank" rel="external">https://github.com/zeusees/HyperLPR]有些地方要改动才能跑起来，该项目是基于opencv、深度学习DNN算法做的车牌识别，该blog主要是记录下踩坑过程。</a></p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="opencv环境搭建"><a href="#opencv环境搭建" class="headerlink" title="opencv环境搭建"></a>opencv环境搭建</h4><p>项目是基于python开发的，但是底层还是依赖opencv的c++库，所以环境搭建最主要的还是opencv的配置；我是基于mac系统做的，开源版本要求opencv版本大于3.3所以用brew install安装的版本不适合。</p>
+<ol>
+<li><p>编译安装</p>
+<p>去opencv官网下载最新版本<a href="https://opencv.org/，之后安装cmake地址https://cmake.org/。我下载的是图形界面版的；之后在opencv源码内新建release文件夹，打开cmake" target="_blank" rel="external">https://opencv.org/，之后安装cmake地址https://cmake.org/。我下载的是图形界面版的；之后在opencv源码内新建release文件夹，打开cmake</a></p>
 </li>
-<li><p>进入系统后安装kvm manger后使用图形界面结果显示“Spice doesn’t work from Virtual Machine Manager”linux mint18.2是基于Ubuntu的16.04安装后会出现这个bug，解决办法是执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install gir1.2-spice-client-gtk-3.0</div></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-</ul>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -119,7 +117,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/linux/">linux</a>
+  <span></span> <a href="/tags/bigdata/">bigdata</a>
   </div>
 
 </div>
@@ -128,7 +126,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/09/17/安装linux系统/" data-title="安装linux系统 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2018/05/08/车牌识别/" data-title="车牌识别 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -141,19 +139,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/11/01/集群搭建hadoop问题总结/" title="集群搭建hadoop问题总结">
-  <strong>上一篇：</strong><br/>
-  <span>
-  集群搭建hadoop问题总结</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/09/09/openstack 概念整理/"  title="">
+<a href="/2018/01/23/openstack源码分析一/"  title="openstack源码分析一">
  <strong>下一篇：</strong><br/> 
- <span>(no title)
+ <span>openstack源码分析一
 </span>
 </a>
 </div>
@@ -162,7 +152,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/09/17/安装linux系统/" data-title="安装linux系统" data-url="http://cealiu.me/2017/09/17/安装linux系统/"></div>
+	<div class="ds-thread" data-thread-key="2018/05/08/车牌识别/" data-title="车牌识别" data-url="http://cealiu.me/2018/05/08/车牌识别/"></div>
 </section>
 
 
@@ -179,7 +169,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#车牌识别"><span class="toc-number">1.</span> <span class="toc-text">车牌识别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境搭建"><span class="toc-number">2.</span> <span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#opencv环境搭建"><span class="toc-number">2.1.</span> <span class="toc-text">opencv环境搭建</span></a></li></ol></li></ol>
  
   </div>
 
