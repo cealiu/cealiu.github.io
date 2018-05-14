@@ -4,27 +4,25 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>Logistic回归和Sigmoid函数的理解 | LiuCe&#39;s Blog</title>
+    <title>python requests post丢失数据 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ 书">
-<meta name="keywords" content="机器学习">
+    <meta name="description" content="描述这周遇到一个bug使用python的requests lib单独运行脚本post数据就成功，结果使用django调用该函数就出问题。在后台打印log发现django调用的时候request.body丢失了部分数据。 代码类似： 12345body=dict()body[&apos;token&apos;]=&apos;23sdcwo81mdvlpwcva&apos;body[&apos;content&apos;]=&apos;信息&apos;...request.pos">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logistic回归和Sigmoid函数的理解">
-<meta property="og:url" content="http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/index.html">
+<meta property="og:title" content="python requests post丢失数据">
+<meta property="og:url" content="http://cealiu.me/2018/05/14/python-requests-post丢失数据/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ 书">
+<meta property="og:description" content="描述这周遇到一个bug使用python的requests lib单独运行脚本post数据就成功，结果使用django调用该函数就出问题。在后台打印log发现django调用的时候request.body丢失了部分数据。 代码类似： 12345body=dict()body[&apos;token&apos;]=&apos;23sdcwo81mdvlpwcva&apos;body[&apos;content&apos;]=&apos;信息&apos;...request.pos">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://cealiu.me/images/Logistic_1.png">
-<meta property="og:updated_time" content="2017-09-03T14:13:35.000Z">
+<meta property="og:updated_time" content="2018-05-14T13:12:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Logistic回归和Sigmoid函数的理解">
-<meta name="twitter:description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ 书">
-<meta name="twitter:image" content="http://cealiu.me/images/Logistic_1.png">
+<meta name="twitter:title" content="python requests post丢失数据">
+<meta name="twitter:description" content="描述这周遇到一个bug使用python的requests lib单独运行脚本post数据就成功，结果使用django调用该函数就出问题。在后台打印log发现django调用的时候request.body丢失了部分数据。 代码类似： 12345body=dict()body[&apos;token&apos;]=&apos;23sdcwo81mdvlpwcva&apos;body[&apos;content&apos;]=&apos;信息&apos;...request.pos">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -84,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/09/01/Logistic回归和Sigmoid函数的理解/" title="Logistic回归和Sigmoid函数的理解" itemprop="url">Logistic回归和Sigmoid函数的理解</a>
+      <a href="/2018/05/14/python-requests-post丢失数据/" title="python requests post丢失数据" itemprop="url">python requests post丢失数据</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-09-01T06:02:21.000Z" itemprop="datePublished"> 发表于 2017-09-01</time>
+    <time datetime="2018-05-14T12:58:28.000Z" itemprop="datePublished"> 发表于 2018-05-14</time>
     
   </p>
 </header>
@@ -100,18 +98,19 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决"><span class="toc-number">2.</span> <span class="toc-text">解决</span></a></li></ol>
 		
 		</div>
 		
-		<p>看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。<br>$$<br>\sigma(z) = \cfrac{1}{1  +e^{-z}}<br>$$</p>
-<p>Sigmoid函数的输入记为z，下面公式用于确定z：<br>$$<br>z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}<br>$$</p>
-<p>书上用的梯度上升算法确定系数w的数值。<br>$$<br>w = w + \alpha\delta f(w)<br>$$<br>该算法一直迭代找出w的系数，代码里是w（n，1），$\alpha = 0.001$ 循环500次得出系数矩阵。</p>
-<p>该函数二维上就是在一些散点中画一条线来划分出不同的特征点，我们要找W就是这条线的系数。</p>
-<p>书上给的给出的代码例程不能很好的运行，我做了简单的修改最后结果如下图：</p>
-<p>修改过的源码上传到我的GitHub了<a href="https://github.com/cealiu/machinelearn/tree/master/Ch05" target="_blank" rel="external">地址</a></p>
-<p><img src="/images/Logistic_1.png" alt=""></p>
-<p>因为这个解法要迭代全部数据计算量比较大，后面的优化都是为了减少计算量做的比较好理解了就不在这里说明了。</p>
+		<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>这周遇到一个bug使用python的requests lib单独运行脚本post数据就成功，结果使用django调用该函数就出问题。在后台打印log发现django调用的时候request.body丢失了部分数据。</p>
+<p>代码类似：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">body=dict()</div><div class="line">body[<span class="string">'token'</span>]=<span class="string">'23sdcwo81mdvlpwcva'</span></div><div class="line">body[<span class="string">'content'</span>]=<span class="string">'信息'</span></div><div class="line">...</div><div class="line">request.post(data = json.dumps(data,ensure_ascii=<span class="keyword">False</span>))</div></pre></td></tr></table></figure>
+<p>原因是单独调用代码的时候发送的body数据内容都是str类型，而Django调用的时候引入了unicode类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">test = <span class="string">'test'</span></div><div class="line"><span class="keyword">print</span> type(test)   <span class="comment">#str</span></div><div class="line">test = <span class="string">'test'</span> + unicode(<span class="string">'test'</span>)</div><div class="line"><span class="keyword">print</span> type(test)   <span class="comment">#unicode</span></div></pre></td></tr></table></figure>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>这个跟python的自身编码问题有关，python3加requests能够解决这个问题，但是项目是python2.7的所以用其它方式解决。在requests lib断点调试下会发现init.py—&gt; api.py—&gt;models.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.headers[<span class="string">'Content-Length'</span>] = builtin_str(l) <span class="comment">#477 line</span></div></pre></td></tr></table></figure>
+<p>将body内的数据转化为str类型解决，或者在增加headers解决</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">request.post(data = json.dumps(data,ensure_ascii=<span class="keyword">False</span>),headers=&#123;<span class="string">'Content-Length'</span>:str(len(data))&#125;)</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -120,7 +119,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/机器学习/">机器学习</a>
+  <span></span> <a href="/tags/python/">python</a>
   </div>
 
 </div>
@@ -129,7 +128,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/" data-title="Logistic回归和Sigmoid函数的理解 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2018/05/14/python-requests-post丢失数据/" data-title="python requests post丢失数据 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -142,19 +141,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/09/02/感知机算法/" title="感知机算法">
-  <strong>上一篇：</strong><br/>
-  <span>
-  感知机算法</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/09/01/opentack节点扩容后热迁移异常/"  title="opentack节点扩容后热迁移异常">
+<a href="/2018/05/13/朴素贝叶斯/"  title="朴素贝叶斯">
  <strong>下一篇：</strong><br/> 
- <span>opentack节点扩容后热迁移异常
+ <span>朴素贝叶斯
 </span>
 </a>
 </div>
@@ -163,7 +154,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/09/01/Logistic回归和Sigmoid函数的理解/" data-title="Logistic回归和Sigmoid函数的理解" data-url="http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/"></div>
+	<div class="ds-thread" data-thread-key="2018/05/14/python-requests-post丢失数据/" data-title="python requests post丢失数据" data-url="http://cealiu.me/2018/05/14/python-requests-post丢失数据/"></div>
 </section>
 
 
@@ -180,7 +171,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决"><span class="toc-number">2.</span> <span class="toc-text">解决</span></a></li></ol>
  
   </div>
 
