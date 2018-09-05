@@ -4,27 +4,27 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>Logistic回归和Sigmoid函数的理解 | LiuCe&#39;s Blog</title>
+    <title>风控规则系统开发 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ 书">
-<meta name="keywords" content="机器学习">
+    <meta name="description" content="背景公司需要开发风控系统之前没有接触过这一块，在网上查询好多资料或得的一些思路，开发的过程也走了些弯路踩了不少坑现在记录下来。 对于风控来说就是提前预防风险降低安全事故的发生，并且能及早发现和封堵；在前期的探索阶段都是利用日志或者离线数据发现规律，在做下面的实时风控系统之前，前期是利用ELK记录的日志数据来查找规律发现一些问题的。 常见风险：研究风控之前有一些风险是比较常出现的：  利用机器访问：">
+<meta name="keywords" content="bigdata">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logistic回归和Sigmoid函数的理解">
-<meta property="og:url" content="http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/index.html">
+<meta property="og:title" content="风控规则系统开发">
+<meta property="og:url" content="http://cealiu.me/2018/09/05/风控规则系统开发/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ 书">
+<meta property="og:description" content="背景公司需要开发风控系统之前没有接触过这一块，在网上查询好多资料或得的一些思路，开发的过程也走了些弯路踩了不少坑现在记录下来。 对于风控来说就是提前预防风险降低安全事故的发生，并且能及早发现和封堵；在前期的探索阶段都是利用日志或者离线数据发现规律，在做下面的实时风控系统之前，前期是利用ELK记录的日志数据来查找规律发现一些问题的。 常见风险：研究风控之前有一些风险是比较常出现的：  利用机器访问：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://cealiu.me/images/Logistic_1.png">
-<meta property="og:updated_time" content="2017-09-03T14:13:35.000Z">
+<meta property="og:image" content="http://cealiu.me/images/riskrule.jpeg">
+<meta property="og:updated_time" content="2018-09-05T14:08:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Logistic回归和Sigmoid函数的理解">
-<meta name="twitter:description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ 书">
-<meta name="twitter:image" content="http://cealiu.me/images/Logistic_1.png">
+<meta name="twitter:title" content="风控规则系统开发">
+<meta name="twitter:description" content="背景公司需要开发风控系统之前没有接触过这一块，在网上查询好多资料或得的一些思路，开发的过程也走了些弯路踩了不少坑现在记录下来。 对于风控来说就是提前预防风险降低安全事故的发生，并且能及早发现和封堵；在前期的探索阶段都是利用日志或者离线数据发现规律，在做下面的实时风控系统之前，前期是利用ELK记录的日志数据来查找规律发现一些问题的。 常见风险：研究风控之前有一些风险是比较常出现的：  利用机器访问：">
+<meta name="twitter:image" content="http://cealiu.me/images/riskrule.jpeg">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -84,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/09/01/Logistic回归和Sigmoid函数的理解/" title="Logistic回归和Sigmoid函数的理解" itemprop="url">Logistic回归和Sigmoid函数的理解</a>
+      <a href="/2018/09/05/风控规则系统开发/" title="风控规则系统开发" itemprop="url">风控规则系统开发</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   <p class="article-time">
-    <time datetime="2017-09-01T06:02:21.000Z" itemprop="datePublished"> 发表于 2017-09-01</time>
+    <time datetime="2018-09-05T13:30:22.000Z" itemprop="datePublished"> 发表于 2018-09-05</time>
     
   </p>
 </header>
@@ -100,18 +100,24 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见风险："><span class="toc-number">1.1.</span> <span class="toc-text">常见风险：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风控系统"><span class="toc-number">1.2.</span> <span class="toc-text">风控系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#离线系统"><span class="toc-number">1.2.1.</span> <span class="toc-text">离线系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实时系统"><span class="toc-number">1.2.2.</span> <span class="toc-text">实时系统</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#主要技术点"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">主要技术点</span></a></li></ol></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<p>看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。<br>$$<br>\sigma(z) = \cfrac{1}{1  +e^{-z}}<br>$$</p>
-<p>Sigmoid函数的输入记为z，下面公式用于确定z：<br>$$<br>z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}<br>$$</p>
-<p>书上用的梯度上升算法确定系数w的数值。<br>$$<br>w = w + \alpha\delta f(w)<br>$$<br>该算法一直迭代找出w的系数，代码里是w（n，1），$\alpha = 0.001$ 循环500次得出系数矩阵。</p>
-<p>该函数二维上就是在一些散点中画一条线来划分出不同的特征点，我们要找W就是这条线的系数。</p>
-<p>书上给的给出的代码例程不能很好的运行，我做了简单的修改最后结果如下图：</p>
-<p>修改过的源码上传到我的GitHub了<a href="https://github.com/cealiu/machinelearn/tree/master/Ch05" target="_blank" rel="external">地址</a></p>
-<p><img src="/images/Logistic_1.png" alt=""></p>
-<p>因为这个解法要迭代全部数据计算量比较大，后面的优化都是为了减少计算量做的比较好理解了就不在这里说明了。</p>
+		<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司需要开发风控系统之前没有接触过这一块，在网上查询好多资料或得的一些思路，开发的过程也走了些弯路踩了不少坑现在记录下来。</p>
+<p>对于风控来说就是提前预防风险降低安全事故的发生，并且能及早发现和封堵；在前期的探索阶段都是利用日志或者离线数据发现规律，在做下面的实时风控系统之前，前期是利用ELK记录的日志数据来查找规律发现一些问题的。</p>
+<h3 id="常见风险："><a href="#常见风险：" class="headerlink" title="常见风险："></a>常见风险：</h3><p>研究风控之前有一些风险是比较常出现的：</p>
+<ol>
+<li>利用机器访问：爬虫、频繁调用短信接口、垃圾注册等</li>
+<li>人为原因：薅羊毛、金融盗刷等</li>
+</ol>
+<h3 id="风控系统"><a href="#风控系统" class="headerlink" title="风控系统"></a>风控系统</h3><p>风控系统分为实时风控和非实时风控系统，两种用途不太一样实时系统可以快速拦截风险，非实时离线系统可以发现一些未知风险。</p>
+<h4 id="离线系统"><a href="#离线系统" class="headerlink" title="离线系统"></a>离线系统</h4><p>离线系统前期更多的是用于数据分析和发现规律，可以利用已知风险数据和一些机器学习的方法发现一些风险点；同时离线数据也可以为实时系统提供信息决策。前期做离线分析的时候用过相关性分析、决策树、k临近算法等等。</p>
+<h4 id="实时系统"><a href="#实时系统" class="headerlink" title="实时系统"></a>实时系统</h4><p>实时系统对系统的响应比较高，本次项目就是利用drools规则引擎可以迅速的更改规则不必重新部署就可以做到发现和拦截一些风险访问。</p>
+<h5 id="主要技术点"><a href="#主要技术点" class="headerlink" title="主要技术点"></a>主要技术点</h5><p>公司访问量比较订单一天大于2000w单，技术框架采用的是kakfa，spark-streaming、drools、redis、postgresql，下面是系统的一个总体框架图</p>
+<p><img src="/images/riskrule.jpeg" alt=""></p>
+<p>drools规则放置在postgresql数据库可以实时更改规则，redis作为临时数据缓存，加载历史数据可以通过历史发现一些发现，例如交易总不在固定地点、多次查询余额等等；通过运行发现处理速度还是不错的，性能瓶颈主要在缓存数据的获取上，总体运行下来单台redis的处理性能达到每数4w/s左右效率还是不错的。</p>
+<p>把部分代码提交到了我的<a href="https://github.com/cealiu/RiskRule" target="_blank" rel="external">github</a>上。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -120,7 +126,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/机器学习/">机器学习</a>
+  <span></span> <a href="/tags/bigdata/">bigdata</a>
   </div>
 
 </div>
@@ -129,7 +135,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/" data-title="Logistic回归和Sigmoid函数的理解 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2018/09/05/风控规则系统开发/" data-title="风控规则系统开发 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -142,19 +148,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/09/02/感知机算法/" title="感知机算法">
-  <strong>上一篇：</strong><br/>
-  <span>
-  感知机算法</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/09/01/opentack节点扩容后热迁移异常/"  title="opentack节点扩容后热迁移异常">
+<a href="/2018/05/14/python-requests-post丢失数据/"  title="python requests post丢失数据">
  <strong>下一篇：</strong><br/> 
- <span>opentack节点扩容后热迁移异常
+ <span>python requests post丢失数据
 </span>
 </a>
 </div>
@@ -163,7 +161,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/09/01/Logistic回归和Sigmoid函数的理解/" data-title="Logistic回归和Sigmoid函数的理解" data-url="http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/"></div>
+	<div class="ds-thread" data-thread-key="2018/09/05/风控规则系统开发/" data-title="风控规则系统开发" data-url="http://cealiu.me/2018/09/05/风控规则系统开发/"></div>
 </section>
 
 
@@ -180,7 +178,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见风险："><span class="toc-number">1.1.</span> <span class="toc-text">常见风险：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风控系统"><span class="toc-number">1.2.</span> <span class="toc-text">风控系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#离线系统"><span class="toc-number">1.2.1.</span> <span class="toc-text">离线系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实时系统"><span class="toc-number">1.2.2.</span> <span class="toc-text">实时系统</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#主要技术点"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">主要技术点</span></a></li></ol></li></ol></li></ol></li></ol>
  
   </div>
 

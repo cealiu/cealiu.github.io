@@ -1,5 +1,5 @@
+http://cealiu.me/2018/09/05/风控规则系统开发/
 http://cealiu.me/2018/05/14/python-requests-post丢失数据/
 http://cealiu.me/2018/05/13/朴素贝叶斯/
 http://cealiu.me/2018/05/08/车牌识别/
 http://cealiu.me/2018/01/23/openstack源码分析一/
-http://cealiu.me/2017/11/16/监控总结/

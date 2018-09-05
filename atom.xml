@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cealiu.me/"/>
-  <updated>2018-05-14T13:12:55.000Z</updated>
+  <updated>2018-09-05T14:08:50.000Z</updated>
   <id>http://cealiu.me/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>风控规则系统开发</title>
+    <link href="http://cealiu.me/2018/09/05/%E9%A3%8E%E6%8E%A7%E8%A7%84%E5%88%99%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91/"/>
+    <id>http://cealiu.me/2018/09/05/风控规则系统开发/</id>
+    <published>2018-09-05T13:30:22.000Z</published>
+    <updated>2018-09-05T14:08:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司需要开发风控系统之前没有接触过这一块，在网上查询好多资料或得的一些思路，开发的过程也走了些弯路踩了不少坑现在记录下来。</p>
+<p>对于风控来说就是提前预防风险降低安全事故的发生，并且能及早发现和封堵；在前期的探索阶段都是利用日志或者离线数据发现规律，在做下面的实时风控系统之前，前期是利用ELK记录的日志数据来查找规律发现一些问题的。</p>
+<h3 id="常见风险："><a href="#常见风险：" class="headerlink" title="常见风险："></a>常见风险：</h3><p>研究风控之前有一些风险是比较常出现的：</p>
+<ol>
+<li>利用机器访问：爬虫、频繁调用短信接口、垃圾注册等</li>
+<li>人为原因：薅羊毛、金融盗刷等</li>
+</ol>
+<h3 id="风控系统"><a href="#风控系统" class="headerlink" title="风控系统"></a>风控系统</h3><p>风控系统分为实时风控和非实时风控系统，两种用途不太一样实时系统可以快速拦截风险，非实时离线系统可以发现一些未知风险。</p>
+<h4 id="离线系统"><a href="#离线系统" class="headerlink" title="离线系统"></a>离线系统</h4><p>离线系统前期更多的是用于数据分析和发现规律，可以利用已知风险数据和一些机器学习的方法发现一些风险点；同时离线数据也可以为实时系统提供信息决策。前期做离线分析的时候用过相关性分析、决策树、k临近算法等等。</p>
+<h4 id="实时系统"><a href="#实时系统" class="headerlink" title="实时系统"></a>实时系统</h4><p>实时系统对系统的响应比较高，本次项目就是利用drools规则引擎可以迅速的更改规则不必重新部署就可以做到发现和拦截一些风险访问。</p>
+<h5 id="主要技术点"><a href="#主要技术点" class="headerlink" title="主要技术点"></a>主要技术点</h5><p>公司访问量比较订单一天大于2000w单，技术框架采用的是kakfa，spark-streaming、drools、redis、postgresql，下面是系统的一个总体框架图</p>
+<p><img src="/images/riskrule.jpeg" alt=""></p>
+<p>drools规则放置在postgresql数据库可以实时更改规则，redis作为临时数据缓存，加载历史数据可以通过历史发现一些发现，例如交易总不在固定地点、多次查询余额等等；通过运行发现处理速度还是不错的，性能瓶颈主要在缓存数据的获取上，总体运行下来单台redis的处理性能达到每数4w/s左右效率还是不错的。</p>
+<p>把部分代码提交到了我的<a href="https://github.com/cealiu/RiskRule" target="_blank" rel="external">github</a>上。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;公司需要开发风控系统之前没有接触过这一块，在网上查询好多资料或得的一些思路，开发的过程也走了些弯路踩了不少坑现在记录下来。&lt;/p&gt;
+&lt;p&gt;对
+    
+    </summary>
+    
+    
+      <category term="bigdata" scheme="http://cealiu.me/tags/bigdata/"/>
+    
+  </entry>
   
   <entry>
     <title>python requests post丢失数据</title>
@@ -49,13 +84,16 @@
     <link href="http://cealiu.me/2018/05/13/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/"/>
     <id>http://cealiu.me/2018/05/13/朴素贝叶斯/</id>
     <published>2018-05-13T10:24:22.000Z</published>
-    <updated>2018-05-14T12:58:47.000Z</updated>
+    <updated>2018-05-21T13:01:02.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h3>]]></content>
+    <content type="html"><![CDATA[<h3 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h3><p>贝叶斯公式：$P(A|B)=P(AB)/P(B)$</p>
+<p>$P(A|B)$表示在B条件下A事件发生的概率，其中$P(A)$表示先验概率，P(A|B)代表后验概率即在B事件发生之后，我们对A事件概率的重新评估，这使得预估概率更接近真实概率。</p>
+]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;基本方法&quot;&gt;&lt;a href=&quot;#基本方法&quot; class=&quot;headerlink&quot; title=&quot;基本方法&quot;&gt;&lt;/a&gt;基本方法&lt;/h3&gt;
+      &lt;h3 id=&quot;基本方法&quot;&gt;&lt;a href=&quot;#基本方法&quot; class=&quot;headerlink&quot; title=&quot;基本方法&quot;&gt;&lt;/a&gt;基本方法&lt;/h3&gt;&lt;p&gt;贝叶斯公式：$P(A|B)=P(AB)/P(B)$&lt;/p&gt;
+&lt;p&gt;$P(A|B)$表示在B条件下A事件发生的概率，其中$P(
     
     </summary>
     
@@ -69,7 +107,7 @@
     <link href="http://cealiu.me/2018/05/08/%E8%BD%A6%E7%89%8C%E8%AF%86%E5%88%AB/"/>
     <id>http://cealiu.me/2018/05/08/车牌识别/</id>
     <published>2018-05-08T13:48:23.000Z</published>
-    <updated>2018-05-08T14:16:50.000Z</updated>
+    <updated>2018-09-05T13:35:38.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="车牌识别"><a href="#车牌识别" class="headerlink" title="车牌识别"></a>车牌识别</h3><p>最近帮朋友调一个车牌识别的源码<a href="https://github.com/zeusees/HyperLPR" target="_blank" rel="external">开源地址</a>有些地方要改动才能跑起来，该项目是基于opencv、深度学习DNN算法做的车牌识别，该blog主要是记录下踩坑过程。</p>
 <h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="opencv环境搭建"><a href="#opencv环境搭建" class="headerlink" title="opencv环境搭建"></a>opencv环境搭建</h4><p>项目是基于python开发的，但是底层还是依赖opencv的c++库，所以环境搭建最主要的还是opencv的配置；我是基于mac系统做的，开源版本要求opencv版本大于3.3所以用brew install安装的版本不适合。</p>
@@ -458,7 +496,7 @@
     <link href="http://cealiu.me/2017/09/02/%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%AE%97%E6%B3%95/"/>
     <id>http://cealiu.me/2017/09/02/感知机算法/</id>
     <published>2017-09-02T13:52:44.000Z</published>
-    <updated>2018-05-12T13:09:22.000Z</updated>
+    <updated>2018-09-05T14:06:32.000Z</updated>
     
     <content type="html"><![CDATA[<p>上节说了下Sigmoid函数做分类器，来做感知机学习(&lt;&lt;李航.统计学习方法&gt;&gt;)</p>
 <h3 id="什么是感知机"><a href="#什么是感知机" class="headerlink" title="什么是感知机"></a>什么是感知机</h3><p>感知机是二分类的线形分类模型，其输入为实例的特征向量，输出为实例的类别，取+1和-1二值。</p>
