@@ -1,7 +1,7 @@
 
  <!DOCTYPE HTML>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
     <title>python requests post丢失数据 | LiuCe&#39;s Blog</title>
@@ -36,14 +36,14 @@
     
     <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
   <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
       
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"/></a>
+				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"></a>
 			</div>
 			
 			<div id="textlogo">
@@ -66,17 +66,17 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
 						<input type="hidden" name="q" value="site:cealiu.me">
 					</form>
 					
 					</li>
 				</ul>
-			</nav>			
+			</ul></nav>			
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -88,7 +88,7 @@
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
-  <p class="article-time">
+  </p><p class="article-time">
     <time datetime="2018-05-14T12:58:28.000Z" itemprop="datePublished"> 发表于 2018-05-14</time>
     
   </p>
@@ -104,13 +104,13 @@
 		
 		<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>这周遇到一个bug使用python的requests lib单独运行脚本post数据就成功，结果使用django调用该函数就出问题。在后台打印log发现django调用的时候request.body丢失了部分数据。</p>
 <p>代码类似：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">body=dict()</div><div class="line">body[<span class="string">'token'</span>]=<span class="string">'23sdcwo81mdvlpwcva'</span></div><div class="line">body[<span class="string">'content'</span>]=<span class="string">'信息'</span></div><div class="line">...</div><div class="line">request.post(data = json.dumps(data,ensure_ascii=<span class="keyword">False</span>))</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">body=dict()</span><br><span class="line">body[<span class="string">'token'</span>]=<span class="string">'23sdcwo81mdvlpwcva'</span></span><br><span class="line">body[<span class="string">'content'</span>]=<span class="string">'信息'</span></span><br><span class="line">...</span><br><span class="line">request.post(data = json.dumps(data,ensure_ascii=<span class="keyword">False</span>))</span><br></pre></td></tr></table></figure>
 <p>原因是单独调用代码的时候发送的body数据内容都是str类型，而Django调用的时候引入了unicode类型。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">test = <span class="string">'test'</span></div><div class="line"><span class="keyword">print</span> type(test)   <span class="comment">#str</span></div><div class="line">test = <span class="string">'test'</span> + unicode(<span class="string">'test'</span>)</div><div class="line"><span class="keyword">print</span> type(test)   <span class="comment">#unicode</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">'test'</span></span><br><span class="line"><span class="keyword">print</span> type(test)   <span class="comment">#str</span></span><br><span class="line">test = <span class="string">'test'</span> + unicode(<span class="string">'test'</span>)</span><br><span class="line"><span class="keyword">print</span> type(test)   <span class="comment">#unicode</span></span><br></pre></td></tr></table></figure>
 <h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>这个跟python的自身编码问题有关，python3加requests能够解决这个问题，但是项目是python2.7的所以用其它方式解决。在requests lib断点调试下会发现init.py—&gt; api.py—&gt;models.py</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.headers[<span class="string">'Content-Length'</span>] = builtin_str(l) <span class="comment">#477 line</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.headers[<span class="string">'Content-Length'</span>] = builtin_str(l) <span class="comment">#477 line</span></span><br></pre></td></tr></table></figure>
 <p>将body内的数据转化为str类型解决，或者在增加headers解决</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">request.post(data = json.dumps(data,ensure_ascii=<span class="keyword">False</span>),headers=&#123;<span class="string">'Content-Length'</span>:str(len(data))&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.post(data = json.dumps(data,ensure_ascii=<span class="keyword">False</span>),headers=&#123;<span class="string">'Content-Length'</span>:str(len(data))&#125;)</span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -141,9 +141,9 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
+ <div class="prev">
  <a href="/2018/09/05/风控规则系统开发/" title="风控规则系统开发">
-  <strong>上一篇：</strong><br/>
+  <strong>上一篇：</strong><br>
   <span>
   风控规则系统开发</span>
 </a>
@@ -151,8 +151,8 @@
 
 
 <div class="next">
-<a href="/2018/05/13/朴素贝叶斯/"  title="朴素贝叶斯">
- <strong>下一篇：</strong><br/> 
+<a href="/2018/05/13/朴素贝叶斯/" title="朴素贝叶斯">
+ <strong>下一篇：</strong><br> 
  <span>朴素贝叶斯
 </span>
 </a>
@@ -191,7 +191,7 @@
 <div class="github-card">
 <p class="asidetitle">Github 名片</p>
 <div class="github-card" data-github="cealiu" data-theme="medium"></div>
-<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js" ></script>
+<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js"></script>
 </div>
 
 
@@ -268,14 +268,14 @@
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
 </div>
 
 
 </aside>
 </div>
     </div>
-    <footer><div id="footer" >
+    <footer><div id="footer">
 	
 	<div class="line">
 		<span></span>
@@ -284,11 +284,11 @@
 	
 	
 	<section class="info">
-		<p> Hello World <br/>
+		<p> Hello World <br>
 			This is my blog</p>
 	</section>
 	 
-	<div class="social-font" class="clearfix">
+	<div class="social-font">
 		
 		<a href="http://weibo.com/3313244784" target="_blank" class="icon-weibo" title="微博"></a>
 		
@@ -532,7 +532,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

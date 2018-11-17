@@ -1,7 +1,7 @@
 
  <!DOCTYPE HTML>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
     <title>存储知识记录 | LiuCe&#39;s Blog</title>
@@ -36,14 +36,14 @@
     
     <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
   <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
       
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"/></a>
+				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"></a>
 			</div>
 			
 			<div id="textlogo">
@@ -66,17 +66,17 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
 						<input type="hidden" name="q" value="site:cealiu.me">
 					</form>
 					
 					</li>
 				</ul>
-			</nav>			
+			</ul></nav>			
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -88,7 +88,7 @@
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
-  <p class="article-time">
+  </p><p class="article-time">
     <time datetime="2017-09-03T14:19:22.000Z" itemprop="datePublished"> 发表于 2017-09-03</time>
     
   </p>
@@ -106,16 +106,16 @@
 <h2 id="块存储、文件存储、对象存储"><a href="#块存储、文件存储、对象存储" class="headerlink" title="块存储、文件存储、对象存储"></a>块存储、文件存储、对象存储</h2><h3 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h3><p>块存储：是以扇区为基础的，一个或连续的扇区组成一个块，概念来自于物理存储。</p>
 <p>文件储存：是多个物理块组成逻辑块后形成文件存储，根据不同的概念及驱动形成入nfs，ext4等文件系统。</p>
 <p>对象存储：结合上面两个优点，增加了元数据(metadata)服务器。</p>
-<p>这里有个知乎上不错的回答：<a href="http://www.zhihu.com/question/21536660" target="_blank" rel="external">http://www.zhihu.com/question/21536660</a></p>
+<p>这里有个知乎上不错的回答：<a href="http://www.zhihu.com/question/21536660" target="_blank" rel="noopener">http://www.zhihu.com/question/21536660</a></p>
 <h3 id="优缺点："><a href="#优缺点：" class="headerlink" title="优缺点："></a>优缺点：</h3><p>推荐生产环境ceph使用块存储、对象存储</p>
 <p>文件级备份：</p>
 <p>文件级备份是指在指定某些文件进行备份时，首先会查找每个文件逻辑块，其次物理块，由于逻辑块是分散在物理块上，而物理块也是分散在不同扇区上。需要一层一 层往下查找，最后才完成整个文件复制。文件级备份时比较费时间，效率不高，实时性不强，备份时间长，且增量备份时，单文件某一小部份修改，不会只备份修改 部份，而整个文件都备份。</p>
 <p>块级备份：</p>
 <p>块级备份是指物理块复制，效率高，实时性强，备份时间短，且增量备份时，只备份修改过的物理块。</p>
 <h2 id="ceph、hadoop、elasticsearch"><a href="#ceph、hadoop、elasticsearch" class="headerlink" title="ceph、hadoop、elasticsearch"></a>ceph、hadoop、elasticsearch</h2><p>hadoop：分布式存储主要适用于一次写入多次读取的场合（后续可能会增加其他数据处理方式），有数据块的概念(64M为一块，可配置)，将大文件分割为多个块进行存储；namenode内存中存放datanode数据索引，存储大小瓶颈来自namenode内存大小。</p>
-<p>ceph：支持块存储、文件存储、对象存储；与hadoop相似的是块存储，不过更接近于物理块的概念；ceph的块驱动基于RBD（介绍<a href="http://www.sebastien-han.fr/blog/2016/03/28/ceph-jewel-preview-ceph-rbd-mirroring" target="_blank" rel="external">http://www.sebastien-han.fr/blog/2016/03/28/ceph-jewel-preview-ceph-rbd-mirroring</a>）</p>
+<p>ceph：支持块存储、文件存储、对象存储；与hadoop相似的是块存储，不过更接近于物理块的概念；ceph的块驱动基于RBD（介绍<a href="http://www.sebastien-han.fr/blog/2016/03/28/ceph-jewel-preview-ceph-rbd-mirroring" target="_blank" rel="noopener">http://www.sebastien-han.fr/blog/2016/03/28/ceph-jewel-preview-ceph-rbd-mirroring</a>）</p>
 <p>hadoop的存储也可以换成ceph的块存储不过性能可能会下降。</p>
-<p>elasticsearch：更接近于nosql的数据库，不过分布式存储也是切片保存数据（介绍<a href="https://kibana.logstash.es/content/elasticsearch/principle/" target="_blank" rel="external">https://kibana.logstash.es/content/elasticsearch/principle/</a>）；查询的时候还有hadoop-elasticsearch插件感觉上是将logstash替换为了hadoop（理解的不知道对不对）。</p>
+<p>elasticsearch：更接近于nosql的数据库，不过分布式存储也是切片保存数据（介绍<a href="https://kibana.logstash.es/content/elasticsearch/principle/" target="_blank" rel="noopener">https://kibana.logstash.es/content/elasticsearch/principle/</a>）；查询的时候还有hadoop-elasticsearch插件感觉上是将logstash替换为了hadoop（理解的不知道对不对）。</p>
 <h3 id="最后："><a href="#最后：" class="headerlink" title="最后："></a>最后：</h3><p>以上是工作中接触过的一些分布式存储的系统，要是想更深层次的理解一些知识还是要看一些理论行的东西如CAP，数据一致性存储等。</p>
 <p>以上有什么说的不对的请指正，大家共同学习。</p>
   
@@ -148,9 +148,9 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
+ <div class="prev">
  <a href="/2017/09/04/hadoop单机搭建/" title="hadoop单机搭建">
-  <strong>上一篇：</strong><br/>
+  <strong>上一篇：</strong><br>
   <span>
   hadoop单机搭建</span>
 </a>
@@ -158,8 +158,8 @@
 
 
 <div class="next">
-<a href="/2017/09/02/感知机算法/"  title="感知机算法">
- <strong>下一篇：</strong><br/> 
+<a href="/2017/09/02/感知机算法/" title="感知机算法">
+ <strong>下一篇：</strong><br> 
  <span>感知机算法
 </span>
 </a>
@@ -198,7 +198,7 @@
 <div class="github-card">
 <p class="asidetitle">Github 名片</p>
 <div class="github-card" data-github="cealiu" data-theme="medium"></div>
-<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js" ></script>
+<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js"></script>
 </div>
 
 
@@ -275,14 +275,14 @@
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
 </div>
 
 
 </aside>
 </div>
     </div>
-    <footer><div id="footer" >
+    <footer><div id="footer">
 	
 	<div class="line">
 		<span></span>
@@ -291,11 +291,11 @@
 	
 	
 	<section class="info">
-		<p> Hello World <br/>
+		<p> Hello World <br>
 			This is my blog</p>
 	</section>
 	 
-	<div class="social-font" class="clearfix">
+	<div class="social-font">
 		
 		<a href="http://weibo.com/3313244784" target="_blank" class="icon-weibo" title="微博"></a>
 		
@@ -539,7 +539,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

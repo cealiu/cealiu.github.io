@@ -1,7 +1,7 @@
 
  <!DOCTYPE HTML>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
     <title>风控规则系统开发 | LiuCe&#39;s Blog</title>
@@ -38,14 +38,14 @@
     
     <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
   <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
       
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"/></a>
+				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"></a>
 			</div>
 			
 			<div id="textlogo">
@@ -68,17 +68,17 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
 						<input type="hidden" name="q" value="site:cealiu.me">
 					</form>
 					
 					</li>
 				</ul>
-			</nav>			
+			</ul></nav>			
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -90,7 +90,7 @@
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
-  <p class="article-time">
+  </p><p class="article-time">
     <time datetime="2018-09-05T13:30:22.000Z" itemprop="datePublished"> 发表于 2018-09-05</time>
     
   </p>
@@ -117,7 +117,7 @@
 <h5 id="主要技术点"><a href="#主要技术点" class="headerlink" title="主要技术点"></a>主要技术点</h5><p>公司访问量比较订单一天大于2000w单，技术框架采用的是kakfa，spark-streaming、drools、redis、postgresql，下面是系统的一个总体框架图</p>
 <p><img src="/images/riskrule.jpeg" alt=""></p>
 <p>drools规则放置在postgresql数据库可以实时更改规则，redis作为临时数据缓存，加载历史数据可以通过历史发现一些发现，例如交易总不在固定地点、多次查询余额等等；通过运行发现处理速度还是不错的，性能瓶颈主要在缓存数据的获取上，总体运行下来单台redis的处理性能达到每数4w/s左右效率还是不错的。</p>
-<p>把部分代码提交到了我的<a href="https://github.com/cealiu/RiskRule" target="_blank" rel="external">github</a>上。</p>
+<p>把部分代码提交到了我的<a href="https://github.com/cealiu/RiskRule" target="_blank" rel="noopener">github</a>上。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -150,8 +150,8 @@
  
 
 <div class="next">
-<a href="/2018/05/14/python-requests-post丢失数据/"  title="python requests post丢失数据">
- <strong>下一篇：</strong><br/> 
+<a href="/2018/05/14/python-requests-post丢失数据/" title="python requests post丢失数据">
+ <strong>下一篇：</strong><br> 
  <span>python requests post丢失数据
 </span>
 </a>
@@ -190,7 +190,7 @@
 <div class="github-card">
 <p class="asidetitle">Github 名片</p>
 <div class="github-card" data-github="cealiu" data-theme="medium"></div>
-<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js" ></script>
+<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js"></script>
 </div>
 
 
@@ -267,14 +267,14 @@
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
 </div>
 
 
 </aside>
 </div>
     </div>
-    <footer><div id="footer" >
+    <footer><div id="footer">
 	
 	<div class="line">
 		<span></span>
@@ -283,11 +283,11 @@
 	
 	
 	<section class="info">
-		<p> Hello World <br/>
+		<p> Hello World <br>
 			This is my blog</p>
 	</section>
 	 
-	<div class="social-font" class="clearfix">
+	<div class="social-font">
 		
 		<a href="http://weibo.com/3313244784" target="_blank" class="icon-weibo" title="微博"></a>
 		
@@ -531,7 +531,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

@@ -1,7 +1,7 @@
 
  <!DOCTYPE HTML>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
     <title>集中式日志监控系统 | LiuCe&#39;s Blog</title>
@@ -45,14 +45,14 @@
     
     <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
   <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
       
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"/></a>
+				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"></a>
 			</div>
 			
 			<div id="textlogo">
@@ -75,17 +75,17 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
 						<input type="hidden" name="q" value="site:cealiu.me">
 					</form>
 					
 					</li>
 				</ul>
-			</nav>			
+			</ul></nav>			
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -97,7 +97,7 @@
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
-  <p class="article-time">
+  </p><p class="article-time">
     <time datetime="2017-03-12T16:00:00.000Z" itemprop="datePublished"> 发表于 2017-03-13</time>
     
   </p>
@@ -173,7 +173,7 @@
 <li>jdk1.8.0_74</li>
 </ul>
 <h3 id="1-部署Elasticsearch集群"><a href="#1-部署Elasticsearch集群" class="headerlink" title="1.部署Elasticsearch集群"></a>1.部署Elasticsearch集群</h3><ul>
-<li><a href="https://www.elastic.co" target="_blank" rel="external">elastic 官网</a></li>
+<li><a href="https://www.elastic.co" target="_blank" rel="noopener">elastic 官网</a></li>
 </ul>
 <p>我从官网下载了 <code>elasticsearch-2.4.4.tar.gz</code></p>
 <h4 id="解压缩tar-tz"><a href="#解压缩tar-tz" class="headerlink" title="解压缩tar.tz"></a>解压缩tar.tz</h4><pre><code>cd /usr/local/elasticsearch
@@ -250,7 +250,7 @@ http://ip:9200/_plugin/head/
 <li>Zookeeper通过复制来实现高可用性，只要集群中半数以上的节点处于可用状态，它就能够保证服务继续。所以搭建集群的服务器台数应该为（2*n+1）台。</li>
 </ul>
 <h4 id="1-Zookeeper的安装配置"><a href="#1-Zookeeper的安装配置" class="headerlink" title="1) Zookeeper的安装配置"></a>1) Zookeeper的安装配置</h4><ul>
-<li><a href="https://zookeeper.apache.org" target="_blank" rel="external">zookeeper官网</a></li>
+<li><a href="https://zookeeper.apache.org" target="_blank" rel="noopener">zookeeper官网</a></li>
 </ul>
 <p>上述说明zookeeper集群必须保证3台以上的服务器，我这里搭建3台zookeeper服务器</p>
 <h5 id="创建myid文件"><a href="#创建myid文件" class="headerlink" title="创建myid文件"></a>创建myid文件</h5><ul>
@@ -334,7 +334,7 @@ Using config: /usr/local/zookeeper/zookeeper-3.4.9/bin/../conf/zoo.cfg
 Mode: follower 
 或者 Mode: leader 
 </code></pre><h4 id="2-kafka的安装配置"><a href="#2-kafka的安装配置" class="headerlink" title="2) kafka的安装配置"></a>2) kafka的安装配置</h4><ul>
-<li><a href="https://kafka.apache.org" target="_blank" rel="external">kafka官网</a></li>
+<li><a href="https://kafka.apache.org" target="_blank" rel="noopener">kafka官网</a></li>
 </ul>
 <h5 id="我从kafka的官网下载了-kafka-2-11-0-10-2-0-tgz"><a href="#我从kafka的官网下载了-kafka-2-11-0-10-2-0-tgz" class="headerlink" title="我从kafka的官网下载了 kafka_2.11-0.10.2.0.tgz"></a>我从kafka的官网下载了 <code>kafka_2.11-0.10.2.0.tgz</code></h5><h5 id="解压缩tar-tz-2"><a href="#解压缩tar-tz-2" class="headerlink" title="解压缩tar.tz"></a>解压缩tar.tz</h5><pre><code>cd /usr/local/kafka
 tar -zxvf kafka_2.11-0.10.2.0.tgz
@@ -401,7 +401,7 @@ zookeeper.connection.timeout.ms=6000
 </ul>
 <h4 id="部署日志处理层的logstash"><a href="#部署日志处理层的logstash" class="headerlink" title="部署日志处理层的logstash"></a>部署日志处理层的logstash</h4><p>这里用到了 <code>GeoLite</code>, 可用于转换IP，变成地理位置信息。</p>
 <ul>
-<li><a href="https://dev.maxmind.com/" target="_blank" rel="external">GeoLite官网</a></li>
+<li><a href="https://dev.maxmind.com/" target="_blank" rel="noopener">GeoLite官网</a></li>
 </ul>
 <h5 id="从GeoLite官网下载-GeoLiteCity-dat-gz"><a href="#从GeoLite官网下载-GeoLiteCity-dat-gz" class="headerlink" title="从GeoLite官网下载 GeoLiteCity.dat.gz"></a>从GeoLite官网下载 <code>GeoLiteCity.dat.gz</code></h5><h5 id="从elastic官网下载-logstash-2-3-4-tar-gz"><a href="#从elastic官网下载-logstash-2-3-4-tar-gz" class="headerlink" title="从elastic官网下载 logstash-2.3.4.tar.gz"></a>从elastic官网下载 <code>logstash-2.3.4.tar.gz</code></h5><h5 id="解压logstash-2-3-4-tar-gz"><a href="#解压logstash-2-3-4-tar-gz" class="headerlink" title="解压logstash-2.3.4.tar.gz"></a>解压logstash-2.3.4.tar.gz</h5><pre><code>cd /usr/local/logstash
 tar -zxvf logstash-2.3.4.tar.gz
@@ -623,9 +623,9 @@ elasticsearch.url: &quot;http://IP:9200&quot;
 </ul>
 <p>参考资料：</p>
 <ul>
-<li><p><a href="https://www.gitbook.com/book/chenryn/elk-stack-guide-cn/details" target="_blank" rel="external">elk-stack-guide-cn</a></p>
+<li><p><a href="https://www.gitbook.com/book/chenryn/elk-stack-guide-cn/details" target="_blank" rel="noopener">elk-stack-guide-cn</a></p>
 </li>
-<li><p><a href="https://www.elastic.co" target="_blank" rel="external">elastic.co</a></p>
+<li><p><a href="https://www.elastic.co" target="_blank" rel="noopener">elastic.co</a></p>
 </li>
 </ul>
   
@@ -663,9 +663,9 @@ elasticsearch.url: &quot;http://IP:9200&quot;
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
+ <div class="prev">
  <a href="/2017/04/08/ELK排障记录/" title="ELK排障记录">
-  <strong>上一篇：</strong><br/>
+  <strong>上一篇：</strong><br>
   <span>
   ELK排障记录</span>
 </a>
@@ -705,7 +705,7 @@ elasticsearch.url: &quot;http://IP:9200&quot;
 <div class="github-card">
 <p class="asidetitle">Github 名片</p>
 <div class="github-card" data-github="cealiu" data-theme="medium"></div>
-<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js" ></script>
+<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js"></script>
 </div>
 
 
@@ -782,14 +782,14 @@ elasticsearch.url: &quot;http://IP:9200&quot;
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
 </div>
 
 
 </aside>
 </div>
     </div>
-    <footer><div id="footer" >
+    <footer><div id="footer">
 	
 	<div class="line">
 		<span></span>
@@ -798,11 +798,11 @@ elasticsearch.url: &quot;http://IP:9200&quot;
 	
 	
 	<section class="info">
-		<p> Hello World <br/>
+		<p> Hello World <br>
 			This is my blog</p>
 	</section>
 	 
-	<div class="social-font" class="clearfix">
+	<div class="social-font">
 		
 		<a href="http://weibo.com/3313244784" target="_blank" class="icon-weibo" title="微博"></a>
 		
@@ -1046,7 +1046,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

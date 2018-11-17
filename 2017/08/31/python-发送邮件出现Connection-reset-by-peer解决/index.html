@@ -1,7 +1,7 @@
 
  <!DOCTYPE HTML>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
     <title>python 发送邮件出现Connection reset by peer解决 | LiuCe&#39;s Blog</title>
@@ -36,14 +36,14 @@
     
     <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
   <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
       
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"/></a>
+				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"></a>
 			</div>
 			
 			<div id="textlogo">
@@ -66,17 +66,17 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
 						<input type="hidden" name="q" value="site:cealiu.me">
 					</form>
 					
 					</li>
 				</ul>
-			</nav>			
+			</ul></nav>			
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -88,7 +88,7 @@
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
-  <p class="article-time">
+  </p><p class="article-time">
     <time datetime="2017-08-31T13:17:37.000Z" itemprop="datePublished"> 发表于 2017-08-31</time>
     
   </p>
@@ -104,7 +104,7 @@
 		
 		<p>​       利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。</p>
 <p>​       网上查找发现对于此问题的解释多是因为socket，web连接问题。后经排查后发现stmp协议使用的端口号是25：这里贴一段关于SMTP协议的介绍STMP协议介绍</p>
-<p>​      下面连接邮件服务器一定要写上邮件端口号25<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">smtp.connect(smtpserver,<span class="string">"25"</span>)</div></pre></td></tr></table></figure></p>
+<p>​      下面连接邮件服务器一定要写上邮件端口号25<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smtp.connect(smtpserver,<span class="string">"25"</span>)</span><br></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -135,9 +135,9 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
+ <div class="prev">
  <a href="/2017/09/01/opentack节点扩容后热迁移异常/" title="opentack节点扩容后热迁移异常">
-  <strong>上一篇：</strong><br/>
+  <strong>上一篇：</strong><br>
   <span>
   opentack节点扩容后热迁移异常</span>
 </a>
@@ -145,8 +145,8 @@
 
 
 <div class="next">
-<a href="/2017/08/30/hello-world/"  title="Hello World">
- <strong>下一篇：</strong><br/> 
+<a href="/2017/08/30/hello-world/" title="Hello World">
+ <strong>下一篇：</strong><br> 
  <span>Hello World
 </span>
 </a>
@@ -185,7 +185,7 @@
 <div class="github-card">
 <p class="asidetitle">Github 名片</p>
 <div class="github-card" data-github="cealiu" data-theme="medium"></div>
-<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js" ></script>
+<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js"></script>
 </div>
 
 
@@ -262,14 +262,14 @@
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
 </div>
 
 
 </aside>
 </div>
     </div>
-    <footer><div id="footer" >
+    <footer><div id="footer">
 	
 	<div class="line">
 		<span></span>
@@ -278,11 +278,11 @@
 	
 	
 	<section class="info">
-		<p> Hello World <br/>
+		<p> Hello World <br>
 			This is my blog</p>
 	</section>
 	 
-	<div class="social-font" class="clearfix">
+	<div class="social-font">
 		
 		<a href="http://weibo.com/3313244784" target="_blank" class="icon-weibo" title="微博"></a>
 		
@@ -526,7 +526,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

@@ -1,7 +1,7 @@
 
  <!DOCTYPE HTML>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
     <title>监控总结 | LiuCe&#39;s Blog</title>
@@ -39,14 +39,14 @@
     
     <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
   <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
       
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"/></a>
+				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"></a>
 			</div>
 			
 			<div id="textlogo">
@@ -69,17 +69,17 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
 						<input type="hidden" name="q" value="site:cealiu.me">
 					</form>
 					
 					</li>
 				</ul>
-			</nav>			
+			</ul></nav>			
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -91,7 +91,7 @@
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
-  <p class="article-time">
+  </p><p class="article-time">
     <time datetime="2017-11-16T00:49:38.000Z" itemprop="datePublished"> 发表于 2017-11-16</time>
     
   </p>
@@ -113,7 +113,7 @@
 <h3 id="主要监控项目"><a href="#主要监控项目" class="headerlink" title="主要监控项目"></a>主要监控项目</h3><p>帮助某家城商行做互金项目监控，主要有tomcat、nginx、redis、oracle、日记</p>
 <h4 id="tomcat、nginx、redis、oracle、zookeeper"><a href="#tomcat、nginx、redis、oracle、zookeeper" class="headerlink" title="tomcat、nginx、redis、oracle、zookeeper"></a>tomcat、nginx、redis、oracle、zookeeper</h4><p>tomcat、zookeper监控通过jmx接口来获取jvm监控信息，zabbix页面也支持jmx获取。</p>
 <p>nginx通过添加 –with-http_stub_status_module参数编译和在配置文件中</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 127.0.0.1:80;</div><div class="line">    server_name 127.0.0.1;</div><div class="line">    access_log off;</div><div class="line">    allow 127.0.0.1;</div><div class="line">    deny all;</div><div class="line">    location /nginxstatus &#123;</div><div class="line">           stub_status on;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 127.0.0.1:80;</span><br><span class="line">    server_name 127.0.0.1;</span><br><span class="line">    access_log off;</span><br><span class="line">    allow 127.0.0.1;</span><br><span class="line">    deny all;</span><br><span class="line">    location /nginxstatus &#123;</span><br><span class="line">           stub_status on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Oracle可以通过orabbix获取，不过我通过pyOrale连接oracle获取的信息</p>
 <p>redis通过缓存redis系统信息获取（主要是info里的信息）</p>
 <h4 id="日志监控"><a href="#日志监控" class="headerlink" title="日志监控"></a>日志监控</h4><p>本来想用ELK做日志收集监控（城商行不允许这么做），所以选择了zabbix告警日志error信息还好错误信息产生速率不高；</p>
@@ -150,9 +150,9 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
+ <div class="prev">
  <a href="/2018/01/23/openstack源码分析一/" title="openstack源码分析一">
-  <strong>上一篇：</strong><br/>
+  <strong>上一篇：</strong><br>
   <span>
   openstack源码分析一</span>
 </a>
@@ -160,8 +160,8 @@
 
 
 <div class="next">
-<a href="/2017/11/01/集群搭建hadoop问题总结/"  title="集群搭建hadoop问题总结">
- <strong>下一篇：</strong><br/> 
+<a href="/2017/11/01/集群搭建hadoop问题总结/" title="集群搭建hadoop问题总结">
+ <strong>下一篇：</strong><br> 
  <span>集群搭建hadoop问题总结
 </span>
 </a>
@@ -200,7 +200,7 @@
 <div class="github-card">
 <p class="asidetitle">Github 名片</p>
 <div class="github-card" data-github="cealiu" data-theme="medium"></div>
-<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js" ></script>
+<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js"></script>
 </div>
 
 
@@ -277,14 +277,14 @@
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
 </div>
 
 
 </aside>
 </div>
     </div>
-    <footer><div id="footer" >
+    <footer><div id="footer">
 	
 	<div class="line">
 		<span></span>
@@ -293,11 +293,11 @@
 	
 	
 	<section class="info">
-		<p> Hello World <br/>
+		<p> Hello World <br>
 			This is my blog</p>
 	</section>
 	 
-	<div class="social-font" class="clearfix">
+	<div class="social-font">
 		
 		<a href="http://weibo.com/3313244784" target="_blank" class="icon-weibo" title="微博"></a>
 		
@@ -541,7 +541,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

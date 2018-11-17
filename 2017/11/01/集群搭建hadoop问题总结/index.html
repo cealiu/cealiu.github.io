@@ -1,7 +1,7 @@
 
  <!DOCTYPE HTML>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
     <title>集群搭建hadoop问题总结 | LiuCe&#39;s Blog</title>
@@ -36,14 +36,14 @@
     
     <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
   <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
       
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"/></a>
+				<a href="/"><img src="/img/logo.png" alt="LiuCe&#39;s Blog" title="LiuCe&#39;s Blog"></a>
 			</div>
 			
 			<div id="textlogo">
@@ -66,17 +66,17 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
 						<input type="hidden" name="q" value="site:cealiu.me">
 					</form>
 					
 					</li>
 				</ul>
-			</nav>			
+			</ul></nav>			
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -88,7 +88,7 @@
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
-  <p class="article-time">
+  </p><p class="article-time">
     <time datetime="2017-11-01T13:06:12.000Z" itemprop="datePublished"> 发表于 2017-11-01</time>
     
   </p>
@@ -110,7 +110,7 @@
 <li><p>master节点跟datanode节点设置免密码登录。</p>
 </li>
 <li><p>搭建完成后运行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop namenode -format</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>运行不成功，开始报错。</p>
@@ -121,10 +121,10 @@
 <li>编辑 Hadoop/etc/hadoop/slave文件，将datanode的主机名或者datanode的记录下来。</li>
 </ol>
 <h4 id="FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component"><a href="#FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component" class="headerlink" title="FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component"></a>FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component</h4><p>出现这个问题有说是配置文件重载权限问题，但是我将hdfs-site.xml的文件权限设置成777也没有生效，后将此文件中的xml配置写成固定值成功，如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>tmp目录是自己指定的。</p>
 <p><strong>完成上述配置后格式化启动成功，发现启动节点数不对或者其他不确定错误，将上面的tmp目录内容清空再试一次即可</strong></p>
-<p>放个hadoop配置文件<a href="http://blog.csdn.net/team77/article/details/50205917" target="_blank" rel="external">参数介绍</a></p>
+<p>放个hadoop配置文件<a href="http://blog.csdn.net/team77/article/details/50205917" target="_blank" rel="noopener">参数介绍</a></p>
 <p>之后就可以在上层跑hive，hsql，spark，storm的组件了，map/reduce的开发跟之前单机版一样。</p>
 <p>hadoop，es，spark/storm基本思想差不多都是<strong>大化小，小块处理，结果整合</strong>，之前记录过。</p>
   
@@ -157,9 +157,9 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
+ <div class="prev">
  <a href="/2017/11/16/监控总结/" title="监控总结">
-  <strong>上一篇：</strong><br/>
+  <strong>上一篇：</strong><br>
   <span>
   监控总结</span>
 </a>
@@ -167,8 +167,8 @@
 
 
 <div class="next">
-<a href="/2017/09/17/安装linux系统/"  title="安装linux系统">
- <strong>下一篇：</strong><br/> 
+<a href="/2017/09/17/安装linux系统/" title="安装linux系统">
+ <strong>下一篇：</strong><br> 
  <span>安装linux系统
 </span>
 </a>
@@ -207,7 +207,7 @@
 <div class="github-card">
 <p class="asidetitle">Github 名片</p>
 <div class="github-card" data-github="cealiu" data-theme="medium"></div>
-<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js" ></script>
+<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js"></script>
 </div>
 
 
@@ -284,14 +284,14 @@
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
 </div>
 
 
 </aside>
 </div>
     </div>
-    <footer><div id="footer" >
+    <footer><div id="footer">
 	
 	<div class="line">
 		<span></span>
@@ -300,11 +300,11 @@
 	
 	
 	<section class="info">
-		<p> Hello World <br/>
+		<p> Hello World <br>
 			This is my blog</p>
 	</section>
 	 
-	<div class="social-font" class="clearfix">
+	<div class="social-font">
 		
 		<a href="http://weibo.com/3313244784" target="_blank" class="icon-weibo" title="微博"></a>
 		
@@ -548,7 +548,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="返回顶部"><img src="/img/scrollup.png"></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
