@@ -4,27 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>Logistic回归和Sigmoid函数的理解 | LiuCe&#39;s Blog</title>
+    <title>openstack概念整理 | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ 书">
-<meta name="keywords" content="机器学习">
+    <meta name="description" content="openstack 概念整理keystoneV2： Tenant、User、Role V3 Domain、Project、Group、User、Role 例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用 Tenant -&amp;gt; 部门，User-&amp;gt;用户，Role-&amp;gt;权限 现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出doma">
+<meta name="keywords" content="cloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logistic回归和Sigmoid函数的理解">
-<meta property="og:url" content="http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/index.html">
+<meta property="og:title" content="openstack概念整理">
+<meta property="og:url" content="http://cealiu.me/2017/12/19/openstack概念整理/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ 书">
+<meta property="og:description" content="openstack 概念整理keystoneV2： Tenant、User、Role V3 Domain、Project、Group、User、Role 例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用 Tenant -&amp;gt; 部门，User-&amp;gt;用户，Role-&amp;gt;权限 现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出doma">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://cealiu.me/images/Logistic_1.png">
-<meta property="og:updated_time" content="2017-09-03T14:13:35.000Z">
+<meta property="og:updated_time" content="2019-06-19T02:47:50.173Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Logistic回归和Sigmoid函数的理解">
-<meta name="twitter:description" content="看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$ Sigmoid函数的输入记为z，下面公式用于确定z：$$z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}$$ 书">
-<meta name="twitter:image" content="http://cealiu.me/images/Logistic_1.png">
+<meta name="twitter:title" content="openstack概念整理">
+<meta name="twitter:description" content="openstack 概念整理keystoneV2： Tenant、User、Role V3 Domain、Project、Group、User、Role 例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用 Tenant -&amp;gt; 部门，User-&amp;gt;用户，Role-&amp;gt;权限 现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出doma">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -84,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/09/01/Logistic回归和Sigmoid函数的理解/" title="Logistic回归和Sigmoid函数的理解" itemprop="url">Logistic回归和Sigmoid函数的理解</a>
+      <a href="/2017/12/19/openstack概念整理/" title="openstack概念整理" itemprop="url">openstack概念整理</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   </p><p class="article-time">
-    <time datetime="2017-09-01T06:02:21.000Z" itemprop="datePublished"> 发表于 2017-09-01</time>
+    <time datetime="2017-12-19T02:44:07.000Z" itemprop="datePublished"> 发表于 2017-12-19</time>
     
   </p>
 </header>
@@ -100,18 +98,26 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#openstack-概念整理"><span class="toc-number">1.</span> <span class="toc-text">openstack 概念整理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#keystone"><span class="toc-number">1.1.</span> <span class="toc-text">keystone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区域概念"><span class="toc-number">1.2.</span> <span class="toc-text">区域概念</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<p>看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。<br>$$<br>\sigma(z) = \cfrac{1}{1  +e^{-z}}<br>$$</p>
-<p>Sigmoid函数的输入记为z，下面公式用于确定z：<br>$$<br>z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}<br>$$</p>
-<p>书上用的梯度上升算法确定系数w的数值。<br>$$<br>w = w + \alpha\delta f(w)<br>$$<br>该算法一直迭代找出w的系数，代码里是w（n，1），$\alpha = 0.001$ 循环500次得出系数矩阵。</p>
-<p>该函数二维上就是在一些散点中画一条线来划分出不同的特征点，我们要找W就是这条线的系数。</p>
-<p>书上给的给出的代码例程不能很好的运行，我做了简单的修改最后结果如下图：</p>
-<p>修改过的源码上传到我的GitHub了<a href="https://github.com/cealiu/machinelearn/tree/master/Ch05" target="_blank" rel="noopener">地址</a></p>
-<p><img src="/images/Logistic_1.png" alt=""></p>
-<p>因为这个解法要迭代全部数据计算量比较大，后面的优化都是为了减少计算量做的比较好理解了就不在这里说明了。</p>
+		<h2 id="openstack-概念整理"><a href="#openstack-概念整理" class="headerlink" title="openstack 概念整理"></a>openstack 概念整理</h2><h3 id="keystone"><a href="#keystone" class="headerlink" title="keystone"></a>keystone</h3><p>V2：</p>
+<p>Tenant、User、Role</p>
+<p>V3</p>
+<p>Domain、Project、Group、User、Role</p>
+<p>例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用</p>
+<p>Tenant -&gt; 部门，User-&gt;用户，Role-&gt;权限</p>
+<p>现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出domain类似公司</p>
+<p>Domain-&gt;公司，Project-&gt;部门，User-&gt;用户，Role-&gt;权限，Group-&gt;组（包含给多个user赋权限）</p>
+<h3 id="区域概念"><a href="#区域概念" class="headerlink" title="区域概念"></a>区域概念</h3><ul>
+<li>region：更像是一个地理上的概念，每个region有自己独立的endpoint，regions之间完全隔离，但是多个regions之间共享同一个keystone和dashboard。（注：目前openstack的dashboard还不支持多region）所以除了提供隔离的功能，region的设计更多侧重地理位置的概念，用户可以选择离自己更近的region来部署自己的服务。</li>
+<li>cell：cell是openstack一个非常重要的概念，主要用来解决openstack的扩展性和规模瓶颈。众所周知，openstack是由很多的组件通过松耦合构成，那么当达到一定的规模后，某些模块必然成为整个系统的瓶颈。比较典型的组件就是database和AMQP了，所以，每个cell有自己独立的DB和AMQP。<ul>
+<li>cell之间的通信(通过rpc完成)</li>
+</ul>
+</li>
+<li>Availability Zone：AZ可以简单理解为一组节点的集合，这组节点具有独立的电力供应设备，比如一个个独立供电的机房，一个个独立供电的机架都可以被划分成AZ。所以，AZ主要是通过冗余来解决可用性问题。AZ是用户可见的一个概念，用户在创建instance的时候可以选择创建到哪些AZ中，以保证instance的可用性</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -120,7 +126,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/机器学习/">机器学习</a>
+  <span></span> <a href="/tags/cloud/">cloud</a>
   </div>
 
 </div>
@@ -129,7 +135,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/" data-title="Logistic回归和Sigmoid函数的理解 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2017/12/19/openstack概念整理/" data-title="openstack概念整理 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -143,18 +149,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/2017/09/02/感知机算法/" title="感知机算法">
+ <a href="/2018/01/23/openstack源码分析一/" title="openstack源码分析一">
   <strong>上一篇：</strong><br>
   <span>
-  感知机算法</span>
+  openstack源码分析一</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/09/01/opentack节点扩容后热迁移异常/" title="opentack节点扩容后热迁移异常">
+<a href="/2017/11/16/监控总结/" title="监控总结">
  <strong>下一篇：</strong><br> 
- <span>opentack节点扩容后热迁移异常
+ <span>监控总结
 </span>
 </a>
 </div>
@@ -163,7 +169,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/09/01/Logistic回归和Sigmoid函数的理解/" data-title="Logistic回归和Sigmoid函数的理解" data-url="http://cealiu.me/2017/09/01/Logistic回归和Sigmoid函数的理解/"></div>
+	<div class="ds-thread" data-thread-key="2017/12/19/openstack概念整理/" data-title="openstack概念整理" data-url="http://cealiu.me/2017/12/19/openstack概念整理/"></div>
 </section>
 
 
@@ -180,7 +186,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#openstack-概念整理"><span class="toc-number">1.</span> <span class="toc-text">openstack 概念整理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#keystone"><span class="toc-number">1.1.</span> <span class="toc-text">keystone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区域概念"><span class="toc-number">1.2.</span> <span class="toc-text">区域概念</span></a></li></ol></li></ol>
  
   </div>
 
