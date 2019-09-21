@@ -4,27 +4,27 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   
-    <title>ELK排障记录 | LiuCe&#39;s Blog</title>
+    <title>web控制树莓派led | LiuCe&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="LiuCe">
     
 
     
-    <meta name="description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
-<meta name="keywords" content="日志">
+    <meta name="description" content="​      最近树莓派4b发布女朋友买了个4g版本当七夕礼物送我，买来随便研究了下硕士的时候做嵌入式所以对硬件底层比较了解就先拿来做了点灯的小程序试试效果。效果就是通过网页web点击button控制树莓派连接的led灯的亮灭，用的技术栈有python、vue、django等。 硬件连接要通过树莓派引脚(GPIO)控制led，需要做如下连接:  上图是网上找的一个大概示意图，led的两个引脚一端接">
+<meta name="keywords" content="web, python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ELK排障记录">
-<meta property="og:url" content="http://cealiu.me/2017/04/08/ELK排障记录/index.html">
+<meta property="og:title" content="web控制树莓派led">
+<meta property="og:url" content="http://cealiu.me/2019/09/21/web控制树莓派led/index.html">
 <meta property="og:site_name" content="LiuCe&#39;s Blog">
-<meta property="og:description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
+<meta property="og:description" content="​      最近树莓派4b发布女朋友买了个4g版本当七夕礼物送我，买来随便研究了下硕士的时候做嵌入式所以对硬件底层比较了解就先拿来做了点灯的小程序试试效果。效果就是通过网页web点击button控制树莓派连接的led灯的亮灭，用的技术栈有python、vue、django等。 硬件连接要通过树莓派引脚(GPIO)控制led，需要做如下连接:  上图是网上找的一个大概示意图，led的两个引脚一端接">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://cealiu.me/images/ELK_structure.png">
-<meta property="og:updated_time" content="2017-09-08T09:10:06.000Z">
+<meta property="og:image" content="http://cealiu.me/images/led.png">
+<meta property="og:updated_time" content="2019-09-21T04:58:50.462Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ELK排障记录">
-<meta name="twitter:description" content="背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。 公司用的审计接入日志的ELK架构图如下：  架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后">
-<meta name="twitter:image" content="http://cealiu.me/images/ELK_structure.png">
+<meta name="twitter:title" content="web控制树莓派led">
+<meta name="twitter:description" content="​      最近树莓派4b发布女朋友买了个4g版本当七夕礼物送我，买来随便研究了下硕士的时候做嵌入式所以对硬件底层比较了解就先拿来做了点灯的小程序试试效果。效果就是通过网页web点击button控制树莓派连接的led灯的亮灭，用的技术栈有python、vue、django等。 硬件连接要通过树莓派引脚(GPIO)控制led，需要做如下连接:  上图是网上找的一个大概示意图，led的两个引脚一端接">
+<meta name="twitter:image" content="http://cealiu.me/images/led.png">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuCe&#39;s Blog" type="application/atom+xml">
@@ -84,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/08/ELK排障记录/" title="ELK排障记录" itemprop="url">ELK排障记录</a>
+      <a href="/2019/09/21/web控制树莓派led/" title="web控制树莓派led" itemprop="url">web控制树莓派led</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
 		
   </p><p class="article-time">
-    <time datetime="2017-04-08T08:33:52.000Z" itemprop="datePublished"> 发表于 2017-04-08</time>
+    <time datetime="2019-09-21T02:44:09.000Z" itemprop="datePublished"> 发表于 2019-09-21</time>
     
   </p>
 </header>
@@ -100,17 +100,54 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍："><span class="toc-number">1.</span> <span class="toc-text">背景介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#处理："><span class="toc-number">2.</span> <span class="toc-text">处理：</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件连接"><span class="toc-number">1.</span> <span class="toc-text">硬件连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web搭建"><span class="toc-number">2.</span> <span class="toc-text">web搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码与效果"><span class="toc-number">3.</span> <span class="toc-text">源码与效果</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="背景介绍："><a href="#背景介绍：" class="headerlink" title="背景介绍："></a>背景介绍：</h2><p>之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。</p>
-<p>公司用的审计接入日志的ELK架构图如下：</p>
-<p><img src="/images/ELK_structure.png" alt=""></p>
-<p>架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后用告警平台发送相应信息到责任人。</p>
-<h2 id="处理："><a href="#处理：" class="headerlink" title="处理："></a>处理：</h2><p>因为是在kibana展示上发现部分日志未展示，所以我们先检查了所有logstash shipper节点的日志情况发现日志时间戳连续没问题，es集群里缺少相应时间的部分日志，之后ossec上查看发现有部分日志缺失判定是logstash吐日志出现问题。</p>
-<p>排查shipper各个节点时发现一台机器的logstash进程down了，重启后问题解决。</p>
-<p>建议后期监控logstash进程或者修改配置。</p>
+		<p>​      最近树莓派4b发布女朋友买了个4g版本当七夕礼物送我，买来随便研究了下硕士的时候做嵌入式所以对硬件底层比较了解就先拿来做了点灯的小程序试试效果。效果就是通过网页web点击button控制树莓派连接的led灯的亮灭，用的技术栈有python、vue、django等。</p>
+<h3 id="硬件连接"><a href="#硬件连接" class="headerlink" title="硬件连接"></a>硬件连接</h3><p>要通过树莓派引脚(GPIO)控制led，需要做如下连接:</p>
+<p><img src="/images/led.png" alt=""></p>
+<p>上图是网上找的一个大概示意图，led的两个引脚一端接地另外一端接GPIO，也可以一端接电源另外一端接GPIO引脚，别管怎么接主要目的就是通过控制GPIO输出高低电平来实现led的亮灭。led需要的电流比较小，所以要加电阻控制下，如果要通过GPIO控制大电流或者电压设备就需要到三极管或者继电器等元器件。  </p>
+<p>树莓派专门提供了python包RPi.GPIO来控制GPIO引脚，如果复杂功能或者驱动的话需要用到C语言的包，这个大家可以网上自己找下资料。</p>
+<h3 id="web搭建"><a href="#web搭建" class="headerlink" title="web搭建"></a>web搭建</h3><p>web后台使用Django的rest framework，前端使用vue框架。</p>
+<ol>
+<li><p>Django后台搭建：</p>
+<p>Python3可以直接创建虚拟环境，使用以下命令创建：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir led</span><br><span class="line">cd led</span><br><span class="line">python -m venv venv</span><br><span class="line">pip install django</span><br><span class="line">pip install djangorestframework</span><br><span class="line">...</span><br><span class="line">pip install RPi.GPIO</span><br></pre></td></tr></table></figure>
+<p>Django rest framework (安装文档)[<a href="https://www.django-rest-framework.org]，另外要注意安装RPi.GPIO要在树莓派上安装在本地电脑会报错。" target="_blank" rel="noopener">https://www.django-rest-framework.org]，另外要注意安装RPi.GPIO要在树莓派上安装在本地电脑会报错。</a></p>
+</li>
+<li><p>vue前端搭建：</p>
+<p>前端使用的是vue用的iview框架，这部分网上内容挺多的以下是官方的安装文档，安装之前请先装node环境：</p>
+<p>(vue安装)[<a href="https://cn.vuejs.org/v2/guide/installation.html#NPM" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/installation.html#NPM</a>]</p>
+<p>(iview安装)[<a href="https://www.iviewui.com/docs/guide/start#SYZQ" target="_blank" rel="noopener">https://www.iviewui.com/docs/guide/start#SYZQ</a>]</p>
+</li>
+</ol>
+<p>###部署</p>
+<ol>
+<li><p>以上都完成了，需要部署在树莓派上，我在树莓派上安装了nginx做转发：</p>
+<p>ssh到树莓派上安装nginx，如果安装报网络错误要更换下apt源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装完成后将前后台项目拷贝到树莓派上，我的目录是：</p>
+<p>后台Django: /home/pi/test/led</p>
+<p>前端vue: /home/pi/dist</p>
+</li>
+<li><p>配置nginx转发，找到nginx的配置目录，增加led.conf文件，并添加如下内入</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">80</span>;<span class="comment">#默认端口是80，如果端口没被占用可以不用修改</span></span><br><span class="line">        <span class="attribute">server_name</span>  <span class="number">192.168.2.167</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#charset koi8-r;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#access_log  logs/host.access.log  main;</span></span><br><span class="line">        <span class="attribute">root</span>        /home/pi/dist;<span class="comment">#vue项目的打包后的dist</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">            <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ <span class="variable">@router</span>;<span class="comment">#需要指向下面的@router否则会出现vue的路由在nginx中刷新出现404</span></span><br><span class="line">            <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">#对应上面的@router，主要原因是路由的路径资源并不是一个真实的路径，所以无法找到具体的文件</span></span><br><span class="line">        <span class="comment">#因此需要rewrite到index.html中，然后交给路由在处理请求资源</span></span><br><span class="line">        <span class="attribute">location</span> <span class="variable">@router</span> &#123;</span><br><span class="line">            <span class="attribute">rewrite</span><span class="regexp"> ^.*$</span> /index.html <span class="literal">last</span>;</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动：</p>
+<p>启动nginx: sudo /etc/init.d/nginx start</p>
+<p>启动django: python3 manage.py runserver 0.0.0.0:8000 &amp;</p>
+</li>
+<li><p>Django部署也可以使用nginx+uwsgi方式，这里我就没在弄了，大家可以去网上搜集下资料</p>
+</li>
+<li><p>实现效果要求网页端和树莓派无线在一个局域网内，想要外网连接实现的话，需要有个域名外加上内网穿透工具实现，代码里都是用ip地址指向的运行的时候要改为实际ip或域名</p>
+</li>
+</ol>
+<h3 id="源码与效果"><a href="#源码与效果" class="headerlink" title="源码与效果"></a>源码与效果</h3><ol>
+<li>源码我上传到了我的github上，仓库地址是：<a href="https://github.com/cealiu/led" target="_blank" rel="noopener">led</a></li>
+<li>演示地址: <a href="">B站</a></li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -119,7 +156,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/日志/">日志</a>
+  <span></span> <a href="/tags/web-python/">web, python</a>
   </div>
 
 </div>
@@ -128,7 +165,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://cealiu.me/2017/04/08/ELK排障记录/" data-title="ELK排障记录 | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="http://cealiu.me/2019/09/21/web控制树莓派led/" data-title="web控制树莓派led | LiuCe&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -141,19 +178,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev">
- <a href="/2017/08/30/hello-world/" title="Hello World">
-  <strong>上一篇：</strong><br>
-  <span>
-  Hello World</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/13/ELK日志系统搭建/" title="集中式日志监控系统">
+<a href="/2018/09/05/风控规则系统开发/" title="风控规则系统开发">
  <strong>下一篇：</strong><br> 
- <span>集中式日志监控系统
+ <span>风控规则系统开发
 </span>
 </a>
 </div>
@@ -162,7 +191,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/04/08/ELK排障记录/" data-title="ELK排障记录" data-url="http://cealiu.me/2017/04/08/ELK排障记录/"></div>
+	<div class="ds-thread" data-thread-key="2019/09/21/web控制树莓派led/" data-title="web控制树莓派led" data-url="http://cealiu.me/2019/09/21/web控制树莓派led/"></div>
 </section>
 
 
@@ -179,7 +208,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍："><span class="toc-number">1.</span> <span class="toc-text">背景介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#处理："><span class="toc-number">2.</span> <span class="toc-text">处理：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件连接"><span class="toc-number">1.</span> <span class="toc-text">硬件连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web搭建"><span class="toc-number">2.</span> <span class="toc-text">web搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码与效果"><span class="toc-number">3.</span> <span class="toc-text">源码与效果</span></a></li></ol>
  
   </div>
 
