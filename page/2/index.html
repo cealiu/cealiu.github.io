@@ -51,11 +51,11 @@
 				<ul>
 					<ul>
 					 
-						<li><a href="/">主页</a></li>
+						<li><a href="/">Home</a></li>
 					
-						<li><a href="/archives">归档</a></li>
+						<li><a href="/archives">Archives</a></li>
 					
-						<li><a href="/about">关于</a></li>
+						<li><a href="/about">About</a></li>
 					
 					<li>
  					
@@ -73,221 +73,1218 @@
     <div id="container">
       <div id="main">
 
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/09/04/hadoop-demo程序/" title="hadoop demo程序" itemprop="url">
-  
-    <h1 itemprop="name">hadoop demo程序</h1>
+   
     
-     
-           <p itemprop="description">Map/Reduce介绍hadoop主要利用Map/Reduce框架进行快速数据处理，就是将上传到hadoop集群的文件进行分片保存在HDFS上（64M），之后利用Map框架进行预处理后交由Reduce框架处理输出结果，如下图(简易图)：
-
-工程构建利用idea建立maven工程</p>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/09/04/hadoop-demo程序/" title="hadoop demo程序" itemprop="url">hadoop demo程序</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-09-04T03:06:44.000Z" itemprop="datePublished"> 发表于 2017-09-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
         
-    
-    <time datetime="2017-09-04T03:06:44.000Z" itemprop="datePublished">2017-09-04</time>
-  </a>
-</section>
+        <h2 id="Map-Reduce介绍"><a href="#Map-Reduce介绍" class="headerlink" title="Map/Reduce介绍"></a>Map/Reduce介绍</h2><p>hadoop主要利用Map/Reduce框架进行快速数据处理，就是将上传到hadoop集群的文件进行分片保存在HDFS上（64M），之后利用Map框架进行预处理后交由Reduce框架处理输出结果，如下图(简易图)：</p>
+<p><img src="\images\MapReduce.jpg" alt=""></p>
+<h2 id="工程构建"><a href="#工程构建" class="headerlink" title="工程构建"></a>工程构建</h2><p>利用idea建立maven工程，pom.xml配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>HadoopTest<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>HadoopTest<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hadoop.version</span>&gt;</span>2.8.0<span class="tag">&lt;/<span class="name">hadoop.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-hdfs<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-mapreduce-client-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-mapreduce-client-jobclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-mapreduce-client-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>之后建立WordCount.java编译生成jar文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">ackage org.myorg;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapred.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordCount</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Map</span> <span class="keyword">extends</span> <span class="title">MapReduceBase</span> <span class="keyword">implements</span> <span class="title">Mapper</span>&lt;<span class="title">LongWritable</span>, <span class="title">Text</span>, <span class="title">Text</span>, <span class="title">IntWritable</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> IntWritable one = <span class="keyword">new</span> IntWritable(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">private</span> Text word = <span class="keyword">new</span> Text();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">map</span><span class="params">(LongWritable key, Text value, OutputCollector&lt;Text, IntWritable&gt; output, Reporter reporter)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        String line = value.toString();</span><br><span class="line">        StringTokenizer tokenizer = <span class="keyword">new</span> StringTokenizer(line);</span><br><span class="line">        <span class="keyword">while</span> (tokenizer.hasMoreTokens()) &#123;</span><br><span class="line">            word.set(tokenizer.nextToken());</span><br><span class="line">            output.collect(word, one);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Reduce</span> <span class="keyword">extends</span> <span class="title">MapReduceBase</span> <span class="keyword">implements</span> <span class="title">Reducer</span>&lt;<span class="title">Text</span>, <span class="title">IntWritable</span>, <span class="title">Text</span>, <span class="title">IntWritable</span>&gt; </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reduce</span><span class="params">(Text key, Iterator&lt;IntWritable&gt; values, OutputCollector&lt;Text, IntWritable&gt; output, Reporter reporter)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (values.hasNext()) &#123;</span><br><span class="line">                sum += values.next().get();</span><br><span class="line">            &#125;</span><br><span class="line">            output.collect(key, <span class="keyword">new</span> IntWritable(sum));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        JobConf conf = <span class="keyword">new</span> JobConf(WordCount.class);</span><br><span class="line">        conf.setJobName(<span class="string">"wordcount"</span>);</span><br><span class="line">        conf.setOutputKeyClass(Text.class);</span><br><span class="line">        conf.setOutputValueClass(IntWritable.class);</span><br><span class="line">        conf.setMapperClass(Map.class);</span><br><span class="line">        conf.setCombinerClass(Reduce.class);</span><br><span class="line">        conf.setReducerClass(Reduce.class);</span><br><span class="line"></span><br><span class="line">        conf.setInputFormat(TextInputFormat.class);</span><br><span class="line">        conf.setOutputFormat(TextOutputFormat.class);</span><br><span class="line"></span><br><span class="line">        FileInputFormat.setInputPaths(conf, <span class="keyword">new</span> Path(args[<span class="number">0</span>]));</span><br><span class="line">        FileOutputFormat.setOutputPath(conf, <span class="keyword">new</span> Path(args[<span class="number">1</span>]));</span><br><span class="line"></span><br><span class="line">        JobClient.runJob(conf);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码主要实现了map／reduce处理过程，上节利用命令 -put上传的文件被分配到各个datanode节点。</p>
+<p>public void map()按文件行分解为单词输出key/value值</p>
+<p>public void reduce()按map传递过来的值统计单词</p>
+<p>之后就是在main函数中配置job</p>
+<h2 id="程序运行"><a href="#程序运行" class="headerlink" title="程序运行"></a>程序运行</h2><p>上面生成了HadoopTest-1.0-SNAPSHOT.jar</p>
+<p>运行命令，会在/user/liuce/output看到输出结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar ./HadoopTest-1.0-SNAPSHOT.jar org.myorg.WordCount /user/liuce/input /user/liuce/output</span><br></pre></td></tr></table></figure>
+<p>eclipse下有插件可以远程连接到hadoop服务器上而不用每次做这些上传删除操作，github上只有2.6版本的高级版本可以自己编译，linux、win下插件都没问题但是macos下一直报错，感觉跟mac系统的目录结构有关一直报找不到job。</p>
 
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/09/04/hadoop单机搭建/" title="hadoop单机搭建" itemprop="url">
-  
-    <h1 itemprop="name">hadoop单机搭建</h1>
-    
-     
-           <p itemprop="description">Hadoop 安装系统macos 10.12.4，linux系统大体与此相似
-1brew insall hadoop
-该命令安装是是最新版（2.8.0）
-配置JAVA_HOME(之前已经配置过，java版本1.8)
-配置ssh免密码登录1、生成公钥，加入authorized_ke</p>
         
-    
-    <time datetime="2017-09-04T02:52:11.000Z" itemprop="datePublished">2017-09-04</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/09/03/存储知识记录/" title="存储知识记录" itemprop="url">
-  
-    <h1 itemprop="name">存储知识记录</h1>
-    
-     
-           <p itemprop="description">平时工作是做云计算相关的，最近在学习hadoop的知识看到hadoop的文件存储方式结合用过的ceph，elasticsearch做下存储相关知识的记录。
-块存储、文件存储、对象存储介绍：块存储：是以扇区为基础的，一个或连续的扇区组成一个块，概念来自于物理存储。
-文件储存：是多个</p>
         
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/bigdata/">bigdata</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-    <time datetime="2017-09-03T14:19:22.000Z" itemprop="datePublished">2017-09-03</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/09/02/感知机算法/" title="感知机算法" itemprop="url">
-  
-    <h1 itemprop="name">感知机算法</h1>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
     
-     
-           <p itemprop="description">上节说了下Sigmoid函数做分类器，来做感知机学习(&amp;lt;&amp;lt;李航.统计学习方法&amp;gt;&amp;gt;)
-什么是感知机感知机是二分类的线形分类模型，其输入为实例的特征向量，输出为实例的类别，取+1和-1二值。
-定义：假设输入空间（特征空间）是$x \subseteq R^n $</p>
+      <a href="/2017/09/04/hadoop单机搭建/" title="hadoop单机搭建" itemprop="url">hadoop单机搭建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-09-04T02:52:11.000Z" itemprop="datePublished"> 发表于 2017-09-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
         
-    
-    <time datetime="2017-09-02T13:52:44.000Z" itemprop="datePublished">2017-09-02</time>
-  </a>
-</section>
+        <h2 id="Hadoop-安装"><a href="#Hadoop-安装" class="headerlink" title="Hadoop 安装"></a>Hadoop 安装</h2><p>系统macos 10.12.4，linux系统大体与此相似</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew insall hadoop</span><br></pre></td></tr></table></figure>
+<p>该命令安装是是最新版（2.8.0）</p>
+<p>配置JAVA_HOME(之前已经配置过，java版本1.8)</p>
+<h2 id="配置ssh免密码登录"><a href="#配置ssh免密码登录" class="headerlink" title="配置ssh免密码登录"></a><strong>配置ssh免密码登录</strong></h2><p>1、生成公钥，加入authorized_keys</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br><span class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<h2 id="Hadoop-配置单节点使用"><a href="#Hadoop-配置单节点使用" class="headerlink" title="Hadoop 配置单节点使用"></a>Hadoop 配置单节点使用</h2><p>这里是使用单节点，brew install的hadoop目录在</p>
+<p>/usr/local/Cellar/hadoop/2.8.0</p>
+<p>配置文件目录在</p>
+<p>/usr/local/Cellar/hadoop/2.8.0/libexec/etc/hadoop</p>
+<h3 id="配置-hdfs-site-xml"><a href="#配置-hdfs-site-xml" class="headerlink" title="配置 hdfs-site.xml"></a>配置 hdfs-site.xml</h3><p>设置副本数为 <strong>1</strong>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置-core-site-xml"><a href="#配置-core-site-xml" class="headerlink" title="配置 core-site.xml"></a>配置 core-site.xml</h3><p>设置文件系统访问的端口：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置-mapred-site-xml"><a href="#配置-mapred-site-xml" class="headerlink" title="配置 mapred-site.xml"></a>配置 mapred-site.xml</h3><p>设置 MapReduce 使用的框架：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置-yarn-site-xml"><a href="#配置-yarn-site-xml" class="headerlink" title="配置 yarn-site.xml"></a>配置 yarn-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Hadoop运行"><a href="#Hadoop运行" class="headerlink" title="Hadoop运行"></a>Hadoop运行</h2><p>因为没有将hadoop目录环境变量，所以以下命令需要在/usr/local/Cellar/hadoop/2.8.0/libexec/sbin目录下运行。</p>
+<h3 id="启动hadoop"><a href="#启动hadoop" class="headerlink" title="启动hadoop"></a>启动hadoop</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br><span class="line">start-yarn.sh</span><br></pre></td></tr></table></figure>
+<h3 id="格式化文件系统"><a href="#格式化文件系统" class="headerlink" title="格式化文件系统"></a>格式化文件系统</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure>
+<h3 id="建立用户空间（相当于连接了hadoop）"><a href="#建立用户空间（相当于连接了hadoop）" class="headerlink" title="建立用户空间（相当于连接了hadoop）"></a>建立用户空间（相当于连接了hadoop）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir /user</span><br><span class="line">hdfs dfs -mkdir /user/$(whoami) # 这里是用户</span><br></pre></td></tr></table></figure>
+<p>建立好目录后可以使用hadoop命令进行查看了</p>
+<p>hadoop fs -ls /user/$(whoami)</p>
+<h3 id="查看hadoop启动的进程情况"><a href="#查看hadoop启动的进程情况" class="headerlink" title="查看hadoop启动的进程情况"></a>查看hadoop启动的进程情况</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps</span><br></pre></td></tr></table></figure>
+<h3 id="网页查看"><a href="#网页查看" class="headerlink" title="网页查看"></a>网页查看</h3><p>启动后可以在本地浏览器访问以下地址：</p>
+<p><a href="http://localhost:8088/cluster" target="_blank" rel="noopener">http://localhost:8088/cluster</a></p>
+<p><a href="http://localhost:50070" target="_blank" rel="noopener">http://localhost:50070</a></p>
+<p><a href="http://localhost:8042/node" target="_blank" rel="noopener">http://localhost:8042/node</a></p>
+<h2 id="Hadoop-Hello-World例程"><a href="#Hadoop-Hello-World例程" class="headerlink" title="Hadoop Hello World例程"></a>Hadoop Hello World例程</h2><p>利用自带的java程序测试，官方给了一个计算单词个数的代码也可以测试</p>
+<p>###建立测试文件上传到HDFS中</p>
+<p>在本地建立文件，我创建的文件与内容如下</p>
+<p>file01</p>
+<p>Hello World Bye World dfss<br>dfsa</p>
+<p>file02</p>
+<p>hello test</p>
+<p>dfs0</p>
+<p>上传文件命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -put /User/liuce/input input #修改自己文件目录</span><br></pre></td></tr></table></figure>
+<p>可以在刚才创建的目录下看到刚才上传的文件：/user/$(whoami)/input  #input自动生成的</p>
+<h3 id="运行测试程序"><a href="#运行测试程序" class="headerlink" title="运行测试程序"></a>运行测试程序</h3><p>自带demo程序目录在</p>
+<p>/usr/local/Cellar/hadoop/2.8.0/libexec/share/hadoop/mapreduce</p>
+<p>运行测试程序</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar ./hadoop-mapreduce-examples-2.8.0.jar grep input output 'dfs[a-z.]+'</span><br></pre></td></tr></table></figure>
+<p>测试程序是计算以dfs单词的个数，结果记录在/user/$(whoami)/out/part-r-00000</p>
+<p>删除刚才生成的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -rm -r /user/$(whoami)/input</span><br><span class="line">hdfs dfs -rm -r /user/$(whoami)/output</span><br></pre></td></tr></table></figure>
+<h2 id="快速搭建方式"><a href="#快速搭建方式" class="headerlink" title="快速搭建方式"></a>快速搭建方式</h2><p>在推荐两种快速的方式</p>
+<ol>
+<li><p>安装docker，基于docker的hadoop</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull sequenceiq/hadoop-docker:2.7.1</span><br><span class="line">docker run -it sequenceiq/hadoop-docker:2.7.1 /etc/bootstrap.sh -bash</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>虚拟机直接启动</p>
+<p>访问网站 <a href="https://bitnami.com/" target="_blank" rel="noopener">https://bitnami.com/</a> 搜索hadoop下载镜像，直接用相应的虚拟机启动。</p>
+<p>运行hadoop启动命令就可以了，这种方式也可以方便搭建集群环境。</p>
+</li>
+</ol>
 
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/09/01/Logistic回归和Sigmoid函数的理解/" title="Logistic回归和Sigmoid函数的理解" itemprop="url">
-  
-    <h1 itemprop="name">Logistic回归和Sigmoid函数的理解</h1>
-    
-     
-           <p itemprop="description">看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。$$\sigma(z) = \cfrac{1}{1  +e^{-z}}$$
-Sigmoid函数的输入记为z，下面公式用于确定z：$$</p>
         
-    
-    <time datetime="2017-09-01T06:02:21.000Z" itemprop="datePublished">2017-09-01</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/09/01/opentack节点扩容后热迁移异常/" title="opentack节点扩容后热迁移异常" itemprop="url">
-  
-    <h1 itemprop="name">opentack节点扩容后热迁移异常</h1>
-    
-     
-           <p itemprop="description">扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上
-故障原因为：新旧节点的qemu版本存在差异。
-1rpm -qa | grep kvm
-qemu-kvm-2.5.1-1.1.el7.x86_64
-libvirt-daemon-kvm-1.3.1-1.el7.centos.</p>
         
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/bigdata/">bigdata</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-    <time datetime="2017-09-01T02:27:37.000Z" itemprop="datePublished">2017-09-01</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" title="python 发送邮件出现Connection reset by peer解决" itemprop="url">
-  
-    <h1 itemprop="name">python 发送邮件出现Connection reset by peer解决</h1>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
     
-     
-           <p itemprop="description">​       利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。
-​       网上查找发现对于此问题的解释多是因为socket，web</p>
+      <a href="/2017/09/03/存储知识记录/" title="存储知识记录" itemprop="url">存储知识记录</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-09-03T14:19:22.000Z" itemprop="datePublished"> 发表于 2017-09-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
         
-    
-    <time datetime="2017-08-31T13:17:37.000Z" itemprop="datePublished">2017-08-31</time>
-  </a>
-</section>
+        <p>平时工作是做云计算相关的，最近在学习hadoop的知识看到hadoop的文件存储方式结合用过的ceph，elasticsearch做下存储相关知识的记录。</p>
+<h2 id="块存储、文件存储、对象存储"><a href="#块存储、文件存储、对象存储" class="headerlink" title="块存储、文件存储、对象存储"></a>块存储、文件存储、对象存储</h2><h3 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h3><p>块存储：是以扇区为基础的，一个或连续的扇区组成一个块，概念来自于物理存储。</p>
+<p>文件储存：是多个物理块组成逻辑块后形成文件存储，根据不同的概念及驱动形成入nfs，ext4等文件系统。</p>
+<p>对象存储：结合上面两个优点，增加了元数据(metadata)服务器。</p>
+<p>这里有个知乎上不错的回答：<a href="http://www.zhihu.com/question/21536660" target="_blank" rel="noopener">http://www.zhihu.com/question/21536660</a></p>
+<h3 id="优缺点："><a href="#优缺点：" class="headerlink" title="优缺点："></a>优缺点：</h3><p>推荐生产环境ceph使用块存储、对象存储</p>
+<p>文件级备份：</p>
+<p>文件级备份是指在指定某些文件进行备份时，首先会查找每个文件逻辑块，其次物理块，由于逻辑块是分散在物理块上，而物理块也是分散在不同扇区上。需要一层一 层往下查找，最后才完成整个文件复制。文件级备份时比较费时间，效率不高，实时性不强，备份时间长，且增量备份时，单文件某一小部份修改，不会只备份修改 部份，而整个文件都备份。</p>
+<p>块级备份：</p>
+<p>块级备份是指物理块复制，效率高，实时性强，备份时间短，且增量备份时，只备份修改过的物理块。</p>
+<h2 id="ceph、hadoop、elasticsearch"><a href="#ceph、hadoop、elasticsearch" class="headerlink" title="ceph、hadoop、elasticsearch"></a>ceph、hadoop、elasticsearch</h2><p>hadoop：分布式存储主要适用于一次写入多次读取的场合（后续可能会增加其他数据处理方式），有数据块的概念(64M为一块，可配置)，将大文件分割为多个块进行存储；namenode内存中存放datanode数据索引，存储大小瓶颈来自namenode内存大小。</p>
+<p>ceph：支持块存储、文件存储、对象存储；与hadoop相似的是块存储，不过更接近于物理块的概念；ceph的块驱动基于RBD（介绍<a href="http://www.sebastien-han.fr/blog/2016/03/28/ceph-jewel-preview-ceph-rbd-mirroring" target="_blank" rel="noopener">http://www.sebastien-han.fr/blog/2016/03/28/ceph-jewel-preview-ceph-rbd-mirroring</a>）</p>
+<p>hadoop的存储也可以换成ceph的块存储不过性能可能会下降。</p>
+<p>elasticsearch：更接近于nosql的数据库，不过分布式存储也是切片保存数据（介绍<a href="https://kibana.logstash.es/content/elasticsearch/principle/" target="_blank" rel="noopener">https://kibana.logstash.es/content/elasticsearch/principle/</a>）；查询的时候还有hadoop-elasticsearch插件感觉上是将logstash替换为了hadoop（理解的不知道对不对）。</p>
+<h3 id="最后："><a href="#最后：" class="headerlink" title="最后："></a>最后：</h3><p>以上是工作中接触过的一些分布式存储的系统，要是想更深层次的理解一些知识还是要看一些理论行的东西如CAP，数据一致性存储等。</p>
+<p>以上有什么说的不对的请指正，大家共同学习。</p>
 
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/08/30/hello-world/" title="Hello World" itemprop="url">
-  
-    <h1 itemprop="name">Hello World</h1>
-    
-     
-           <p itemprop="description">用hexo和github搭建了一个静态博客，程序员惯用helloworld例程那就拿之前在知乎写简单写的一个回答放在这里吧，当作熟悉hexo博客和markdown语法了；后续会将开源中国上的和笔记软件记录的内容放上来。
-韩国灾难电影推荐最近在腾讯视频上看了部韩国电影《铁线虫入侵》</p>
         
-    
-    <time datetime="2017-08-30T12:19:34.000Z" itemprop="datePublished">2017-08-30</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/04/08/ELK排障记录/" title="ELK排障记录" itemprop="url">
-  
-    <h1 itemprop="name">ELK排障记录</h1>
-    
-     
-           <p itemprop="description">背景介绍：之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。
-公司用的审计接入日志的ELK架构图如下：
-
-架构基本属于主流的应用不过logs</p>
         
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/cloud/">cloud</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-    <time datetime="2017-04-08T08:33:52.000Z" itemprop="datePublished">2017-04-08</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/03/13/ELK日志系统搭建/" title="集中式日志监控系统" itemprop="url">
-  
-    <h1 itemprop="name">集中式日志监控系统</h1>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
     
-     
-           <p itemprop="description">集中式日志监控系统为什么需要日志管理系统日志，对于任何系统都是重要的组成，作为程序猿，定位问题，查看系统的健康运载情况，都需要通过查询日志进行分析。
-合理的软件架构往往都不会是单点的，即使在同一台应用服务器上，日志有不同的种类，nginx访问日志，操作系统，应用服务，业务逻辑等等</p>
+      <a href="/2017/09/02/感知机算法/" title="感知机算法" itemprop="url">感知机算法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-09-02T13:52:44.000Z" itemprop="datePublished"> 发表于 2017-09-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
         
+        <p>上节说了下Sigmoid函数做分类器，来做感知机学习(&lt;&lt;李航.统计学习方法&gt;&gt;)</p>
+<h3 id="什么是感知机"><a href="#什么是感知机" class="headerlink" title="什么是感知机"></a>什么是感知机</h3><p>感知机是二分类的线形分类模型，其输入为实例的特征向量，输出为实例的类别，取+1和-1二值。</p>
+<p>定义：假设输入空间（特征空间）是$x \subseteq R^n $,输出空间是$Y={+1,-1}$。输入$x \in \chi$表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y \in Y$实例的类别。由输入空间到输出空间的如下函数</p>
+<p>$$f(x) = sign(w.x+b)$$</p>
+<p>称为感知机。其中，w和b为感知机模型参数，$w \in R^n$叫做权值(weight)或权值向量(weight vector)，$b \in R$叫作偏置(bias)，w.x表示w和x的内积。sign是符号函数，即<br>$$<br>\begin{equation}<br>sign(x)=\begin{cases}<br>+1&amp; x\ge0\\<br>-1&amp; x&lt;0<br>\end{cases}<br>\end{equation}<br>$$</p>
+<h3 id="感知机算法"><a href="#感知机算法" class="headerlink" title="感知机算法"></a>感知机算法</h3><p>输入：训练数据集$T={(x_1,y_1),(x_2,y_2,)…(x_N,y_N)}$，其中$x_i \in \chi=R^n,y_i \in Y={-1,+1}$,i=1,2,…N;学习率$\eta(0&lt;\eta\leq1)$;</p>
+<p>输出：w，b；感知机模型$f(x)=sign(w*x + b)$.</p>
+<ol>
+<li>选取初值$w_0,b_0$</li>
+<li>在训练集中选取数据$(x_i,y_i)$</li>
+<li>如果$y_i(w*x_i)+b\leq0$</li>
+</ol>
+<p>$$<br>w \gets w+\eta y_{i}x_i\\<br>b \gets b+\eta y_i<br>$$</p>
+<ol>
+<li>转至（2），直至训练集中没有误分类点。</li>
+</ol>
+<p>解释：当一个实例点被误分类，即位于分离超平面的错误一侧时，则调整w,b的值，使分离超平面向该误分类点的一侧移动，以减少该误分类点与超平面间的距离，直至超平面越过该误分类点使其被正确分类。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/机器学习/">机器学习</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-    <time datetime="2017-03-12T16:00:00.000Z" itemprop="datePublished">2017-03-13</time>
-  </a>
-</section>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/09/01/Logistic回归和Sigmoid函数的理解/" title="Logistic回归和Sigmoid函数的理解" itemprop="url">Logistic回归和Sigmoid函数的理解</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-09-01T06:02:21.000Z" itemprop="datePublished"> 发表于 2017-09-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>看《机器学习实战》一书的Logistic回归记录下自己的理解，书上的例子用的是二维向量；该方法预测用的是Sigmoid函数（信号与系统的阶跃函数）。<br>$$<br>\sigma(z) = \cfrac{1}{1  +e^{-z}}<br>$$</p>
+<p>Sigmoid函数的输入记为z，下面公式用于确定z：<br>$$<br>z = w_{0}x_{0} + w_{1}x_{1} + w_{2}x_{2} + …+ w_{n}x_{n}<br>$$</p>
+<p>书上用的梯度上升算法确定系数w的数值。<br>$$<br>w = w + \alpha\delta f(w)<br>$$<br>该算法一直迭代找出w的系数，代码里是w（n，1），$\alpha = 0.001$ 循环500次得出系数矩阵。</p>
+<p>该函数二维上就是在一些散点中画一条线来划分出不同的特征点，我们要找W就是这条线的系数。</p>
+<p>书上给的给出的代码例程不能很好的运行，我做了简单的修改最后结果如下图：</p>
+<p>修改过的源码上传到我的GitHub了<a href="https://github.com/cealiu/machinelearn/tree/master/Ch05" target="_blank" rel="noopener">地址</a></p>
+<p><img src="/images/Logistic_1.png" alt=""></p>
+<p>因为这个解法要迭代全部数据计算量比较大，后面的优化都是为了减少计算量做的比较好理解了就不在这里说明了。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/机器学习/">机器学习</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/09/01/opentack节点扩容后热迁移异常/" title="opentack节点扩容后热迁移异常" itemprop="url">opentack节点扩容后热迁移异常</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-09-01T02:27:37.000Z" itemprop="datePublished"> 发表于 2017-09-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>扩容完成后旧计算节点上的虚机无法正常热迁移到新计算节点上</p>
+<p>故障原因为：新旧节点的qemu版本存在差异。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep kvm</span><br></pre></td></tr></table></figure>
+<p>qemu-kvm-2.5.1-1.1.el7.x86_64</p>
+<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
+<p>qemu-kvm-common-2.5.1-1.1.el7.x86_64</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep kvm</span><br></pre></td></tr></table></figure>
+<p>qemu-kvm-2.5.1-1.el7.es.x86_64</p>
+<p>libvirt-daemon-kvm-1.3.1-1.el7.centos.es.x86_64</p>
+<p>qemu-kvm-common-2.5.1-1.el7.es.x86_64</p>
+<p>openstack虚机热迁移节点要求（摘录三条）:</p>
+<ol>
+<li><p>源和目标节点的 CPU 类型要一致。</p>
+</li>
+<li><p>源和目标节点的 Libvirt 版本要一致。</p>
+</li>
+<li><p>源和目标节点能相互识别对方的主机名称，比如可以在 /etc/hosts 中加入对方的条目。</p>
+<p>迁移失败原因是第2条不满足。</p>
+<p>升级qumu版本后解决，blog留作记录。</p>
+</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/cloud/">cloud</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/08/31/python-发送邮件出现Connection-reset-by-peer解决/" title="python 发送邮件出现Connection reset by peer解决" itemprop="url">python 发送邮件出现Connection reset by peer解决</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-08-31T13:17:37.000Z" itemprop="datePublished"> 发表于 2017-08-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>​       利用python自带的stmp模块发送邮件成功，但是在添加附件后发送失败。运行代码后提示出现connection reset by peer错误，查看后台服务器发现邮件服务器直接关闭了链接。</p>
+<p>​       网上查找发现对于此问题的解释多是因为socket，web连接问题。后经排查后发现stmp协议使用的端口号是25：这里贴一段关于SMTP协议的介绍STMP协议介绍</p>
+<p>​      下面连接邮件服务器一定要写上邮件端口号25<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smtp.connect(smtpserver,<span class="string">"25"</span>)</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/python/">python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/08/30/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-08-30T12:19:34.000Z" itemprop="datePublished"> 发表于 2017-08-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>用hexo和github搭建了一个静态博客，程序员惯用helloworld例程那就拿之前在知乎写简单写的一个回答放在这里吧，当作熟悉hexo博客和markdown语法了；后续会将开源中国上的和笔记软件记录的内容放上来。</p>
+<h2 id="韩国灾难电影推荐"><a href="#韩国灾难电影推荐" class="headerlink" title="韩国灾难电影推荐"></a>韩国灾难电影推荐</h2><p>最近在腾讯视频上看了部韩国电影《铁线虫入侵》仔细回想发现之前看过不少类似韩国灾难电影这里一并推荐出来吧。</p>
+<h3 id="《铁线虫入侵》"><a href="#《铁线虫入侵》" class="headerlink" title="《铁线虫入侵》"></a>《铁线虫入侵》</h3><p>关于人体寄生虫的故事</p>
+<p><img src="/images/tiexianchongruqin.jpg" alt=""></p>
+<h3 id="《流感》"><a href="#《流感》" class="headerlink" title="《流感》"></a>《流感》</h3><p>讲传染病的故事，让人想起之前的非典不过电影比较夸张</p>
+<p><img src="/images/liugan.jpg" alt=""></p>
+<h3 id="《釜山行》"><a href="#《釜山行》" class="headerlink" title="《釜山行》"></a>《釜山行》</h3><p>号称亚洲首部丧尸片</p>
+<p><img src="/images/fushanxing.jpg" alt=""></p>
+<h3 id="《隧道》"><a href="#《隧道》" class="headerlink" title="《隧道》"></a>《隧道》</h3><p>类似井下求生的故事</p>
+<p><img src="/images/suidao.jpg" alt=""></p>
+<h3 id="《汉江怪物》"><a href="#《汉江怪物》" class="headerlink" title="《汉江怪物》"></a>《汉江怪物》</h3><p>大家一起打怪兽</p>
+<p><img src="/images/hanjiangguaiwu.jpg" alt=""></p>
+<h3 id="《潘多拉》"><a href="#《潘多拉》" class="headerlink" title="《潘多拉》"></a>《潘多拉》</h3><p>讲述核电站核泄漏的故事</p>
+<p><img src="/images/panduola.jpg" alt=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/影视/">影视</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/08/ELK排障记录/" title="ELK排障记录" itemprop="url">ELK排障记录</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-04-08T08:33:52.000Z" itemprop="datePublished"> 发表于 2017-04-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="背景介绍："><a href="#背景介绍：" class="headerlink" title="背景介绍："></a>背景介绍：</h2><p>之前公司安全团队用ELK来收集ngnix，tomcat，防火墙等的接入日志来做一些安全风控的告警操作，接手后有次报告说有个IP的机器一直没有产生日志出来，因此做了简单的排查顺便在熟悉下架构。</p>
+<p>公司用的审计接入日志的ELK架构图如下：</p>
+<p><img src="/images/ELK_structure.png" alt=""></p>
+<p>架构基本属于主流的应用不过logstash吐日志分别到Kafka集群和ossec集群，这样做的目的是Kafka用来削峰，ossec用来做安全分析发现问题后用告警平台发送相应信息到责任人。</p>
+<h2 id="处理："><a href="#处理：" class="headerlink" title="处理："></a>处理：</h2><p>因为是在kibana展示上发现部分日志未展示，所以我们先检查了所有logstash shipper节点的日志情况发现日志时间戳连续没问题，es集群里缺少相应时间的部分日志，之后ossec上查看发现有部分日志缺失判定是logstash吐日志出现问题。</p>
+<p>排查shipper各个节点时发现一台机器的logstash进程down了，重启后问题解决。</p>
+<p>建议后期监控logstash进程或者修改配置。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/日志/">日志</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/03/13/ELK日志系统搭建/" title="集中式日志监控系统" itemprop="url">集中式日志监控系统</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-03-12T16:00:00.000Z" itemprop="datePublished"> 发表于 2017-03-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="集中式日志监控系统"><a href="#集中式日志监控系统" class="headerlink" title="集中式日志监控系统"></a>集中式日志监控系统</h1><h2 id="为什么需要日志管理系统"><a href="#为什么需要日志管理系统" class="headerlink" title="为什么需要日志管理系统"></a>为什么需要日志管理系统</h2><p>日志，对于任何系统都是重要的组成，作为程序猿，定位问题，查看系统的健康运载情况，都需要通过查询日志进行分析。</p>
+<p>合理的软件架构往往都不会是单点的，即使在同一台应用服务器上，日志有不同的种类，nginx访问日志，操作系统，应用服务，业务逻辑等等。</p>
+<p>没有日志管理系统时，我们如何分析日志：</p>
+<p>tail，cat，grep，sed ，awk ，wc… 显然不可能登录到每一台应用服务器上敲命令。</p>
+<p>于是建立一套集中式的方法，把不同来源的数据集中整合到一起，方便归纳分析，就成为解决以上痛点的方式方法。</p>
+<h2 id="ELK-简介"><a href="#ELK-简介" class="headerlink" title="ELK 简介"></a>ELK 简介</h2><p>ELK 是 Elasticsearch、Logstash 和 Kibana 三种软件产品的首字母缩写。这三者都是开源软件，通常配合使用，而且又先后归于 Elastic.co 公司名下，所以被简称为 ELK Stack,目前ELK Stack 已经成为最流行的集中式日志解决方案。</p>
+<h3 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h3><p>Elasticsearch 是一个实时的分布式搜索和分析引擎，它可以用于全文搜索，结构化搜索以及分析。它是一个建立在全文搜索引擎 Apache Lucene 基础上的搜索引擎，使用 Java 语言编写</p>
+<p>主要特点</p>
+<ul>
+<li>实时分析</li>
+<li>分布式实时文件存储，并将每一个字段都编入索引</li>
+<li>文档导向，所有的对象全部是文档</li>
+<li>高可用性，易扩展，支持集群（Cluster）、分片和复制（Shards 和 Replicas）。</li>
+<li>支持 JSON</li>
+</ul>
+<h3 id="Logstash"><a href="#Logstash" class="headerlink" title="Logstash"></a>Logstash</h3><p>Logstash 是一个具有实时渠道能力的数据收集引擎。使用 JRuby 语言编写</p>
+<p>主要特点</p>
+<ul>
+<li>几乎可以访问任何数据</li>
+<li>可以和多种外部应用结合</li>
+<li>支持弹性扩展</li>
+</ul>
+<p>它由三个主要部分组成</p>
+<ul>
+<li>Shipper－发送日志数据</li>
+<li>Broker－收集数据，缺省内置 Redis</li>
+<li>Indexer－数据写入</li>
+</ul>
+<h3 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h3><p>Kibana 是一款基于 Apache 开源协议，为 Elasticsearch 提供分析和可视化的 Web 平台。它可以在 Elasticsearch 的索引中查找，交互数据，并生成各种维度的表图。</p>
+<p>Elastic.co 在2016-10-27 发布了 Elastic Stack 5.0 以后目前更新的步伐还是很快的，并且Elastic.co 对部分好用插件开始收费。</p>
+<h2 id="整体架构图"><a href="#整体架构图" class="headerlink" title="整体架构图"></a>整体架构图</h2><p>我在对ELK有了一定了解探索后，决定先使用 ELK 5 之前比较成熟的方案做一次搭建，尝试及进一步熟悉了解集中式日志监控系统，也方便应用到我们的测试及生成环境中。</p>
+<p>各模块版本</p>
+<ul>
+<li>elasticsearch-2.4.4</li>
+<li>logstash-2.3.4</li>
+<li>kibana-4.6.3</li>
+</ul>
+<p>另外还引入消息队列</p>
+<ul>
+<li>zookeeper-3.4.9</li>
+<li>kafka_2.11-0.10.2.0</li>
+</ul>
+<p>Logstash 作为日志收集端，比较消耗 CPU 和内存资源,从Elastic.co的官网找到了更好的替代方案：Beats组件</p>
+<p>Beats 作为日志shipper</p>
+<ul>
+<li>Packetbeat（网络数据）；</li>
+<li>Metricbeat（从系统和服务收集指标。从CPU到内存，Redis到Nginx等等，Metricbeat是一种轻量级的方式来发送系统和服务统计信息）；</li>
+<li>Filebeat（日志文件）；</li>
+<li>Winlogbeat（搜集 Windows 事件日志数据）。</li>
+<li>Heartbeat （使用主动探测监视服务的可用性。给出一个URL列表，Heartbeat询问一个简单的问题：你活着吗？Heartbeat将此信息和响应时间发送到弹性堆栈的其余部分进行进一步分析）</li>
+</ul>
+<p>Beats 将搜集到的数据发送到 Logstash，经 Logstash 解析、过滤后，将其发送到 Elasticsearch 存储</p>
+<p>相比 Logstash，Beats 所占系统的 CPU 和内存几乎可以忽略不计，这样解决了Logstash 在各服务器节点上占用系统资源高的问题。另外，Beats 和 Logstash 之间支持 SSL/TLS 加密传输，客户端和服务器双向认证，保证了通信安全。</p>
+<p><img src="https://ws1.sinaimg.cn/large/7108d6c2ly1fdj6dwfug4j20mo0jswft" alt=""></p>
+<h2 id="部署图"><a href="#部署图" class="headerlink" title="部署图"></a>部署图</h2><p><img src="https://ws1.sinaimg.cn/large/7108d6c2ly1fdfbfjchczj214g10iwpx" alt=""></p>
+<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>简单把部署过程及配置文件进行记录，方便后续回顾及优化</p>
+<h3 id="相关环境："><a href="#相关环境：" class="headerlink" title="相关环境："></a>相关环境：</h3><p>部署平台/环境：</p>
+<ul>
+<li>linux centos7.2</li>
+<li>jdk1.8.0_74</li>
+</ul>
+<h3 id="1-部署Elasticsearch集群"><a href="#1-部署Elasticsearch集群" class="headerlink" title="1.部署Elasticsearch集群"></a>1.部署Elasticsearch集群</h3><ul>
+<li><a href="https://www.elastic.co" target="_blank" rel="noopener">elastic 官网</a></li>
+</ul>
+<p>我从官网下载了 <code>elasticsearch-2.4.4.tar.gz</code></p>
+<h4 id="解压缩tar-tz"><a href="#解压缩tar-tz" class="headerlink" title="解压缩tar.tz"></a>解压缩tar.tz</h4><pre><code>cd /usr/local/elasticsearch
+tar -zxvf elasticsearch-2.4.4.tar.gz
+</code></pre><h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><pre><code>cd /usr/local/elasticsearch/elasticsearch-2.4.4/config
+vim elasticsearch.yml
+</code></pre><p>配置文件关键配置说明：</p>
+<p>部分配置已经在部署图中有所说明，这里再补充一些字段说明：</p>
+<pre><code> #配置es的集群名称，不同的集群用名字来区分，es会自动发现在同一网段下的es，配置成相同集群名字的各个节点形成一个集群。如果在同一网段下有多个集群，就可以用这个属性来区分不同的集群。
+cluster.name: blu-es 
+
+  #节点名称，es启动时会自动创建节点名称，自己配置下更方便维护吧
+node.name: es01
+
+ #是否作为主节点
+node.master: true
+
+#是否存储数据 
+node.data: false
+
+# 默认情况下，ElasticSearch使用0.0.0.0地址，并为http传输开启9200-9300端口，为节点到节点的通信开启9300-9400端口，可以自行设置IP地址
+network.host: 我设置为内网的IP了
+
+# 输监听定制端口
+http.port: 9200
+
+# 数据文件存储路径 此路径要创建出来
+path.data: /home/elk/data
+
+# 日志文件存储路径，此路径要创建出来
+path.logs: /var/log/elasticsearch
+</code></pre><h4 id="ES环境启动"><a href="#ES环境启动" class="headerlink" title="ES环境启动"></a>ES环境启动</h4><ul>
+<li><strong>elasticsearch默认是不支持用root用户来启动的。</strong></li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li>1.新建专门的用户用来管理elasticsearch，线上环境确实也不建议使用root用户</li>
+</ul>
+<ul>
+<li><p>2.启动时，追加 <code>Des.insecure.allow.root=true</code></p>
+<pre><code>在 `/usr/local/elasticsearch/elasticsearch-2.4.4/bin/elasticsearch` 中增加 ES_JAVA_OPTS=&quot;-Des.insecure.allow.root=true&quot;
+</code></pre></li>
+</ul>
+<p>启动ES环境</p>
+<pre><code>cd /usr/local/elasticsearch/elasticsearch-2.4.4/bin
+sh ./elasticsearch -d
+</code></pre><ul>
+<li>-d表示后台启动</li>
+</ul>
+<h4 id="Elasticsearch插件安装"><a href="#Elasticsearch插件安装" class="headerlink" title="Elasticsearch插件安装"></a>Elasticsearch插件安装</h4><p>在熟悉Elasticsearch过程中，了解到有许多不错的插件，这里把简单记录下插件的安装方法</p>
+<ul>
+<li>通过plugin 命令进行安装</li>
+</ul>
+<pre><code>#head 方便对es进行各种操作的客户端，可以查看各个索引的数据量以及分片的状态，
+/usr/share/elasticsearch/bin/plugin install mobz/elasticsearch-head
+#kopf es的管理工具，也提供了对ES集群操作的API。
+/usr/share/elasticsearch/bin/plugin install lmenezes/elasticsearch-kopf
+#bigdesk 监控es状态的插
+/usr/share/elasticsearch/bin/plugin install hlstudio/bigdesk
+</code></pre><ul>
+<li>还可以到github上查找插件的源码进行手动安装，安装细节不再赘述。</li>
+</ul>
+<ul>
+<li><p>访问插件： <code>/_plugin/插件名称</code></p>
+<pre><code>如访问head
+http://ip:9200/_plugin/head/
+</code></pre></li>
+</ul>
+<h4 id="Elasticsearch集群配置"><a href="#Elasticsearch集群配置" class="headerlink" title="Elasticsearch集群配置"></a>Elasticsearch集群配置</h4><p>主要是针对 <code>elasticsearch.yml</code>的配置，上述步骤已经对该文件部分关键字段说明，我在测试环境使用了3台做集群配置，通过head插件可以查看集群的状态：</p>
+<p><img src="https://ws1.sinaimg.cn/large/7108d6c2ly1fdl4okw4u7j20o60hrdks" alt=""></p>
+<p>ES 集群搭建OK~</p>
+<h3 id="2-部署kafka集群"><a href="#2-部署kafka集群" class="headerlink" title="2.部署kafka集群"></a>2.部署kafka集群</h3><p>Kafka集群是把状态保存在Zookeeper中的，首先要搭建Zookeeper集群。</p>
+<ul>
+<li>Zookeeper通过复制来实现高可用性，只要集群中半数以上的节点处于可用状态，它就能够保证服务继续。所以搭建集群的服务器台数应该为（2*n+1）台。</li>
+</ul>
+<h4 id="1-Zookeeper的安装配置"><a href="#1-Zookeeper的安装配置" class="headerlink" title="1) Zookeeper的安装配置"></a>1) Zookeeper的安装配置</h4><ul>
+<li><a href="https://zookeeper.apache.org" target="_blank" rel="noopener">zookeeper官网</a></li>
+</ul>
+<p>上述说明zookeeper集群必须保证3台以上的服务器，我这里搭建3台zookeeper服务器</p>
+<h5 id="创建myid文件"><a href="#创建myid文件" class="headerlink" title="创建myid文件"></a>创建myid文件</h5><ul>
+<li>myid 为服务器编号，用于标识服务器，这个值必须和dataDir目录下myid文件中的值保证一致</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>服务IP</th>
+<th>myid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.11.1.11</td>
+<td>11</td>
+<td></td>
+</tr>
+<tr>
+<td>10.11.1.12</td>
+<td>12</td>
+<td></td>
+</tr>
+<tr>
+<td>10.11.1.13</td>
+<td>13</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code>为每台机器创建myid文件
+# 10.11.1.11
+echo 11 &gt;/home/zookeeper/data/myid
+# 10.11.1.12
+echo 12 &gt;/home/zookeeper/data/myid
+# 10.11.1.13
+echo 13 &gt;/home/zookeeper/data/myid
+</code></pre><h5 id="我从官网下载了-zookeeper-3-4-9-tar-gz"><a href="#我从官网下载了-zookeeper-3-4-9-tar-gz" class="headerlink" title="我从官网下载了 zookeeper-3.4.9.tar.gz"></a>我从官网下载了 <code>zookeeper-3.4.9.tar.gz</code></h5><h5 id="解压缩tar-tz-1"><a href="#解压缩tar-tz-1" class="headerlink" title="解压缩tar.tz"></a>解压缩tar.tz</h5><pre><code>cd /usr/local/zookeeper
+tar -zxvf zookeeper-3.4.9.tar.gz
+</code></pre><h5 id="修改配置文件-1"><a href="#修改配置文件-1" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><pre><code>cd /usr/local/zookeeper/zookeeper-3.4.9/conf
+cp zoo_sample.cfg zoo.cfg
+vim zoo.cfg
+
+
+# 这个时间是作为Zk服务器之间或客户端与服务器之间维持心跳的时间间隔，每隔tickTime时间就会发送一个心跳；最小 的session过期时间为2倍tickTime 
+tickTime=2000
+# 此配置表示，允许follower(相对于Leaderer言的“客户端”)连接并同步到Leader的初始化连接时间，以tickTime为单位。当初始化连接时间超过该值，则表示连接失败。
+initLimit=10
+# 此配置项表示Leader与Follower之间发送消息时，请求和应答时间长度。如果follower在设置时间内不能与leader通信，那么此follower将会被丢弃。
+syncLimit=5
+# 数据的存放路径
+dataDir=/home/zookeeper/data
+# the port at which the clients will connect
+clientPort=2181
+# the maximum number of client connections.
+# 最大的并发连接数限制，设置为0或者不设置该参数，表示不进行连接数的限制。
+#maxClientCnxns=60
+
+# 集群模式的配置参数
+# 第一个端口是master和slave之间的通信端口，默认是2888，第二个端口是leader选举的端口，集群刚启动的时候选举或者leader挂掉之后进行新的选举的端口默认是3888
+server.11=10.11.1.11:2888:3888
+server.12=10.11.1.12:2888:3888
+server.13=10.11.1.13:2888:3888
+
+#
+# Be sure to read the maintenance section of the 
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to &quot;0&quot; to disable auto purge feature
+#autopurge.purgeInterval=1        
+</code></pre><p>每台的zoo.cfg的配置相同，复制到每一台即可</p>
+<h5 id="启动zookeeper环境"><a href="#启动zookeeper环境" class="headerlink" title="启动zookeeper环境"></a>启动zookeeper环境</h5><pre><code>在bin目录下执行
+nohup ./zkServer.sh start &amp;
+</code></pre><h5 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h5><pre><code>./zkServer.sh status
+Using config: /usr/local/zookeeper/zookeeper-3.4.9/bin/../conf/zoo.cfg
+Mode: follower 
+或者 Mode: leader 
+</code></pre><h4 id="2-kafka的安装配置"><a href="#2-kafka的安装配置" class="headerlink" title="2) kafka的安装配置"></a>2) kafka的安装配置</h4><ul>
+<li><a href="https://kafka.apache.org" target="_blank" rel="noopener">kafka官网</a></li>
+</ul>
+<h5 id="我从kafka的官网下载了-kafka-2-11-0-10-2-0-tgz"><a href="#我从kafka的官网下载了-kafka-2-11-0-10-2-0-tgz" class="headerlink" title="我从kafka的官网下载了 kafka_2.11-0.10.2.0.tgz"></a>我从kafka的官网下载了 <code>kafka_2.11-0.10.2.0.tgz</code></h5><h5 id="解压缩tar-tz-2"><a href="#解压缩tar-tz-2" class="headerlink" title="解压缩tar.tz"></a>解压缩tar.tz</h5><pre><code>cd /usr/local/kafka
+tar -zxvf kafka_2.11-0.10.2.0.tgz
+</code></pre><h5 id="修改配置文件-2"><a href="#修改配置文件-2" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><pre><code>vim /usr/local/kafka/kafka_2.11-0.10.2.0/config/server.properties
+</code></pre><p>配置文件主要参数说明</p>
+<pre><code>#当前机器在集群中的唯一标识，和zookeeper的myid性质一样
+broker.id=1  
+
+#当前kafka对外提供服务的端口默认是9092
+port=9092 #不配置的话，默认为9092
+
+#这个是borker进行网络处理的线程数
+num.network.threads=3 
+
+#这个是borker进行I/O处理的线程数
+num.io.threads=8 
+
+#消息存放的目录，这个目录可以配置为“，”逗号分割的表达式，上面的num.io.threads要大于这个目录的个数这个目录，如果配置多个目录，新创建的topic他把消息持久化的地方是，当前以逗号分割的目录中，那个分区数最少就放那一个
+log.dirs=/usr/local/kafka/kafka_2.11-0.10.2.0/logs 
+
+
+#发送缓冲区buffer大小，数据不是一下子就发送的，先回存储到缓冲区了到达一定的大小后在发送，能提高性能
+socket.send.buffer.bytes=102400 
+
+
+#kafka接收缓冲区大小，当数据到达一定大小后在序列化到磁盘
+socket.receive.buffer.bytes=102400 
+
+#这个参数是向kafka请求消息或者向kafka发送消息的请请求的最大数，这个值不能超过java的堆栈大小
+socket.request.max.bytes=104857600 
+
+#默认的分区数，一个topic默认1个分区数
+num.partitions=6
+
+#默认消息的最大持久化时间（小时）
+log.retention.hours=60 
+
+#这个参数是：因为kafka的消息是以追加的形式落地到文件，当超过这个值的时候，kafka会新起一个文件
+log.segment.bytes=1073741824
+
+#每隔300000毫秒去检查上面配置的log失效时间（log.retention.hours=168 ），到目录查看是否有过期的消息如果有，删除
+log.retention.check.interval.ms=300000 
+
+#设置zookeeper的连接端口
+zookeeper.connect=10.11.1.11:2181,10.11.1.12:2181,10.11.1.13:2181
+
+指定客户端连接zookeeper的最大超时时间
+zookeeper.connection.timeout.ms=6000
+</code></pre><ul>
+<li>另外2台的配置只是需要修改broker.id即可，3台服务器保证broker.id不相同。</li>
+</ul>
+<h5 id="配置主机名对应IP的解析"><a href="#配置主机名对应IP的解析" class="headerlink" title="配置主机名对应IP的解析"></a>配置主机名对应IP的解析</h5><p><strong>3台配置相同</strong></p>
+<pre><code>vim /etc/hosts
+
+10.11.1.11 server1
+10.11.1.12 server2
+10.11.1.13 server3
+</code></pre><h5 id="启动kafka环境"><a href="#启动kafka环境" class="headerlink" title="启动kafka环境"></a>启动kafka环境</h5><pre><code>nohup ./kafka-server-start.sh ../config/server.properties &amp;
+</code></pre><p>kafka集群搭建OK</p>
+<h3 id="3-部署logstash服务"><a href="#3-部署logstash服务" class="headerlink" title="3.部署logstash服务"></a>3.部署logstash服务</h3><p>在此架构中，logstash担任两种角色，也处于不同的层次</p>
+<ul>
+<li>对日志进行格式化等处理，对接转存到kafka集群中。</li>
+<li>作为（消费者）从kafka集群中拉取日志消息。同步到ES集群。</li>
+</ul>
+<h4 id="部署日志处理层的logstash"><a href="#部署日志处理层的logstash" class="headerlink" title="部署日志处理层的logstash"></a>部署日志处理层的logstash</h4><p>这里用到了 <code>GeoLite</code>, 可用于转换IP，变成地理位置信息。</p>
+<ul>
+<li><a href="https://dev.maxmind.com/" target="_blank" rel="noopener">GeoLite官网</a></li>
+</ul>
+<h5 id="从GeoLite官网下载-GeoLiteCity-dat-gz"><a href="#从GeoLite官网下载-GeoLiteCity-dat-gz" class="headerlink" title="从GeoLite官网下载 GeoLiteCity.dat.gz"></a>从GeoLite官网下载 <code>GeoLiteCity.dat.gz</code></h5><h5 id="从elastic官网下载-logstash-2-3-4-tar-gz"><a href="#从elastic官网下载-logstash-2-3-4-tar-gz" class="headerlink" title="从elastic官网下载 logstash-2.3.4.tar.gz"></a>从elastic官网下载 <code>logstash-2.3.4.tar.gz</code></h5><h5 id="解压logstash-2-3-4-tar-gz"><a href="#解压logstash-2-3-4-tar-gz" class="headerlink" title="解压logstash-2.3.4.tar.gz"></a>解压logstash-2.3.4.tar.gz</h5><pre><code>cd /usr/local/logstash
+tar -zxvf logstash-2.3.4.tar.gz
+</code></pre><h5 id="解压GeoLiteCity-dat-gz"><a href="#解压GeoLiteCity-dat-gz" class="headerlink" title="解压GeoLiteCity.dat.gz"></a>解压GeoLiteCity.dat.gz</h5><pre><code>cd /usr/local/logstash
+tar -zxvf GeoLiteCity.dat.gz
+</code></pre><h5 id="编辑获取日志并输出到kafka的配置文件"><a href="#编辑获取日志并输出到kafka的配置文件" class="headerlink" title="编辑获取日志并输出到kafka的配置文件"></a>编辑获取日志并输出到kafka的配置文件</h5><p><code>vim logstash_in_kafka.conf</code></p>
+<pre><code># 用于接收Beats组件传送的日志信息
+input {
+    beats {
+    port =&gt; 5044
+    codec =&gt; &quot;json&quot;
+}
+}
+
+# 过滤日志内容，这里判断nginx日志时，增加ip转换的内容  
+filter {
+    if [type] == &quot;nginxacclog&quot; {
+
+    geoip {
+        source =&gt; &quot;clientip&quot;
+        target =&gt; &quot;geoip&quot;
+        database =&gt; &quot;/usr/local/logstash/GeoLiteCity.dat&quot;
+        add_field =&gt; [ &quot;[geoip][coordinates]&quot;,&quot;%{[geoip][longitude]}&quot; ]
+        add_field =&gt; [ &quot;[geoip][coordinates]&quot;,&quot;%{[geoip][latitude]}&quot; ]
+}
+
+    mutate {
+        convert =&gt; [ &quot;[geoip][coordinates]&quot;,&quot;float&quot; ]
+
+}
+}
+}
+
+# 输出到kafka中
+output {
+  kafka {
+    workers =&gt; 2
+    bootstrap_servers =&gt; &quot;10.11.1.11:9092,10.11.1.12:9092,10.11.1.13:9092&quot;
+    topic_id =&gt; &quot;peiyinlog&quot;
+}
+}
+</code></pre><ul>
+<li>workers：用于写入时的工作线程</li>
+<li>bootstrap_servers：指定可用的kafka broker实例列表</li>
+<li>topic_id：指定topic名称，可以在写入前手动在broker创建定义好分片数和副本数，也可以不提前创建，那么在logstash写入时会自动创建</li>
+<li>topic，分片数和副本数则默认为broker配置文件中设置的。</li>
+</ul>
+<h5 id="启动logstash"><a href="#启动logstash" class="headerlink" title="启动logstash"></a>启动logstash</h5><pre><code>nohup ./logstash agent -f logstash_in_kafka.conf &amp;
+</code></pre><h4 id="部署作为consumer的logstash"><a href="#部署作为consumer的logstash" class="headerlink" title="部署作为consumer的logstash"></a>部署作为consumer的logstash</h4><p>同样解压logstash-2.3.4.tar.gz，只是这里的配置文件不同</p>
+<h5 id="编辑从kafka获取日志内容，传输到ES集群的配置文件"><a href="#编辑从kafka获取日志内容，传输到ES集群的配置文件" class="headerlink" title="编辑从kafka获取日志内容，传输到ES集群的配置文件"></a>编辑从kafka获取日志内容，传输到ES集群的配置文件</h5><p><code>vim kafka_to_es.conf</code></p>
+<pre><code># 从kafka获取日志内容
+input{
+    kafka {
+        zk_connect =&gt; &quot;10.11.1.11:2181,10.11.1.12:2181,10.11.1.13:2181&quot;
+        group_id =&gt; &quot;logstash&quot;
+        topic_id =&gt; &quot;peiyinlog&quot;
+        reset_beginning =&gt; false
+        consumer_threads =&gt; 50
+        decorate_events =&gt; true
+
+}
+
+}
+
+# 删除一些不需要的字段  
+filter {
+  if [type] == &quot;nginxacclog&quot; {
+
+     mutate {
+     remove_field =&gt; [&quot;slbip&quot;,&quot;kafka&quot;,&quot;domain&quot;,&quot;serverip&quot;,&quot;url&quot;,&quot;@version&quot;,&quot;offset&quot;,&quot;input_type&quot;,&quot;count&quot;,&quot;source&quot;,&quot;fields&quot;,&quot;beat.hostname&quot;,&quot;host&quot;,&quot;tags&quot;]
+    }
+}
+
+}
+
+# 输出日志到ES集群
+output {
+    if [type] == &quot;nginxacclog&quot; {
+       # stdout {codec =&gt; rubydebug }
+        elasticsearch {
+            hosts =&gt; [&quot;x.x.x.x:9200&quot;,&quot;x.x.x.x:9200&quot;]
+            index =&gt; &quot;logstash-nginxacclog-%{+YYYY.MM.dd}&quot;
+            manage_template =&gt; true
+            flush_size =&gt; 50000
+            idle_flush_time =&gt; 10
+            workers =&gt; 2
+}
+
+}
+    if [type] == &quot;messages&quot; {
+        elasticsearch {
+            hosts =&gt; [&quot;x.x.x.x:9200&quot;,&quot;x.x.x.x:9200&quot;]
+            index =&gt; &quot;logstash-messages-%{+YYYY.MM.dd}&quot;
+            manage_template =&gt; true
+            flush_size =&gt; 50000
+            idle_flush_time =&gt; 30
+            workers =&gt; 1
+}
+
+}
+
+}
+</code></pre><h5 id="启动logstash-1"><a href="#启动logstash-1" class="headerlink" title="启动logstash"></a>启动logstash</h5><pre><code>nohup ./logstash agent -f kafka_to_es.conf &amp;
+</code></pre><h3 id="4-部署日志采集程序Filebeat"><a href="#4-部署日志采集程序Filebeat" class="headerlink" title="4.部署日志采集程序Filebeat"></a>4.部署日志采集程序Filebeat</h3><p>上述已说明使用beats组件作为日志采集程序，这里只使用了<code>filebeat</code>组件收集我们测试环境上的nginx日志centos操作系统日志，并传输到logstash中。</p>
+<h4 id="从elastic官网下载-filebeat-1-2-3-x86-64-tar-gz"><a href="#从elastic官网下载-filebeat-1-2-3-x86-64-tar-gz" class="headerlink" title="从elastic官网下载 filebeat-1.2.3-x86_64.tar.gz"></a>从elastic官网下载 <code>filebeat-1.2.3-x86_64.tar.gz</code></h4><h4 id="解压logstash-2-3-4-tar-gz-1"><a href="#解压logstash-2-3-4-tar-gz-1" class="headerlink" title="解压logstash-2.3.4.tar.gz"></a>解压logstash-2.3.4.tar.gz</h4><pre><code>cd /usr/local/filebeat
+tar -zxvf ogstash-2.3.4.tar.gz
+</code></pre><h4 id="配置filebeat-yml-文件"><a href="#配置filebeat-yml-文件" class="headerlink" title="配置filebeat.yml 文件"></a>配置filebeat.yml 文件</h4><pre><code>################### Filebeat Configuration Example #########################
+
+############################# Filebeat ######################################
+
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /var/log/messages
+
+      input_type: log
+
+      document_type: messages
+
+    -
+      paths:
+        - /var/log/nginx/access.log
+
+      input_type: log
+
+      document_type: nginxacclog
+
+
+      multiline: 
+          pattern: &apos;^[[:space:]]&apos;
+          negate: true
+          match: after
+
+  registry_file: /var/lib/filebeat/registry
+
+
+############################# Output ##########################################
+
+output:
+  logstash: 
+    hosts: [&quot;x.x.x.x:5044&quot;,&quot;x.x.x.x:5044&quot;]
+
+
+############################# Shipper #########################################
+
+shipper: 
+  name: &quot;blu_test&quot;
+
+
+############################# Logging ######################################### 
+
+logging:  
+  files:
+    rotateeverybytes: 10485760 # = 10MB
+</code></pre><h4 id="这里把nginx的access日志源改为json格式，方便后续处理"><a href="#这里把nginx的access日志源改为json格式，方便后续处理" class="headerlink" title="这里把nginx的access日志源改为json格式，方便后续处理"></a>这里把nginx的access日志源改为json格式，方便后续处理</h4><pre><code>log_format json &apos;{ &quot;@timestamp&quot;:&quot;$time_local&quot;,&apos;
+         &apos;&quot;clientip&quot;:&quot;$remote_addr&quot;,&apos;
+         &apos;&quot;remote_user&quot;: &quot;$remote_user&quot;, &apos;
+         &apos;&quot;http_x_forwarded_for&quot;:&quot;$http_x_forwarded_for&quot;,&apos;
+         &apos;&quot;serverip&quot;:&quot;$server_addr&quot;,&apos;
+         &apos;&quot;size&quot;:$body_bytes_sent,&apos;
+         &apos;&quot;request_time&quot;:$request_time,&apos;
+         &apos;&quot;domain&quot;:&quot;$host&quot;,&apos;
+         &apos;&quot;request&quot;: &quot;$request&quot;, &apos;
+         &apos;&quot;method&quot;:&quot;$request_method&quot;,&apos;
+         &apos;&quot;requesturi&quot;:&quot;$request_uri&quot;,&apos;
+         &apos;&quot;url&quot;:&quot;$uri&quot;,&apos;
+         &apos;&quot;appversion&quot;:&quot;$HTTP_APP_VERSION&quot;,&apos;
+         &apos;&quot;referer&quot;:&quot;$http_referer&quot;,&apos;
+         &apos;&quot;agent&quot;:&quot;$http_user_agent&quot;,&apos;
+         &apos;&quot;status&quot;:&quot;$status&quot;}&apos;;
+</code></pre><h4 id="重启nginx服务"><a href="#重启nginx服务" class="headerlink" title="重启nginx服务"></a>重启nginx服务</h4><pre><code>nginx -s reload
+</code></pre><h4 id="启动-filebeat"><a href="#启动-filebeat" class="headerlink" title="启动 filebeat"></a>启动 filebeat</h4><pre><code>cd /usr/local/filebeat/filebeat-1.2.3-x86_64
+nohup ./filebeat start &amp;
+</code></pre><h3 id="5-安装配置kibana"><a href="#5-安装配置kibana" class="headerlink" title="5.安装配置kibana"></a>5.安装配置kibana</h3><h4 id="安装kibana"><a href="#安装kibana" class="headerlink" title="安装kibana"></a>安装kibana</h4><p>kibana最早是为了代替logstash-web 用来查看 ES 中的数据，用PHP编写的web</p>
+<p>k2 是k1作者使用ruby重写</p>
+<p>K3 是纯前端框架搭建，使用angularjs 编写</p>
+<p>K4 是使用node.js编写</p>
+<p>目前最新的版本已经是K5 </p>
+<p>本次部署依然选用了比较成熟的k4,安装也相对比较简单</p>
+<h5 id="从elastic官网下载-kibana-4-6-3-linux-x86-64-tar-gz"><a href="#从elastic官网下载-kibana-4-6-3-linux-x86-64-tar-gz" class="headerlink" title="从elastic官网下载 kibana-4.6.3-linux-x86_64.tar.gz"></a>从elastic官网下载 <code>kibana-4.6.3-linux-x86_64.tar.gz</code></h5><h5 id="解压kibana-4-6-3-linux-x86-64-tar-gz"><a href="#解压kibana-4-6-3-linux-x86-64-tar-gz" class="headerlink" title="解压kibana-4.6.3-linux-x86_64.tar.gz"></a>解压kibana-4.6.3-linux-x86_64.tar.gz</h5><pre><code>cd /usr/local/kibana
+tar -zxvf kibana-4.6.3-linux-x86_64.tar.gz
+</code></pre><h5 id="配置kibana-yml-文件"><a href="#配置kibana-yml-文件" class="headerlink" title="配置kibana.yml 文件"></a>配置kibana.yml 文件</h5><pre><code>cd /usr/local/kibana/kibana-4.6.3-linux-x86_64/config
+vim kibana.yml
+</code></pre><p>一堆参数，只需修改这3个，即可启动</p>
+<pre><code># Kibana is served by a back end server. This controls which port to use.
+server.port: 5601
+
+# The host to bind the server to.
+server.host: &quot;0.0.0.0&quot;
+
+# The Elasticsearch instance to use for all your queries.
+elasticsearch.url: &quot;http://IP:9200&quot;
+</code></pre><h5 id="启动kibana"><a href="#启动kibana" class="headerlink" title="启动kibana"></a>启动kibana</h5><pre><code>nohup ./kibana &amp;
+</code></pre><h4 id="访问kibana，配置日志索引"><a href="#访问kibana，配置日志索引" class="headerlink" title="访问kibana，配置日志索引"></a>访问kibana，配置日志索引</h4><ul>
+<li>访问地址： <code>http://IP:5601</code></li>
+</ul>
+<p>默认情况下，Kibana 认为你要访问的是通过 Logstash 导入 Elasticsearch 的数据。这时候你可以用默认的 logstash-<em> 作为你的 index pattern。通配符(</em>) 匹配索引名中零到多个字符。如果你的 Elasticsearch 索引有其他命名约定，输入合适的 pattern。pattern 也开始是最简单的单个索引的名字。</p>
+<p><img src="https://ws1.sinaimg.cn/mw690/7108d6c2ly1fdlec8xlpfj210z0hbtae" alt=""></p>
+<p>如果一个新索引是定期生成，而且索引名中带有时间戳，选择 <code>Use event times to create index names</code> 选项，然后再选择 <code>Index pattern interval</code>。这可以提高搜索性能，Kibana 会至搜索你指定的时间范围内的索引。在你用 Logstash 输出数据给 Elasticsearch 的情况下尤其有效。</p>
+<p>点击 <code>Create</code> 添加 <code>index pattern</code>。第一个被添加的 pattern 会自动被设置为默认值。如果你有多个 index pattern 的时候，你可以在 Settings &gt; Indices 里设置具体哪个是默认值。</p>
+<p><img src="https://ws1.sinaimg.cn/mw690/7108d6c2ly1fdleezdoyrj21070pgq78" alt=""></p>
+<h4 id="kibana简单介绍"><a href="#kibana简单介绍" class="headerlink" title="kibana简单介绍"></a>kibana简单介绍</h4><p>简单介绍下kibana的三个模块</p>
+<h5 id="Discover"><a href="#Discover" class="headerlink" title="Discover"></a>Discover</h5><p>可以从 <strong><code>Discover</code></strong> 页面以交互方式探索日志数据，可以过滤搜索结果以及查看文档数据。 还可以查看与搜索查询匹配的文档数，并获取字段值统计信息，可以配置时间字段，则日志随时间的分布将显示在页面顶部的直方图中。</p>
+<p><img src="https://ws1.sinaimg.cn/large/7108d6c2ly1fdlh5o8arrj218m0ekwgf" alt=""></p>
+<h5 id="Visualize"><a href="#Visualize" class="headerlink" title="Visualize"></a>Visualize</h5><p><strong><code>Visualize</code></strong> 用来构建显示相关可视化的仪表板.Kibana可视化基于Elasticsearch查询。 通过使用一系列Elasticsearch聚合来提取和处理数据</p>
+<p><img src="https://ws1.sinaimg.cn/large/7108d6c2ly1fdlh5z4x7ej210p0k6tb6" alt=""></p>
+<h5 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h5><p>Kibana仪表板显示已保存的可视化对象的集合。 可以根据需要安排和调整可视化对象，并保存仪表板，以便重新加载和共享。</p>
+<p>我在Visualize中制作了一些简单的统计，绘制了一个Dashboard</p>
+<p><img src="https://ws1.sinaimg.cn/large/7108d6c2ly1fdlhexd03kj21f30qzqfa" alt=""></p>
+<p>目前对Kibana及ES尚未深入了解，后续有一定掌握之后再做总结分享。</p>
+<h3 id="后续优化："><a href="#后续优化：" class="headerlink" title="后续优化："></a>后续优化：</h3><ul>
+<li>部署的的相关应用统一管理等</li>
+<li>ES 调优</li>
+<li>kafka集群调优</li>
+<li>kibana扩展</li>
+<li>kibana接入到nginx中</li>
+<li>等等</li>
+</ul>
+<p>参考资料：</p>
+<ul>
+<li><p><a href="https://www.gitbook.com/book/chenryn/elk-stack-guide-cn/details" target="_blank" rel="noopener">elk-stack-guide-cn</a></p>
+</li>
+<li><p><a href="https://www.elastic.co" target="_blank" rel="noopener">elastic.co</a></p>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/杂记/">杂记</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/日志/">日志</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
 
 
 
@@ -295,7 +1292,7 @@ libvirt-daemon-kvm-1.3.1-1.el7.centos.</p>
 
 
 
-  <nav id="page-nav" class="clearfix unexpand">
+  <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
@@ -307,12 +1304,6 @@ libvirt-daemon-kvm-1.3.1-1.el7.centos.</p>
 <aside class="clearfix">
 
   
-<div class="github-card">
-<p class="asidetitle">Github 名片</p>
-<div class="github-card" data-github="cealiu" data-theme="medium"></div>
-<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js"></script>
-</div>
-
 
 
   
@@ -375,7 +1366,13 @@ libvirt-daemon-kvm-1.3.1-1.el7.centos.</p>
         
           <li>
             
-            	<a href="https://www.oschina.net" target="_blank" title="开源社区">开源中国</a>
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
             
           </li>
         
@@ -391,7 +1388,7 @@ libvirt-daemon-kvm-1.3.1-1.el7.centos.</p>
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
 </div>
 
 
@@ -407,16 +1404,13 @@ libvirt-daemon-kvm-1.3.1-1.el7.centos.</p>
 	
 	
 	<section class="info">
-		<p> Hello World <br>
-			This is my blog</p>
+		<p> Hello ,I&#39;m Larry Page in Google. <br>
+			This is my blog,believe it or not.</p>
 	</section>
 	 
 	<div class="social-font">
 		
-		<a href="http://weibo.com/3313244784" target="_blank" class="icon-weibo" title="微博"></a>
-		
-		
-		<a href="https://github.com/cealiu" target="_blank" class="icon-github" title="github"></a>
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
 		
 		
 		
@@ -424,11 +1418,8 @@ libvirt-daemon-kvm-1.3.1-1.el7.centos.</p>
 		
 		
 		
-		<a href="http://www.zhihu.com/people/ce-ce-19-73/answers" target="_blank" class="icon-zhihu" title="知乎"></a>
 		
 		
-		
-		<a href="mailto:liucemail@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
 		
 	</div>
 			
@@ -554,35 +1545,6 @@ var _hmt = _hmt || [];
 
 <!-- MathJax Begin -->
 <!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 <!-- MathJax End -->

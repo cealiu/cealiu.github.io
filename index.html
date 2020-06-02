@@ -51,11 +51,11 @@
 				<ul>
 					<ul>
 					 
-						<li><a href="/">主页</a></li>
+						<li><a href="/">Home</a></li>
 					
-						<li><a href="/archives">归档</a></li>
+						<li><a href="/archives">Archives</a></li>
 					
-						<li><a href="/about">关于</a></li>
+						<li><a href="/about">About</a></li>
 					
 					<li>
  					
@@ -73,219 +73,726 @@
     <div id="container">
       <div id="main">
 
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2019/09/21/web控制树莓派led/" title="web控制树莓派led" itemprop="url">
-  
-    <h1 itemprop="name">web控制树莓派led</h1>
+   
     
-     
-           <p itemprop="description">​      最近树莓派4b发布女朋友买了个4g版本当七夕礼物送我，买来随便研究了下硕士的时候做嵌入式所以对硬件底层比较了解就先拿来做了点灯的小程序试试效果。效果就是通过网页web点击button控制树莓派连接的led灯的亮灭，用的技术栈有python、vue、django等。
-</p>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/09/21/web控制树莓派led/" title="web控制树莓派led" itemprop="url">web控制树莓派led</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2019-09-21T02:44:09.000Z" itemprop="datePublished"> 发表于 2019-09-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
         
-    
-    <time datetime="2019-09-21T02:44:09.000Z" itemprop="datePublished">2019-09-21</time>
-  </a>
-</section>
+        <p>​      最近树莓派4b发布女朋友买了个4g版本当七夕礼物送我，买来随便研究了下硕士的时候做嵌入式所以对硬件底层比较了解就先拿来做了点灯的小程序试试效果。效果就是通过网页web点击button控制树莓派连接的led灯的亮灭，用的技术栈有python、vue、django等。</p>
+<h3 id="硬件连接"><a href="#硬件连接" class="headerlink" title="硬件连接"></a>硬件连接</h3><p>要通过树莓派引脚(GPIO)控制led，需要做如下连接:</p>
+<p><img src="/images/led.png" alt=""></p>
+<p>上图是网上找的一个大概示意图，led的两个引脚一端接地另外一端接GPIO，也可以一端接电源另外一端接GPIO引脚，别管怎么接主要目的就是通过控制GPIO输出高低电平来实现led的亮灭。led需要的电流比较小，所以要加电阻控制下，如果要通过GPIO控制大电流或者电压设备就需要到三极管或者继电器等元器件。  </p>
+<p>树莓派专门提供了python包RPi.GPIO来控制GPIO引脚，如果复杂功能或者驱动的话需要用到C语言的包，这个大家可以网上自己找下资料。</p>
+<h3 id="web搭建"><a href="#web搭建" class="headerlink" title="web搭建"></a>web搭建</h3><p>web后台使用Django的rest framework，前端使用vue框架。</p>
+<ol>
+<li><p>Django后台搭建：</p>
+<p>Python3可以直接创建虚拟环境，使用以下命令创建：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir led</span><br><span class="line">cd led</span><br><span class="line">python -m venv venv</span><br><span class="line">pip install django</span><br><span class="line">pip install djangorestframework</span><br><span class="line">...</span><br><span class="line">pip install RPi.GPIO</span><br></pre></td></tr></table></figure>
+<p>Django rest framework (安装文档)[<a href="https://www.django-rest-framework.org]，另外要注意安装RPi.GPIO要在树莓派上安装在本地电脑会报错。" target="_blank" rel="noopener">https://www.django-rest-framework.org]，另外要注意安装RPi.GPIO要在树莓派上安装在本地电脑会报错。</a></p>
+</li>
+<li><p>vue前端搭建：</p>
+<p>前端使用的是vue用的iview框架，这部分网上内容挺多的以下是官方的安装文档，安装之前请先装node环境：</p>
+<p>(vue安装)[<a href="https://cn.vuejs.org/v2/guide/installation.html#NPM" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/installation.html#NPM</a>]</p>
+<p>(iview安装)[<a href="https://www.iviewui.com/docs/guide/start#SYZQ" target="_blank" rel="noopener">https://www.iviewui.com/docs/guide/start#SYZQ</a>]</p>
+</li>
+</ol>
+<p>###部署</p>
+<ol>
+<li><p>以上都完成了，需要部署在树莓派上，我在树莓派上安装了nginx做转发：</p>
+<p>ssh到树莓派上安装nginx，如果安装报网络错误要更换下apt源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装完成后将前后台项目拷贝到树莓派上，我的目录是：</p>
+<p>后台Django: /home/pi/test/led</p>
+<p>前端vue: /home/pi/dist</p>
+</li>
+<li><p>配置nginx转发，找到nginx的配置目录，增加led.conf文件，并添加如下内入</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">80</span>;<span class="comment">#默认端口是80，如果端口没被占用可以不用修改</span></span><br><span class="line">        <span class="attribute">server_name</span>  <span class="number">192.168.2.167</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#charset koi8-r;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#access_log  logs/host.access.log  main;</span></span><br><span class="line">        <span class="attribute">root</span>        /home/pi/dist;<span class="comment">#vue项目的打包后的dist</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">            <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ <span class="variable">@router</span>;<span class="comment">#需要指向下面的@router否则会出现vue的路由在nginx中刷新出现404</span></span><br><span class="line">            <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">#对应上面的@router，主要原因是路由的路径资源并不是一个真实的路径，所以无法找到具体的文件</span></span><br><span class="line">        <span class="comment">#因此需要rewrite到index.html中，然后交给路由在处理请求资源</span></span><br><span class="line">        <span class="attribute">location</span> <span class="variable">@router</span> &#123;</span><br><span class="line">            <span class="attribute">rewrite</span><span class="regexp"> ^.*$</span> /index.html <span class="literal">last</span>;</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动：</p>
+<p>启动nginx: sudo /etc/init.d/nginx start</p>
+<p>启动django: python3 manage.py runserver 0.0.0.0:8000 &amp;</p>
+</li>
+<li><p>Django部署也可以使用nginx+uwsgi方式，这里我就没在弄了，大家可以去网上搜集下资料</p>
+</li>
+<li><p>实现效果要求网页端和树莓派无线在一个局域网内，想要外网连接实现的话，需要有个域名外加上内网穿透工具实现，代码里都是用ip地址指向的运行的时候要改为实际ip或域名</p>
+</li>
+</ol>
+<h3 id="源码与效果"><a href="#源码与效果" class="headerlink" title="源码与效果"></a>源码与效果</h3><ol>
+<li>源码我上传到了我的github上，仓库地址是：<a href="https://github.com/cealiu/led" target="_blank" rel="noopener">led</a></li>
+<li>演示地址: <a href="https://www.bilibili.com/video/av68470271/" target="_blank" rel="noopener">B站</a></li>
+</ol>
 
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2018/09/05/风控规则系统开发/" title="风控规则系统开发" itemprop="url">
-  
-    <h1 itemprop="name">风控规则系统开发</h1>
-    
-     
-           <p itemprop="description">背景公司需要开发风控系统之前没有接触过这一块，在网上查询好多资料或得的一些思路，开发的过程也走了些弯路踩了不少坑现在记录下来。
-对于风控来说就是提前预防风险降低安全事故的发生，并且能及早发现和封堵；在前期的探索阶段都是利用日志或者离线数据发现规律，在做下面的实时风控系统之前，前期</p>
         
-    
-    <time datetime="2018-09-05T13:30:22.000Z" itemprop="datePublished">2018-09-05</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2018/05/14/python-requests-post丢失数据/" title="python requests post丢失数据" itemprop="url">
-  
-    <h1 itemprop="name">python requests post丢失数据</h1>
-    
-     
-           <p itemprop="description">描述这周遇到一个bug使用python的requests lib单独运行脚本post数据就成功，结果使用django调用该函数就出问题。在后台打印log发现django调用的时候request.body丢失了部分数据。
-代码类似：
-12345body=dict()body[&#39;to</p>
         
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/web-python/">web, python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-    <time datetime="2018-05-14T12:58:28.000Z" itemprop="datePublished">2018-05-14</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2018/05/13/朴素贝叶斯/" title="朴素贝叶斯" itemprop="url">
-  
-    <h1 itemprop="name">朴素贝叶斯</h1>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
     
-     
-           <p itemprop="description">基本方法贝叶斯公式：$P(A|B)=P(AB)/P(B)$
-$P(A|B)$表示在B条件下A事件发生的概率，其中$P(A)$表示先验概率，P(A|B)代表后验概率即在B事件发生之后，我们对A事件概率的重新评估，这使得预估概率更接近真实概率。</p>
+      <a href="/2018/09/05/风控规则系统开发/" title="风控规则系统开发" itemprop="url">风控规则系统开发</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-09-05T13:30:22.000Z" itemprop="datePublished"> 发表于 2018-09-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
         
-    
-    <time datetime="2018-05-13T10:24:22.000Z" itemprop="datePublished">2018-05-13</time>
-  </a>
-</section>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司需要开发风控系统之前没有接触过这一块，在网上查询好多资料或得的一些思路，开发的过程也走了些弯路踩了不少坑现在记录下来。</p>
+<p>对于风控来说就是提前预防风险降低安全事故的发生，并且能及早发现和封堵；在前期的探索阶段都是利用日志或者离线数据发现规律，在做下面的实时风控系统之前，前期是利用ELK记录的日志数据来查找规律发现一些问题的。</p>
+<h3 id="常见风险："><a href="#常见风险：" class="headerlink" title="常见风险："></a>常见风险：</h3><p>研究风控之前有一些风险是比较常出现的：</p>
+<ol>
+<li>利用机器访问：爬虫、频繁调用短信接口、垃圾注册等</li>
+<li>人为原因：薅羊毛、金融盗刷等</li>
+</ol>
+<h3 id="风控系统"><a href="#风控系统" class="headerlink" title="风控系统"></a>风控系统</h3><p>风控系统分为实时风控和非实时风控系统，两种用途不太一样实时系统可以快速拦截风险，非实时离线系统可以发现一些未知风险。</p>
+<h4 id="离线系统"><a href="#离线系统" class="headerlink" title="离线系统"></a>离线系统</h4><p>离线系统前期更多的是用于数据分析和发现规律，可以利用已知风险数据和一些机器学习的方法发现一些风险点；同时离线数据也可以为实时系统提供信息决策。前期做离线分析的时候用过相关性分析、决策树、k临近算法等等。</p>
+<h4 id="实时系统"><a href="#实时系统" class="headerlink" title="实时系统"></a>实时系统</h4><p>实时系统对系统的响应比较高，本次项目就是利用drools规则引擎可以迅速的更改规则不必重新部署就可以做到发现和拦截一些风险访问。</p>
+<h5 id="主要技术点"><a href="#主要技术点" class="headerlink" title="主要技术点"></a>主要技术点</h5><p>公司访问量比较订单一天大于2000w单，技术框架采用的是kakfa，spark-streaming、drools、redis、postgresql，下面是系统的一个总体框架图</p>
+<p><img src="/images/riskrule.jpeg" alt=""></p>
+<p>drools规则放置在postgresql数据库可以实时更改规则，redis作为临时数据缓存，加载历史数据可以通过历史发现一些发现，例如交易总不在固定地点、多次查询余额等等；通过运行发现处理速度还是不错的，性能瓶颈主要在缓存数据的获取上，总体运行下来单台redis的处理性能达到每数4w/s左右效率还是不错的。</p>
+<p>把部分代码提交到了我的<a href="https://github.com/cealiu/RiskRule" target="_blank" rel="noopener">github</a>上。</p>
 
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2018/05/08/车牌识别/" title="车牌识别" itemprop="url">
-  
-    <h1 itemprop="name">车牌识别</h1>
-    
-     
-           <p itemprop="description">车牌识别最近帮朋友调一个车牌识别的源码开源地址有些地方要改动才能跑起来，该项目是基于opencv、深度学习DNN算法做的车牌识别，该blog主要是记录下踩坑过程。
-环境搭建opencv环境搭建项目是基于python开发的，但是底层还是依赖opencv的c++库，所以环境搭建最主要</p>
         
-    
-    <time datetime="2018-05-08T13:48:23.000Z" itemprop="datePublished">2018-05-08</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2018/01/23/openstack源码分析一/" title="openstack源码分析一" itemprop="url">
-  
-    <h1 itemprop="name">openstack源码分析一</h1>
-    
-     
-           <p itemprop="description">从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的参数，</p>
         
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/bigdata/">bigdata</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-    <time datetime="2018-01-23T13:09:10.000Z" itemprop="datePublished">2018-01-23</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/12/19/openstack概念整理/" title="openstack概念整理" itemprop="url">
-  
-    <h1 itemprop="name">openstack概念整理</h1>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
     
-     
-           <p itemprop="description">openstack 概念整理keystoneV2：
-Tenant、User、Role
-V3
-Domain、Project、Group、User、Role
-例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用
-Tenant -&amp;gt; 部门，User-&amp;g</p>
+      <a href="/2018/05/14/python-requests-post丢失数据/" title="python requests post丢失数据" itemprop="url">python requests post丢失数据</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-05-14T12:58:28.000Z" itemprop="datePublished"> 发表于 2018-05-14</time>
+    
+  </p>
+</header>
+    <div class="article-content">
         
-    
-    <time datetime="2017-12-19T02:44:07.000Z" itemprop="datePublished">2017-12-19</time>
-  </a>
-</section>
+        <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>这周遇到一个bug使用python的requests lib单独运行脚本post数据就成功，结果使用django调用该函数就出问题。在后台打印log发现django调用的时候request.body丢失了部分数据。</p>
+<p>代码类似：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">body=dict()</span><br><span class="line">body[<span class="string">'token'</span>]=<span class="string">'23sdcwo81mdvlpwcva'</span></span><br><span class="line">body[<span class="string">'content'</span>]=<span class="string">'信息'</span></span><br><span class="line">...</span><br><span class="line">request.post(data = json.dumps(data,ensure_ascii=<span class="keyword">False</span>))</span><br></pre></td></tr></table></figure>
+<p>原因是单独调用代码的时候发送的body数据内容都是str类型，而Django调用的时候引入了unicode类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="string">'test'</span></span><br><span class="line"><span class="keyword">print</span> type(test)   <span class="comment">#str</span></span><br><span class="line">test = <span class="string">'test'</span> + unicode(<span class="string">'test'</span>)</span><br><span class="line"><span class="keyword">print</span> type(test)   <span class="comment">#unicode</span></span><br></pre></td></tr></table></figure>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>这个跟python的自身编码问题有关，python3加requests能够解决这个问题，但是项目是python2.7的所以用其它方式解决。在requests lib断点调试下会发现init.py—&gt; api.py—&gt;models.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.headers[<span class="string">'Content-Length'</span>] = builtin_str(l) <span class="comment">#477 line</span></span><br></pre></td></tr></table></figure>
+<p>将body内的数据转化为str类型解决，或者在增加headers解决</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.post(data = json.dumps(data,ensure_ascii=<span class="keyword">False</span>),headers=&#123;<span class="string">'Content-Length'</span>:str(len(data))&#125;)</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/11/16/监控总结/" title="监控总结" itemprop="url">
-  
-    <h1 itemprop="name">监控总结</h1>
-    
-     
-           <p itemprop="description">背景年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜；
-zabbix邮件短信服务监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警通过socket对接的是</p>
         
-    
-    <time datetime="2017-11-16T00:49:38.000Z" itemprop="datePublished">2017-11-16</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/11/01/集群搭建hadoop问题总结/" title="集群搭建hadoop问题总结" itemprop="url">
-  
-    <h1 itemprop="name">集群搭建hadoop问题总结</h1>
-    
-     
-           <p itemprop="description">在公司的openstack上搭建hadoop的集群环境的过程中遇到一些问题，整理记录下：
-搭建的过程参考官方文档和一些blog，版本2.7.4
-
-申请资源的hadoop的master节点申请public ip，datanode节点可以不用申请public ip。
-
-master节</p>
         
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/python/">python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-    <time datetime="2017-11-01T13:06:12.000Z" itemprop="datePublished">2017-11-01</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope="" itemprop="blogitem">
-  
-    <a href="/2017/09/17/安装linux系统/" title="安装linux系统" itemprop="url">
-  
-    <h1 itemprop="name">安装linux系统</h1>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
     
-     
-           <p itemprop="description">很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：
-
-用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题</p>
+      <a href="/2018/05/13/朴素贝叶斯/" title="朴素贝叶斯" itemprop="url">朴素贝叶斯</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-05-13T10:24:22.000Z" itemprop="datePublished"> 发表于 2018-05-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
         
+        <h3 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h3><p>贝叶斯公式：$P(A|B)=P(AB)/P(B)$</p>
+<p>$P(A|B)$表示在B条件下A事件发生的概率，其中$P(A)$表示先验概率，P(A|B)代表后验概率即在B事件发生之后，我们对A事件概率的重新评估，这使得预估概率更接近真实概率。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/机器学习/">机器学习</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
     
-    <time datetime="2017-09-17T06:46:27.000Z" itemprop="datePublished">2017-09-17</time>
-  </a>
-</section>
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/05/08/车牌识别/" title="车牌识别" itemprop="url">车牌识别</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-05-08T13:48:23.000Z" itemprop="datePublished"> 发表于 2018-05-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="车牌识别"><a href="#车牌识别" class="headerlink" title="车牌识别"></a>车牌识别</h3><p>最近帮朋友调一个车牌识别的源码<a href="https://github.com/zeusees/HyperLPR" target="_blank" rel="noopener">开源地址</a>有些地方要改动才能跑起来，该项目是基于opencv、深度学习DNN算法做的车牌识别，该blog主要是记录下踩坑过程。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="opencv环境搭建"><a href="#opencv环境搭建" class="headerlink" title="opencv环境搭建"></a>opencv环境搭建</h4><p>项目是基于python开发的，但是底层还是依赖opencv的c++库，所以环境搭建最主要的还是opencv的配置；我是基于mac系统做的，开源版本要求opencv版本大于3.3所以用brew install安装的版本不适合。</p>
+<ol>
+<li><p>编译安装</p>
+<p>去官网下载最新版本<a href="https://opencv.org/" target="_blank" rel="noopener">opencv</a>， 之后安装cmake<a href="https://cmake.org/" target="_blank" rel="noopener">地址</a>。我下载的是图形界面版的；之后在opencv源码内新建release文件夹，打开cmake</p>
+</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/bigdata/">bigdata</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/23/openstack源码分析一/" title="openstack源码分析一" itemprop="url">openstack源码分析一</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-01-23T13:09:10.000Z" itemprop="datePublished"> 发表于 2018-01-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>从openstack的nova开始先介绍，在openstack的组件中，基本每个组件都会有一个API服务，对于Nova来说API服务主要的作用就是接收由用户通过Client或者一些其他REST请求工具（比如curl、postman）发送的请求。一般来说会包含一些虚拟机创建的参数，比如虚拟机的规格、可用域之类的信息。</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>我们在启动nova-api会使用service openstack-nova-api start命令，查看该服务启动的是/usr/bin/nova-api</p>
+<ol>
+<li><p>nova/cmd/api.py    def main():  #启动进程</p>
+<p>功能：载入配置文件、启动进程数（默认cpu核数）、根据配置文件中的enabled_apis启动不同WSGIService</p>
+<p>nova.conf</p>
+<p>enabled_apis=ec2,osapi_compute,metadata</p>
+<p>ec2 亚马逊云主机</p>
+<p>osapi_compute openstack云主机</p>
+<p>metadata 元数据</p>
+<p>我们主要看osapi_compute</p>
+</li>
+<li><p>nova/service.py class WSGIService(service.Service):</p>
+<p>功能加载/etc/nova/api-paste.ini（这里用到了deploy模块解释：<a href="https://www.cnblogs.com/Security-Darren/p/4087587.html" target="_blank" rel="noopener">https://www.cnblogs.com/Security-Darren/p/4087587.html</a>）</p>
+</li>
+<li><p>etc/nova/api-paste.ini</p>
+<p>[composite:osapi_compute]</p>
+<p>use = call:nova.api.openstack.urlmap:urlmap_factory</p>
+<p>解析url调用 urlmap_factory</p>
+</li>
+<li><p>nova/api/openstack/urlmap.py</p>
+<p>def urlmap_factory(loader, global_conf, **local_conf):</p>
+<p>#loader是上面加在的app的loader，这里是osapi_compute</p>
+<p>#global_conf = {‘<strong>file</strong>‘: ‘/etc/nova/api-paste.ini’, ‘here’: ‘/etc/nova’}</p>
+<p>#local_conf = {‘/v2’: ‘openstack_compute_api_v21_legacy_v2_compatible’, ‘/‘: ‘oscomputeversions’, ‘/v2.1’: ‘openstack_compute_api_v21’}</p>
+<p>该方法将osapi_compute 转换为 openstack_compute_api_v21_legacy_v2_compatible</p>
+<p>[composite:openstack_compute_api_v21_legacy_v2_compatible]</p>
+<p>use = call:nova.api.auth:pipeline_factory_v21</p>
+<p>noauth2 = cors http_proxy_to_wsgi compute_req_id faultwrap request_log sizelimit osprofiler noauth2 legacy_v2_compatible osapi_compute_app_v21</p>
+<p>keystone = cors http_proxy_to_wsgi compute_req_id faultwrap request_log sizelimit osprofiler authtoken keystonecontext legacy_v2_compatible osapi_compute_app_v21</p>
+</li>
+<li><p>nova/api/auth.py</p>
+<p>def pipeline_factory_v21(loader, global_conf, **local_conf): </p>
+<p>#使用keystone验证 类似Django midware看keystone最后一项osapi_compute_app_v21</p>
+</li>
+<li><p>[app:osapi_compute_app_v21]</p>
+<p>paste.app_factory = nova.api.openstack.compute:APIRouterV21.factory</p>
+<p>Nova/api/openstack/compute/routes.py</p>
+<p>class APIRouterV21(base_wsgi.Router): #最终url解析（flavor、show…）</p>
+<p>贴一个调用流程图，新版加入了nova-cell这里是个简易版</p>
+<p><img src="/images/nova.png" alt=""></p>
+<p>​</p>
+<p>先介绍这里，剩下就是nova-conductor、nova-scheduler、nova-coumpute的rpc调用</p>
+</li>
+</ol>
+<h5 id="to-be-continued"><a href="#to-be-continued" class="headerlink" title="to be continued"></a>to be continued</h5>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/cloud/">cloud</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/19/openstack概念整理/" title="openstack概念整理" itemprop="url">openstack概念整理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-12-19T02:44:07.000Z" itemprop="datePublished"> 发表于 2017-12-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="openstack-概念整理"><a href="#openstack-概念整理" class="headerlink" title="openstack 概念整理"></a>openstack 概念整理</h2><h3 id="keystone"><a href="#keystone" class="headerlink" title="keystone"></a>keystone</h3><p>V2：</p>
+<p>Tenant、User、Role</p>
+<p>V3</p>
+<p>Domain、Project、Group、User、Role</p>
+<p>例子：使用OpenStack搭建公司的私有云V2版本的keystone基本够用</p>
+<p>Tenant -&gt; 部门，User-&gt;用户，Role-&gt;权限</p>
+<p>现在基于OpenStack构建公有云对每家公司用户来说都会有V2架构，V3多出domain类似公司</p>
+<p>Domain-&gt;公司，Project-&gt;部门，User-&gt;用户，Role-&gt;权限，Group-&gt;组（包含给多个user赋权限）</p>
+<h3 id="区域概念"><a href="#区域概念" class="headerlink" title="区域概念"></a>区域概念</h3><ul>
+<li>region：更像是一个地理上的概念，每个region有自己独立的endpoint，regions之间完全隔离，但是多个regions之间共享同一个keystone和dashboard。（注：目前openstack的dashboard还不支持多region）所以除了提供隔离的功能，region的设计更多侧重地理位置的概念，用户可以选择离自己更近的region来部署自己的服务。</li>
+<li>cell：cell是openstack一个非常重要的概念，主要用来解决openstack的扩展性和规模瓶颈。众所周知，openstack是由很多的组件通过松耦合构成，那么当达到一定的规模后，某些模块必然成为整个系统的瓶颈。比较典型的组件就是database和AMQP了，所以，每个cell有自己独立的DB和AMQP。<ul>
+<li>cell之间的通信(通过rpc完成)</li>
+</ul>
+</li>
+<li>Availability Zone：AZ可以简单理解为一组节点的集合，这组节点具有独立的电力供应设备，比如一个个独立供电的机房，一个个独立供电的机架都可以被划分成AZ。所以，AZ主要是通过冗余来解决可用性问题。AZ是用户可见的一个概念，用户在创建instance的时候可以选择创建到哪些AZ中，以保证instance的可用性</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/cloud/">cloud</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/11/16/监控总结/" title="监控总结" itemprop="url">监控总结</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-11-16T00:49:38.000Z" itemprop="datePublished"> 发表于 2017-11-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>年初入职新公司做云计算相关开发奈何线上系统都还有没有做监控，所以接手做监控事宜；</p>
+<h4 id="zabbix邮件短信服务"><a href="#zabbix邮件短信服务" class="headerlink" title="zabbix邮件短信服务"></a>zabbix邮件短信服务</h4><p>监控使用的是zabbix将zabbix服务器安装在openstack云服务集群外，zabbix邮件告警直接在配置页面配置好邮件服务器地址；短信告警通过socket对接的是总行的短信服务。</p>
+<p>配置如下：</p>
+<p><img src="/images/sms.png" alt=""></p>
+<p>在图中，Name自行定义；Type选择 Script；Script name填写脚本名称socket_alarm_script.py；Script parameters包含3个参数：{ALERT.SENDTO}、{ALERT.SUBJECT}、{ALERT.MESSAGE}，这3个参数是zabbix启用脚本时自动传给脚本的参数。此3个参数的具体内容将在zabbix文档有具体说明。</p>
+<h3 id="主要监控项目"><a href="#主要监控项目" class="headerlink" title="主要监控项目"></a>主要监控项目</h3><p>帮助某家城商行做互金项目监控，主要有tomcat、nginx、redis、oracle、日记</p>
+<h4 id="tomcat、nginx、redis、oracle、zookeeper"><a href="#tomcat、nginx、redis、oracle、zookeeper" class="headerlink" title="tomcat、nginx、redis、oracle、zookeeper"></a>tomcat、nginx、redis、oracle、zookeeper</h4><p>tomcat、zookeper监控通过jmx接口来获取jvm监控信息，zabbix页面也支持jmx获取。</p>
+<p>nginx通过添加 –with-http_stub_status_module参数编译和在配置文件中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 127.0.0.1:80;</span><br><span class="line">    server_name 127.0.0.1;</span><br><span class="line">    access_log off;</span><br><span class="line">    allow 127.0.0.1;</span><br><span class="line">    deny all;</span><br><span class="line">    location /nginxstatus &#123;</span><br><span class="line">           stub_status on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Oracle可以通过orabbix获取，不过我通过pyOrale连接oracle获取的信息</p>
+<p>redis通过缓存redis系统信息获取（主要是info里的信息）</p>
+<h4 id="日志监控"><a href="#日志监控" class="headerlink" title="日志监控"></a>日志监控</h4><p>本来想用ELK做日志收集监控（城商行不允许这么做），所以选择了zabbix告警日志error信息还好错误信息产生速率不高；</p>
+<h4 id="对账文件监控"><a href="#对账文件监控" class="headerlink" title="对账文件监控"></a>对账文件监控</h4><p>平台每天在不同时间段会产生几个对账文件，需要每天检测一次对账文件是否生成；zabbix 3.0支持固定时间点生成告警（粒度一分钟）</p>
+<p><img src="/images/zabbix_time.png" alt=""></p>
+<h3 id="to-be-contiune"><a href="#to-be-contiune" class="headerlink" title="to be contiune"></a>to be contiune</h3><p>部署选用的ansible，后面补充一些调优配置</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/11/01/集群搭建hadoop问题总结/" title="集群搭建hadoop问题总结" itemprop="url">集群搭建hadoop问题总结</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-11-01T13:06:12.000Z" itemprop="datePublished"> 发表于 2017-11-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在公司的openstack上搭建hadoop的集群环境的过程中遇到一些问题，整理记录下：</p>
+<p>搭建的过程参考官方文档和一些blog，版本2.7.4</p>
+<ol>
+<li><p>申请资源的hadoop的master节点申请public ip，datanode节点可以不用申请public ip。</p>
+</li>
+<li><p>master节点跟datanode节点设置免密码登录。</p>
+</li>
+<li><p>搭建完成后运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>运行不成功，开始报错。</p>
+<h4 id="hadoop-java-net-UnknowHostException"><a href="#hadoop-java-net-UnknowHostException" class="headerlink" title="hadoop java.net.UnknowHostException"></a>hadoop java.net.UnknowHostException</h4><p>上面这个错误是不能识别集群的hostname，依次做如下修改：</p>
+<ol>
+<li>编辑集群中每个/etc/hosts文件，依次将集群的ip hostname记录下来。</li>
+<li>编辑/etc/hostname文件，将主机名记录此文件。</li>
+<li>编辑 Hadoop/etc/hadoop/slave文件，将datanode的主机名或者datanode的记录下来。</li>
+</ol>
+<h4 id="FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component"><a href="#FATAL-namenode-NameNode-Exception-in-namenode-join-java-lang-IllegalArgumentException-URI-has-an-authority-component" class="headerlink" title="FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component"></a>FATAL namenode.NameNode: Exception in namenode join java.lang.IllegalArgumentException: URI has an authority component</h4><p>出现这个问题有说是配置文件重载权限问题，但是我将hdfs-site.xml的文件权限设置成777也没有生效，后将此文件中的xml配置写成固定值成功，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop-2.7.4/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span>（即使用完整的绝对地址）  </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>tmp目录是自己指定的。</p>
+<p><strong>完成上述配置后格式化启动成功，发现启动节点数不对或者其他不确定错误，将上面的tmp目录内容清空再试一次即可</strong></p>
+<p>放个hadoop配置文件<a href="http://blog.csdn.net/team77/article/details/50205917" target="_blank" rel="noopener">参数介绍</a></p>
+<p>之后就可以在上层跑hive，hsql，spark，storm的组件了，map/reduce的开发跟之前单机版一样。</p>
+<p>hadoop，es，spark/storm基本思想差不多都是<strong>大化小，小块处理，结果整合</strong>，之前记录过。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/bigdata/">bigdata</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/09/17/安装linux系统/" title="安装linux系统" itemprop="url">安装linux系统</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuCe" target="_blank" itemprop="author">LiuCe</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-09-17T06:46:27.000Z" itemprop="datePublished"> 发表于 2017-09-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>很久没装过系统了，最近组装台式机安装linux mint系统碰到一点问题：</p>
+<ul>
+<li><p>用u盘做引导安装过程中所有配置选项做好后点击“继续”出现“无法将grub-efi-amd64-signed软件包安装到/target/中。如果没有GRUB启动引导器，所安装的系统将无法启动”出现这个问题是最新的引导都支持efi引导了；解决方法是在启动列表的选项中选择不带efi u盘的启动项。</p>
+</li>
+<li><p>进入系统后安装kvm manger后使用图形界面结果显示“Spice doesn’t work from Virtual Machine Manager”linux mint18.2是基于Ubuntu的16.04安装后会出现这个bug，解决办法是执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gir1.2-spice-client-gtk-3.0</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
 
 
 
@@ -293,7 +800,7 @@ master节</p>
 
 
 
-  <nav id="page-nav" class="clearfix unexpand">
+  <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
@@ -305,12 +812,6 @@ master节</p>
 <aside class="clearfix">
 
   
-<div class="github-card">
-<p class="asidetitle">Github 名片</p>
-<div class="github-card" data-github="cealiu" data-theme="medium"></div>
-<script type="text/javascript" src="//lab.lepture.com/github-cards/widget.js"></script>
-</div>
-
 
 
   
@@ -373,7 +874,13 @@ master节</p>
         
           <li>
             
-            	<a href="https://www.oschina.net" target="_blank" title="开源社区">开源中国</a>
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
             
           </li>
         
@@ -389,7 +896,7 @@ master节</p>
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
 </div>
 
 
@@ -405,16 +912,13 @@ master节</p>
 	
 	
 	<section class="info">
-		<p> Hello World <br>
-			This is my blog</p>
+		<p> Hello ,I&#39;m Larry Page in Google. <br>
+			This is my blog,believe it or not.</p>
 	</section>
 	 
 	<div class="social-font">
 		
-		<a href="http://weibo.com/3313244784" target="_blank" class="icon-weibo" title="微博"></a>
-		
-		
-		<a href="https://github.com/cealiu" target="_blank" class="icon-github" title="github"></a>
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
 		
 		
 		
@@ -422,11 +926,8 @@ master节</p>
 		
 		
 		
-		<a href="http://www.zhihu.com/people/ce-ce-19-73/answers" target="_blank" class="icon-zhihu" title="知乎"></a>
 		
 		
-		
-		<a href="mailto:liucemail@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
 		
 	</div>
 			
@@ -552,35 +1053,6 @@ var _hmt = _hmt || [];
 
 <!-- MathJax Begin -->
 <!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 <!-- MathJax End -->

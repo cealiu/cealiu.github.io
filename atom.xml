@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cealiu.me/"/>
-  <updated>2019-09-21T04:58:50.462Z</updated>
+  <updated>2019-09-21T05:32:14.126Z</updated>
   <id>http://cealiu.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://cealiu.me/2019/09/21/web%E6%8E%A7%E5%88%B6%E6%A0%91%E8%8E%93%E6%B4%BEled/"/>
     <id>http://cealiu.me/2019/09/21/web控制树莓派led/</id>
     <published>2019-09-21T02:44:09.000Z</published>
-    <updated>2019-09-21T04:58:50.462Z</updated>
+    <updated>2019-09-21T05:32:14.126Z</updated>
     
     <content type="html"><![CDATA[<p>​      最近树莓派4b发布女朋友买了个4g版本当七夕礼物送我，买来随便研究了下硕士的时候做嵌入式所以对硬件底层比较了解就先拿来做了点灯的小程序试试效果。效果就是通过网页web点击button控制树莓派连接的led灯的亮灭，用的技术栈有python、vue、django等。</p>
 <h3 id="硬件连接"><a href="#硬件连接" class="headerlink" title="硬件连接"></a>硬件连接</h3><p>要通过树莓派引脚(GPIO)控制led，需要做如下连接:</p>
@@ -64,7 +64,7 @@
 </ol>
 <h3 id="源码与效果"><a href="#源码与效果" class="headerlink" title="源码与效果"></a>源码与效果</h3><ol>
 <li>源码我上传到了我的github上，仓库地址是：<a href="https://github.com/cealiu/led" target="_blank" rel="noopener">led</a></li>
-<li>演示地址: <a href="">B站</a></li>
+<li>演示地址: <a href="https://www.bilibili.com/video/av68470271/" target="_blank" rel="noopener">B站</a></li>
 </ol>
 ]]></content>
     
