@@ -1,5 +1,5 @@
+http://cealiu.me/2020/06/02/spring-cloud使用/
 http://cealiu.me/2019/09/21/web控制树莓派led/
 http://cealiu.me/2018/09/05/风控规则系统开发/
 http://cealiu.me/2018/05/14/python-requests-post丢失数据/
 http://cealiu.me/2018/05/13/朴素贝叶斯/
-http://cealiu.me/2018/05/08/车牌识别/
